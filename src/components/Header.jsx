@@ -1,10 +1,12 @@
+import onnesWordmark from "../assets/onnes-wordmark.png";
+
 const navItems = ["Home", "Vision", "Platforms", "Applications", "Technology", "Media", "Contact"];
 
 export default function Header() {
   return (
     <header className="header">
       <a className="brand" href="#home" aria-label="Onnes Aerospace home">
-        <span className="brand-mark">ONNES</span>
+        <img className="brand-logo" src={onnesWordmark} alt="Onnes" />
         <span className="brand-sub">AEROSPACE</span>
       </a>
       <nav className="nav" aria-label="Primary navigation">

@@ -77,6 +77,12 @@ a {
   width: max-content;
 }
 
+.brand-logo {
+  display: block;
+  height: auto;
+  width: 156px;
+}
+
 .brand-mark {
   color: var(--blue);
   font-size: 40px;
@@ -87,20 +93,21 @@ a {
 .brand-sub {
   color: #fff;
   font-size: 16px;
-  letter-spacing: 13px;
+  letter-spacing: 12px;
   margin-left: 5px;
+  margin-top: 6px;
 }
 
 .nav {
   align-items: center;
   display: flex;
-  gap: clamp(18px, 2.5vw, 52px);
+  gap: clamp(20px, 2vw, 42px);
   justify-content: center;
 }
 
 .nav a {
   color: #fff;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1;
   padding: 0 0 18px;
   position: relative;
@@ -623,28 +630,51 @@ h2 {
   padding: 58px 64px 38px;
 }
 
+.footer-brand {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
 .footer-brand .brand-mark {
   display: block;
   font-size: 44px;
 }
 
+.footer-logo {
+  width: 132px;
+}
+
 .footer-brand p {
   font-size: 16px;
+  line-height: 1.45;
+  margin: 22px 0 0;
   max-width: 260px;
 }
 
 .socials {
   display: flex;
-  gap: 14px;
+  gap: 13px;
+  margin-top: 24px;
 }
 
 .socials a {
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.38);
   border-radius: 50%;
-  display: grid;
-  height: 32px;
-  place-items: center;
-  width: 32px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 14px;
+  height: 36px;
+  justify-content: center;
+  transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  width: 36px;
+}
+
+.socials a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-2px);
 }
 
 .footer-group {
@@ -707,6 +737,14 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .vision,
+  .platforms,
+  .journey,
+  .why {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
   .world-grid,
   .platform-grid,
   .reason-grid,
@@ -725,6 +763,32 @@ h2 {
   }
 }
 
+@media (max-width: 900px) {
+  .platform-grid,
+  .reason-grid,
+  .timeline,
+  .footer {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-card {
+    min-height: 0;
+  }
+
+  .journey-head {
+    align-items: start;
+    grid-template-columns: 1fr;
+  }
+
+  .final-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand p {
+    max-width: 320px;
+  }
+}
+
 @media (max-width: 720px) {
   .header {
     grid-template-columns: 1fr;
@@ -738,15 +802,20 @@ h2 {
     font-size: 34px;
   }
 
+  .brand-logo {
+    width: 126px;
+  }
+
   .brand-sub {
-    font-size: 12px;
-    letter-spacing: 9px;
+    font-size: 11px;
+    letter-spacing: 8px;
+    margin-top: 5px;
   }
 
   .hero {
     background-position: 62% center;
-    min-height: 820px;
-    padding-top: 170px;
+    min-height: 760px;
+    padding-top: 145px;
   }
 
   h1 {
@@ -790,7 +859,8 @@ h2 {
   }
 
   .world-card {
-    min-height: 430px;
+    height: 430px;
+    padding-bottom: 42px;
   }
 
   .platforms-head,
@@ -808,5 +878,18 @@ h2 {
 
   .scroll-cue {
     left: 28px;
+  }
+
+  .footer {
+    gap: 34px;
+    padding-top: 44px;
+  }
+
+  .footer-logo {
+    width: 124px;
+  }
+
+  .socials {
+    gap: 12px;
   }
 }

@@ -1,3 +1,7 @@
+import { FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import onnesWordmark from "../assets/onnes-wordmark.png";
+
 const groups = [
   ["Company", "Vision", "Mission", "Leadership", "Careers", "Contact"],
   ["Platforms", "Orbital Infrastructure", "Lunar Infrastructure", "Deep Space Systems", "Autonomous Space Ecosystems"],
@@ -6,18 +10,26 @@ const groups = [
   ["Media", "News", "Videos", "Insights"],
 ];
 
+const socialLinks = [
+  ["X", <FaXTwitter />],
+  ["LinkedIn", <FaLinkedinIn />],
+  ["YouTube", <FaYoutube />],
+  ["Instagram", <FaInstagram />],
+];
+
 export default function Footer() {
   return (
     <footer className="footer" id="media">
       <div className="footer-brand">
-        <span className="brand-mark">ONNES</span>
+        <img className="brand-logo footer-logo" src={onnesWordmark} alt="Onnes" />
         <span className="brand-sub">AEROSPACE</span>
         <p>The next-generation deep space infrastructure company shaping humanity beyond Earth.</p>
         <div className="socials" aria-label="Social links">
-          <a href="#x">X</a>
-          <a href="#in">in</a>
-          <a href="#yt">▶</a>
-          <a href="#ig">◎</a>
+          {socialLinks.map(([label, icon]) => (
+            <a href={`#${label.toLowerCase()}`} aria-label={label} key={label}>
+              {icon}
+            </a>
+          ))}
         </div>
       </div>
       {groups.map(([title, ...items]) => (
