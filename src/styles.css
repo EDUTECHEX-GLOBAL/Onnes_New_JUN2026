@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: "D-DIN Pro";
-  src: url("/fonts/D-DIN-PRO-400-Regular.woff2") format("woff2");
+  src: url("./fonts/D-DIN-PRO-400-Regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -22,7 +22,7 @@
 
 @font-face {
   font-family: "D-DIN Pro";
-  src: url("/fonts/D-DIN-PRO-700-Bold.woff2") format("woff2");
+  src: url("./fonts/D-DIN-PRO-700-Bold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 700;
@@ -172,7 +172,7 @@ a {
   background:
     linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.18) 68%, rgba(0, 0, 0, 0.34) 100%),
     linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.12) 28%, rgba(0, 0, 0, 0.26) 100%),
-    url("/assets/hero-bg.png") right center / cover no-repeat;
+    url("./assets/hero-bg.png") right center / cover no-repeat;
   border-bottom: 1px solid var(--muted-line);
   min-height: 790px;
   padding: 180px 64px 74px;
@@ -357,10 +357,10 @@ h2 {
   text-align: center;
 }
 
-.world-1 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("/assets/vision-earth.png"); }
-.world-2 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("/assets/vision-orbit.png"); }
-.world-3 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("/assets/vision-moon.png"); }
-.world-4 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("/assets/vision-deep-space.png"); }
+.world-1 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("./assets/vision-earth.png"); }
+.world-2 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("./assets/vision-orbit.png"); }
+.world-3 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("./assets/vision-moon.png"); }
+.world-4 { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("./assets/vision-deep-space.png"); }
 
 .pin {
   background: var(--blue);
@@ -396,7 +396,7 @@ h2 {
 .platforms {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.44), #000 82%),
-    url("/assets/platforms-bg.png") top right / 78% auto no-repeat,
+    url("./assets/platforms-bg.png") top right / 78% auto no-repeat,
     #000;
   border-top: 1px solid var(--muted-line);
   min-height: 850px;
@@ -461,10 +461,10 @@ h2 {
   margin: 0 -38px 28px;
 }
 
-.platform-1 .platform-image { background-image: url("/assets/platform-orbital-new.png"); }
-.platform-2 .platform-image { background-image: url("/assets/platform-lunar-new.png"); }
-.platform-3 .platform-image { background-image: url("/assets/platform-deep-space-new.png"); }
-.platform-4 .platform-image { background-image: url("/assets/platform-ecosystem-new.png"); }
+.platform-1 .platform-image { background-image: url("./assets/platform-orbital-new.png"); }
+.platform-2 .platform-image { background-image: url("./assets/platform-lunar-new.png"); }
+.platform-3 .platform-image { background-image: url("./assets/platform-deep-space-new.png"); }
+.platform-4 .platform-image { background-image: url("./assets/platform-ecosystem-new.png"); }
 
 .icon-ring,
 .reason-icon {
@@ -488,7 +488,7 @@ h2 {
   background:
     linear-gradient(90deg, #000 0 12%, rgba(0, 0, 0, 0.55) 46%, #000 100%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.3)),
-    url("/assets/journey-bg.png") center bottom / cover no-repeat;
+    url("./assets/journey-bg.png") center bottom / cover no-repeat;
   border-top: 1px solid var(--muted-line);
   min-height: 520px;
   padding: 60px 80px 100px;
@@ -551,7 +551,7 @@ h2 {
   align-items: start;
   background:
     linear-gradient(90deg, #000 0 74%, rgba(0, 0, 0, 0.48)),
-    url("/assets/why-bg.png") bottom right / auto 100% no-repeat;
+    url("./assets/why-bg.png") bottom right / auto 100% no-repeat;
   border-top: 1px solid var(--muted-line);
   display: grid;
   gap: 70px;
@@ -591,7 +591,7 @@ h2 {
   align-items: center;
   background:
     linear-gradient(90deg, #000 0 42%, rgba(0, 0, 0, 0.38)),
-    url("/assets/hero-bg.png") bottom right / cover no-repeat;
+    url("./assets/hero-bg.png") bottom right / cover no-repeat;
   border-top: 1px solid var(--muted-line);
   display: grid;
   gap: 40px;

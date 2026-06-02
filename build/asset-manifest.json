@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7a0549e5.css",
+    "main.js": "/static/js/main.2948795b.js",
+    "static/media/platform-lunar-new.png": "/static/media/platform-lunar-new.8ec0862a64ea065d4fd6.png",
+    "static/media/platform-orbital-new.png": "/static/media/platform-orbital-new.254c59d908bbe203e5e1.png",
+    "static/media/hero-bg.png": "/static/media/hero-bg.9e06031748a62c58d497.png",
+    "static/media/why-bg.png": "/static/media/why-bg.9c44d732bc4205c2e68a.png",
+    "static/media/platforms-bg.png": "/static/media/platforms-bg.052bbd3dfd7344ba092b.png",
+    "static/media/platform-ecosystem-new.png": "/static/media/platform-ecosystem-new.9ea0d8eab9e2a018fd2c.png",
+    "static/media/platform-deep-space-new.png": "/static/media/platform-deep-space-new.be2dd5f0a1cfe870ab06.png",
+    "static/media/journey-bg.png": "/static/media/journey-bg.0712f35cac7c4c9430ff.png",
+    "static/media/vision-moon.png": "/static/media/vision-moon.965aef6ee86af72a9532.png",
+    "static/media/vision-earth.png": "/static/media/vision-earth.0955184385324251d86a.png",
+    "static/media/vision-deep-space.png": "/static/media/vision-deep-space.1a7c55f2b197234cd292.png",
+    "static/media/vision-orbit.png": "/static/media/vision-orbit.243235904a53eb328315.png",
+    "static/media/D-DIN-PRO-700-Bold.woff2": "/static/media/D-DIN-PRO-700-Bold.49e5f91a62686db6a8a9.woff2",
+    "static/media/D-DIN-PRO-400-Regular.woff2": "/static/media/D-DIN-PRO-400-Regular.5a8b7862c17d22dfa3ce.woff2",
+    "index.html": "/index.html",
+    "main.7a0549e5.css.map": "/static/css/main.7a0549e5.css.map",
+    "main.2948795b.js.map": "/static/js/main.2948795b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a0549e5.css",
+    "static/js/main.2948795b.js"
+  ]
+}
