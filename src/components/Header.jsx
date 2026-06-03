@@ -1,24 +1,48 @@
+import { Link, useLocation } from "react-router-dom";
 import onnesWordmark from "../assets/onnes-wordmark.png";
 
-const navItems = ["Home", "Vision", "Platforms", "Applications", "Technology", "Media", "Contact"];
+const navItems = [
+  ["Platforms", "/#platforms"],
+  ["Applications", "/#applications"],
+  ["Technology", "/#technology"],
+  ["Media", "/#media"],
+  ["Contact", "/#contact"],
+];
+
+const visionItems = [
+  ["Mission", "/vision#mission"],
+  ["Future Beyond Earth", "/vision#future-beyond-earth"],
+  ["Leadership", "/vision#leadership"],
+];
 
 export default function Header() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const isVision = location.pathname === "/vision";
+
   return (
     <header className="header">
-      <a className="brand" href="#home" aria-label="Onnes Aerospace home">
+      <Link className="brand" to="/" aria-label="Onnes Aerospace home">
         <img className="brand-logo" src={onnesWordmark} alt="Onnes" />
         <span className="brand-sub">AEROSPACE</span>
-      </a>
+      </Link>
       <nav className="nav" aria-label="Primary navigation">
-        {navItems.map((item) => (
-          <a className={item === "Home" ? "active" : ""} href={`#${item.toLowerCase()}`} key={item}>
-            {item}
-          </a>
+        <Link className={isHome ? "active" : ""} to="/">Home</Link>
+        <div className="nav-dropdown">
+          <Link className={isVision ? "active" : ""} to="/vision">Vision</Link>
+          <div className="nav-menu">
+            {visionItems.map(([label, to]) => (
+              <Link to={to} key={label}>{label}</Link>
+            ))}
+          </div>
+        </div>
+        {navItems.map(([item, to]) => (
+          <Link to={to} key={item}>{item}</Link>
         ))}
       </nav>
-      <a className="outline-button small" href="#contact">
+      <Link className="outline-button small" to="/#contact">
         Partner With Us <span aria-hidden="true">↗</span>
-      </a>
+      </Link>
     </header>
   );
 }

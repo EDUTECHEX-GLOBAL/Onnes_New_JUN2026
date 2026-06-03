@@ -1,5 +1,5 @@
-import { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
@@ -9,6 +9,7 @@ import Journey from "./components/Journey.jsx";
 import WhyOnnes from "./components/WhyOnnes.jsx";
 import FinalCta from "./components/FinalCta.jsx";
 import Footer from "./components/Footer.jsx";
+import VisionPage from "./components/VisionPage.jsx";
 
 // Lazy admin imports
 const AdminLogin = lazy(() => import("./AdminDashboard/pages/AdminLogin"));
@@ -34,11 +35,33 @@ function HomePage() {
   );
 }
 
+function ScrollToHash() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      return;
+    }
+
+    window.setTimeout(() => {
+      const target = document.querySelector(location.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    }, 80);
+  }, [location.pathname, location.hash]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <Suspense fallback={null}>
+      <ScrollToHash />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/vision" element={<VisionPage />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
 
