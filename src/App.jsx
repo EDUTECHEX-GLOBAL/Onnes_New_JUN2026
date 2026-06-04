@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import Header from "./components/Header.jsx";
+import "./styles/home.css";
 import Hero from "./components/Hero.jsx";
 import Vision from "./components/Vision.jsx";
 import Platforms from "./components/Platforms.jsx";
@@ -10,6 +11,7 @@ import WhyOnnes from "./components/WhyOnnes.jsx";
 import FinalCta from "./components/FinalCta.jsx";
 import Footer from "./components/Footer.jsx";
 import VisionPage from "./components/VisionPage.jsx";
+import PlatformsPage from "./components/PlatformsPage.jsx";
 
 // Lazy admin imports
 const AdminLogin = lazy(() => import("./AdminDashboard/pages/AdminLogin"));
@@ -62,6 +64,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/vision" element={<VisionPage />} />
+        <Route path="/platforms" element={<PlatformsPage />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
 

@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import onnesWordmark from "../assets/onnes-wordmark.png";
+import "../styles/header.css";
 
 const navItems = [
-  ["Platforms", "/#platforms"],
   ["Applications", "/#applications"],
   ["Technology", "/#technology"],
   ["Media", "/#media"],
@@ -15,10 +15,18 @@ const visionItems = [
   ["Leadership", "/vision#leadership"],
 ];
 
+const platformItems = [
+  ["Orbital Infrastructure", "/platforms#orbital-infrastructure"],
+  ["Lunar Infrastructure", "/platforms#lunar-infrastructure"],
+  ["Deep Space Systems", "/platforms#deep-space-systems"],
+  ["Autonomous Space Ecosystems", "/platforms#autonomous-space-ecosystems"],
+];
+
 export default function Header() {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const isVision = location.pathname === "/vision";
+  const isPlatforms = location.pathname === "/platforms";
 
   return (
     <header className="header">
@@ -36,8 +44,16 @@ export default function Header() {
             ))}
           </div>
         </div>
+        <div className="nav-dropdown platform-nav-dropdown">
+          <Link className={isPlatforms ? "active" : ""} to="/platforms">Platforms</Link>
+          <div className="nav-menu">
+            {platformItems.map(([label, to]) => (
+              <Link to={to} key={label}>{label}</Link>
+            ))}
+          </div>
+        </div>
         {navItems.map(([item, to]) => (
-          <Link to={to} key={item}>{item}</Link>
+          <Link className={item === "Platforms" && isPlatforms ? "active" : ""} to={to} key={item}>{item}</Link>
         ))}
       </nav>
       <Link className="outline-button small" to="/#contact">

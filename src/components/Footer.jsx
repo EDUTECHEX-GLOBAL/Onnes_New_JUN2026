@@ -1,6 +1,7 @@
 import { FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import onnesWordmark from "../assets/onnes-wordmark.png";
+import "../styles/footer.css";
 
 const groups = [
   ["Company", "Vision", "Mission", "Leadership", "Careers", "Contact"],

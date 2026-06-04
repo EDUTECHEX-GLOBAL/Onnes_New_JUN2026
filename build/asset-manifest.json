@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.c6e27536.css",
-    "main.js": "/static/js/main.b77687ee.js",
+    "main.css": "/static/css/main.354c80ba.css",
+    "main.js": "/static/js/main.1eb160ce.js",
     "static/css/438.52a17ef3.chunk.css": "/static/css/438.52a17ef3.chunk.css",
     "static/js/438.914ff82e.chunk.js": "/static/js/438.914ff82e.chunk.js",
     "static/css/346.52a17ef3.chunk.css": "/static/css/346.52a17ef3.chunk.css",
@@ -38,8 +38,8 @@
     "static/media/D-DIN-PRO-700-Bold.woff2": "/static/media/D-DIN-PRO-700-Bold.49e5f91a62686db6a8a9.woff2",
     "static/media/D-DIN-PRO-400-Regular.woff2": "/static/media/D-DIN-PRO-400-Regular.5a8b7862c17d22dfa3ce.woff2",
     "index.html": "/index.html",
-    "main.c6e27536.css.map": "/static/css/main.c6e27536.css.map",
-    "main.b77687ee.js.map": "/static/js/main.b77687ee.js.map",
+    "main.354c80ba.css.map": "/static/css/main.354c80ba.css.map",
+    "main.1eb160ce.js.map": "/static/js/main.1eb160ce.js.map",
     "438.52a17ef3.chunk.css.map": "/static/css/438.52a17ef3.chunk.css.map",
     "438.914ff82e.chunk.js.map": "/static/js/438.914ff82e.chunk.js.map",
     "346.52a17ef3.chunk.css.map": "/static/css/346.52a17ef3.chunk.css.map",
@@ -58,7 +58,7 @@
     "850.97126df8.chunk.css.map": "/static/css/850.97126df8.chunk.css.map"
   },
   "entrypoints": [
-    "static/css/main.c6e27536.css",
-    "static/js/main.b77687ee.js"
+    "static/css/main.354c80ba.css",
+    "static/js/main.1eb160ce.js"
   ]
 }

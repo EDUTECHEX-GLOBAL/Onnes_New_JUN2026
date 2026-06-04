@@ -14,6 +14,7 @@ import {
 import Header from "./Header";
 import FinalCta from "./FinalCta";
 import Footer from "./Footer";
+import "../styles/vision.css";
 
 import futureEarth from "../assets/vision-earth.png";
 import futureLunar from "../assets/platform-lunar-new.png";
