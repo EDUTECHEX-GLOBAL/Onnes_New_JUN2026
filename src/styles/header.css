@@ -111,6 +111,14 @@
   transform: translateY(0);
 }
 
+.nav-dropdown.dropdown-closed .nav-menu,
+.nav-dropdown.dropdown-closed:hover .nav-menu,
+.nav-dropdown.dropdown-closed:focus-within .nav-menu {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+
 .nav-menu a {
   color: #dfe6f4;
   display: block;
@@ -129,6 +137,10 @@
 
 .platform-nav-dropdown .nav-menu {
   min-width: 230px;
+}
+
+.application-nav-dropdown .nav-menu {
+  min-width: 300px;
 }
 
 .outline-button,

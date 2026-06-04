@@ -12,6 +12,7 @@ import FinalCta from "./components/FinalCta.jsx";
 import Footer from "./components/Footer.jsx";
 import VisionPage from "./components/VisionPage.jsx";
 import PlatformsPage from "./components/PlatformsPage.jsx";
+import ApplicationsPage from "./components/ApplicationsPage.jsx";
 
 // Lazy admin imports
 const AdminLogin = lazy(() => import("./AdminDashboard/pages/AdminLogin"));
@@ -65,6 +66,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/vision" element={<VisionPage />} />
         <Route path="/platforms" element={<PlatformsPage />} />
+        <Route path="/applications" element={<ApplicationsPage />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
 

@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import onnesWordmark from "../assets/onnes-wordmark.png";
 import "../styles/header.css";
 
 const navItems = [
-  ["Applications", "/#applications"],
   ["Technology", "/#technology"],
   ["Media", "/#media"],
   ["Contact", "/#contact"],
@@ -22,11 +22,33 @@ const platformItems = [
   ["Autonomous Space Ecosystems", "/platforms#autonomous-space-ecosystems"],
 ];
 
+const applicationItems = [
+  ["Commercial Space", "/applications#commercial-space"],
+  ["National Security Space", "/applications#national-security-space"],
+  ["Space Enabled Air, Ground, Water Systems", "/applications#space-enabled-air-ground-water-systems"],
+  ["Deep Space Exploration", "/applications#deep-space-exploration"],
+];
+
 export default function Header() {
   const location = useLocation();
+  const [closedDropdown, setClosedDropdown] = useState(null);
   const isHome = location.pathname === "/";
   const isVision = location.pathname === "/vision";
   const isPlatforms = location.pathname === "/platforms";
+  const isApplications = location.pathname === "/applications";
+
+  const closeDropdown = (name) => {
+    setClosedDropdown(name);
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
+
+  const resetDropdown = (name) => {
+    if (closedDropdown === name) {
+      setClosedDropdown(null);
+    }
+  };
 
   return (
     <header className="header">
@@ -36,24 +58,41 @@ export default function Header() {
       </Link>
       <nav className="nav" aria-label="Primary navigation">
         <Link className={isHome ? "active" : ""} to="/">Home</Link>
-        <div className="nav-dropdown">
+        <div
+          className={`nav-dropdown${closedDropdown === "vision" ? " dropdown-closed" : ""}`}
+          onMouseLeave={() => resetDropdown("vision")}
+        >
           <Link className={isVision ? "active" : ""} to="/vision">Vision</Link>
           <div className="nav-menu">
             {visionItems.map(([label, to]) => (
-              <Link to={to} key={label}>{label}</Link>
+              <Link to={to} key={label} onClick={() => closeDropdown("vision")}>{label}</Link>
             ))}
           </div>
         </div>
-        <div className="nav-dropdown platform-nav-dropdown">
+        <div
+          className={`nav-dropdown platform-nav-dropdown${closedDropdown === "platforms" ? " dropdown-closed" : ""}`}
+          onMouseLeave={() => resetDropdown("platforms")}
+        >
           <Link className={isPlatforms ? "active" : ""} to="/platforms">Platforms</Link>
           <div className="nav-menu">
             {platformItems.map(([label, to]) => (
-              <Link to={to} key={label}>{label}</Link>
+              <Link to={to} key={label} onClick={() => closeDropdown("platforms")}>{label}</Link>
+            ))}
+          </div>
+        </div>
+        <div
+          className={`nav-dropdown application-nav-dropdown${closedDropdown === "applications" ? " dropdown-closed" : ""}`}
+          onMouseLeave={() => resetDropdown("applications")}
+        >
+          <Link className={isApplications ? "active" : ""} to="/applications">Applications</Link>
+          <div className="nav-menu">
+            {applicationItems.map(([label, to]) => (
+              <Link to={to} key={label} onClick={() => closeDropdown("applications")}>{label}</Link>
             ))}
           </div>
         </div>
         {navItems.map(([item, to]) => (
-          <Link className={item === "Platforms" && isPlatforms ? "active" : ""} to={to} key={item}>{item}</Link>
+          <Link to={to} key={item}>{item}</Link>
         ))}
       </nav>
       <Link className="outline-button small" to="/#contact">
