@@ -20,11 +20,11 @@ import {
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/platforms.css";
-import heroBg from "../assets/platforms-bg.png";
-import orbitalImg from "../assets/platform-orbital-new.png";
-import lunarImg from "../assets/platform-lunar-new.png";
-import deepImg from "../assets/platform-deep-space-new.png";
-import ecosystemImg from "../assets/platform-ecosystem-new.png";
+import heroBg from "../assets/platform-hero-clean.png";
+import orbitalImg from "../assets/platform-orbital-clean.png";
+import lunarImg from "../assets/platform-lunar-clean.png";
+import deepImg from "../assets/platform-deep-clean.png";
+import ecosystemImg from "../assets/platform-ecosystem-clean.png";
 import ctaBg from "../assets/journey-bg.png";
 
 const platformSections = [

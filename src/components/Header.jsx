@@ -3,11 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import onnesWordmark from "../assets/onnes-wordmark.png";
 import "../styles/header.css";
 
-const navItems = [
-  ["Technology", "/#technology"],
-  ["Media", "/#media"],
-  ["Contact", "/#contact"],
-];
+const navItems = [["Contact", "/#contact"]];
 
 const visionItems = [
   ["Mission", "/vision#mission"],
@@ -29,6 +25,18 @@ const applicationItems = [
   ["Deep Space Exploration", "/applications#deep-space-exploration"],
 ];
 
+const technologyItems = [
+  ["Infrastructure Platform", "/technology#infrastructure-platform"],
+  ["Intelligent Systems", "/technology#intelligent-systems"],
+  ["Advanced Engineering", "/technology#advanced-engineering"],
+];
+
+const mediaItems = [
+  ["News", "/media#news"],
+  ["Videos", "/media#videos"],
+  ["Insights", "/media#insights"],
+];
+
 export default function Header() {
   const location = useLocation();
   const [closedDropdown, setClosedDropdown] = useState(null);
@@ -36,6 +44,8 @@ export default function Header() {
   const isVision = location.pathname === "/vision";
   const isPlatforms = location.pathname === "/platforms";
   const isApplications = location.pathname === "/applications";
+  const isTechnology = location.pathname === "/technology";
+  const isMedia = location.pathname === "/media";
 
   const closeDropdown = (name) => {
     setClosedDropdown(name);
@@ -88,6 +98,28 @@ export default function Header() {
           <div className="nav-menu">
             {applicationItems.map(([label, to]) => (
               <Link to={to} key={label} onClick={() => closeDropdown("applications")}>{label}</Link>
+            ))}
+          </div>
+        </div>
+        <div
+          className={`nav-dropdown technology-nav-dropdown${closedDropdown === "technology" ? " dropdown-closed" : ""}`}
+          onMouseLeave={() => resetDropdown("technology")}
+        >
+          <Link className={isTechnology ? "active" : ""} to="/technology">Technology</Link>
+          <div className="nav-menu">
+            {technologyItems.map(([label, to]) => (
+              <Link to={to} key={label} onClick={() => closeDropdown("technology")}>{label}</Link>
+            ))}
+          </div>
+        </div>
+        <div
+          className={`nav-dropdown media-nav-dropdown${closedDropdown === "media" ? " dropdown-closed" : ""}`}
+          onMouseLeave={() => resetDropdown("media")}
+        >
+          <Link className={isMedia ? "active" : ""} to="/media">Media</Link>
+          <div className="nav-menu">
+            {mediaItems.map(([label, to]) => (
+              <Link to={to} key={label} onClick={() => closeDropdown("media")}>{label}</Link>
             ))}
           </div>
         </div>

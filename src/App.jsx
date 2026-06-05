@@ -13,6 +13,8 @@ import Footer from "./components/Footer.jsx";
 import VisionPage from "./components/VisionPage.jsx";
 import PlatformsPage from "./components/PlatformsPage.jsx";
 import ApplicationsPage from "./components/ApplicationsPage.jsx";
+import TechnologyPage from "./components/TechnologyPage.jsx";
+import MediaPage from "./components/MediaPage.jsx";
 
 // Lazy admin imports
 const AdminLogin = lazy(() => import("./AdminDashboard/pages/AdminLogin"));
@@ -67,6 +69,8 @@ export default function App() {
         <Route path="/vision" element={<VisionPage />} />
         <Route path="/platforms" element={<PlatformsPage />} />
         <Route path="/applications" element={<ApplicationsPage />} />
+        <Route path="/technology" element={<TechnologyPage />} />
+        <Route path="/media" element={<MediaPage />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
 

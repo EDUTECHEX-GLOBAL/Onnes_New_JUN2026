@@ -18,9 +18,9 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/applications.css";
 import heroBg from "../assets/platforms-bg.png";
-import commercialBg from "../assets/platform-orbital-new.png";
-import securityBg from "../assets/platforms-bg.png";
-import defenseBg from "../assets/platform-ecosystem-new.png";
+import commercialBg from "../assets/Platforms1.png";
+import securityBg from "../assets/Platforms2.png";
+import defenseBg from "../assets/Platforms3.png";
 import explorationBg from "../assets/platform-lunar-new.png";
 import ctaBg from "../assets/journey-bg.png";
 

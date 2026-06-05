@@ -143,6 +143,14 @@
   min-width: 300px;
 }
 
+.technology-nav-dropdown .nav-menu {
+  min-width: 230px;
+}
+
+.media-nav-dropdown .nav-menu {
+  min-width: 130px;
+}
+
 .outline-button,
 .solid-button,
 .text-link {
