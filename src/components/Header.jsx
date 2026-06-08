@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import onnesWordmark from "../assets/onnes-wordmark.png";
 import "../styles/header.css";
 
-const navItems = [["Contact", "/#contact"]];
+const navItems = [["Contact", "/contact"]];
 
 const visionItems = [
   ["Mission", "/vision#mission"],
@@ -37,99 +37,156 @@ const mediaItems = [
   ["Insights", "/media#insights"],
 ];
 
+const dropdownNavs = [
+  { label: "Vision", to: "/vision", items: visionItems, key: "vision" },
+  { label: "Platforms", to: "/platforms", items: platformItems, key: "platforms" },
+  { label: "Applications", to: "/applications", items: applicationItems, key: "applications" },
+  { label: "Technology", to: "/technology", items: technologyItems, key: "technology" },
+  { label: "Media", to: "/media", items: mediaItems, key: "media" },
+];
+
 export default function Header() {
   const location = useLocation();
   const [closedDropdown, setClosedDropdown] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState(null);
+
   const isHome = location.pathname === "/";
-  const isVision = location.pathname === "/vision";
-  const isPlatforms = location.pathname === "/platforms";
-  const isApplications = location.pathname === "/applications";
-  const isTechnology = location.pathname === "/technology";
-  const isMedia = location.pathname === "/media";
+  const isContact = location.pathname === "/contact";
+
+  const pathMap = {
+    vision: location.pathname === "/vision",
+    platforms: location.pathname === "/platforms",
+    applications: location.pathname === "/applications",
+    technology: location.pathname === "/technology",
+    media: location.pathname === "/media",
+  };
 
   const closeDropdown = (name) => {
     setClosedDropdown(name);
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
   };
 
   const resetDropdown = (name) => {
-    if (closedDropdown === name) {
-      setClosedDropdown(null);
-    }
+    if (closedDropdown === name) setClosedDropdown(null);
+  };
+
+  const toggleAccordion = (key) => {
+    setOpenAccordion((prev) => (prev === key ? null : key));
+  };
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setOpenAccordion(null);
   };
 
   return (
-    <header className="header">
-      <Link className="brand" to="/" aria-label="Onnes Aerospace home">
-        <img className="brand-logo" src={onnesWordmark} alt="Onnes" />
-        <span className="brand-sub">AEROSPACE</span>
-      </Link>
-      <nav className="nav" aria-label="Primary navigation">
-        <Link className={isHome ? "active" : ""} to="/">Home</Link>
-        <div
-          className={`nav-dropdown${closedDropdown === "vision" ? " dropdown-closed" : ""}`}
-          onMouseLeave={() => resetDropdown("vision")}
+    <>
+      <header className={`header${mobileOpen ? " mobile-menu-open" : ""}`}>
+        <Link className="brand" to="/" aria-label="Onnes Aerospace home" onClick={closeMobileMenu}>
+          <img className="brand-logo" src={onnesWordmark} alt="Onnes" />
+          <span className="brand-sub">AEROSPACE</span>
+        </Link>
+
+        <nav className="nav" aria-label="Primary navigation">
+          <Link className={isHome ? "active" : ""} to="/">Home</Link>
+
+          {dropdownNavs.map(({ label, to, items, key }) => (
+            <div
+              key={key}
+              className={`nav-dropdown ${key}-nav-dropdown${closedDropdown === key ? " dropdown-closed" : ""}`}
+              onMouseLeave={() => resetDropdown(key)}
+            >
+              <Link className={pathMap[key] ? "active" : ""} to={to}>
+                {label}
+              </Link>
+
+              <div className="nav-menu">
+                {items.map(([itemLabel, itemTo]) => (
+                  <Link to={itemTo} key={itemLabel} onClick={() => closeDropdown(key)}>
+                    {itemLabel}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {navItems.map(([item, to]) => (
+            <Link className={isContact ? "active" : ""} to={to} key={item}>
+              {item}
+            </Link>
+          ))}
+        </nav>
+
+        <Link className="outline-button small desktop-cta" to="/contact">
+          Partner With Us <span aria-hidden="true">↗</span>
+        </Link>
+
+        <button
+          type="button"
+          className="hamburger"
+          onClick={() => (mobileOpen ? closeMobileMenu() : setMobileOpen(true))}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
         >
-          <Link className={isVision ? "active" : ""} to="/vision">Vision</Link>
-          <div className="nav-menu">
-            {visionItems.map(([label, to]) => (
-              <Link to={to} key={label} onClick={() => closeDropdown("vision")}>{label}</Link>
-            ))}
-          </div>
-        </div>
-        <div
-          className={`nav-dropdown platform-nav-dropdown${closedDropdown === "platforms" ? " dropdown-closed" : ""}`}
-          onMouseLeave={() => resetDropdown("platforms")}
-        >
-          <Link className={isPlatforms ? "active" : ""} to="/platforms">Platforms</Link>
-          <div className="nav-menu">
-            {platformItems.map(([label, to]) => (
-              <Link to={to} key={label} onClick={() => closeDropdown("platforms")}>{label}</Link>
-            ))}
-          </div>
-        </div>
-        <div
-          className={`nav-dropdown application-nav-dropdown${closedDropdown === "applications" ? " dropdown-closed" : ""}`}
-          onMouseLeave={() => resetDropdown("applications")}
-        >
-          <Link className={isApplications ? "active" : ""} to="/applications">Applications</Link>
-          <div className="nav-menu">
-            {applicationItems.map(([label, to]) => (
-              <Link to={to} key={label} onClick={() => closeDropdown("applications")}>{label}</Link>
-            ))}
-          </div>
-        </div>
-        <div
-          className={`nav-dropdown technology-nav-dropdown${closedDropdown === "technology" ? " dropdown-closed" : ""}`}
-          onMouseLeave={() => resetDropdown("technology")}
-        >
-          <Link className={isTechnology ? "active" : ""} to="/technology">Technology</Link>
-          <div className="nav-menu">
-            {technologyItems.map(([label, to]) => (
-              <Link to={to} key={label} onClick={() => closeDropdown("technology")}>{label}</Link>
-            ))}
-          </div>
-        </div>
-        <div
-          className={`nav-dropdown media-nav-dropdown${closedDropdown === "media" ? " dropdown-closed" : ""}`}
-          onMouseLeave={() => resetDropdown("media")}
-        >
-          <Link className={isMedia ? "active" : ""} to="/media">Media</Link>
-          <div className="nav-menu">
-            {mediaItems.map(([label, to]) => (
-              <Link to={to} key={label} onClick={() => closeDropdown("media")}>{label}</Link>
-            ))}
-          </div>
-        </div>
-        {navItems.map(([item, to]) => (
-          <Link to={to} key={item}>{item}</Link>
-        ))}
-      </nav>
-      <Link className="outline-button small" to="/#contact">
-        Partner With Us <span aria-hidden="true">↗</span>
-      </Link>
-    </header>
+          {mobileOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round">
+              <line x1="4" y1="4" x2="24" y2="24" />
+              <line x1="24" y1="4" x2="4" y2="24" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round">
+              <line x1="0" y1="2" x2="28" y2="2" />
+              <line x1="0" y1="10" x2="28" y2="10" />
+              <line x1="0" y1="18" x2="28" y2="18" />
+            </svg>
+          )}
+        </button>
+      </header>
+
+      <div className={`mobile-menu${mobileOpen ? " mobile-menu--open" : ""}`}>
+        <nav className="mobile-menu-nav" aria-label="Mobile navigation">
+          <Link className="mobile-menu-link mobile-menu-btn" to="/" onClick={closeMobileMenu}>
+            Home
+          </Link>
+
+          {dropdownNavs.map(({ label, to, items, key }) => (
+            <div key={key} className="mobile-menu-item">
+              <div className={`mobile-menu-row${openAccordion === key ? " is-open" : ""}`}>
+                <Link className="mobile-menu-link" to={to} onClick={closeMobileMenu}>
+                  {label}
+                </Link>
+
+                <button
+                  type="button"
+                  className="mobile-menu-chevron"
+                  onClick={() => toggleAccordion(key)}
+                  aria-expanded={openAccordion === key}
+                  aria-label={`Toggle ${label} menu`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <div className={`mobile-submenu${openAccordion === key ? " is-open" : ""}`}>
+                <div className="mobile-submenu-inner">
+                  {items.map(([itemLabel, itemTo]) => (
+                    <Link key={itemLabel} className="mobile-sub-link" to={itemTo} onClick={closeMobileMenu}>
+                      {itemLabel}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <Link className="mobile-menu-link" to="/contact" onClick={closeMobileMenu}>
+            Contact
+          </Link>
+        </nav>
+      </div>
+    </>
   );
 }

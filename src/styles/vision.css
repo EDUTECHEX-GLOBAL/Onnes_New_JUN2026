@@ -492,7 +492,7 @@
 
 @media (max-width: 720px) {
   .header {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
   }
 
   .header .outline-button {

@@ -11,6 +11,27 @@ const groups = [
   ["Media", "News", "Videos", "Insights"],
 ];
 
+const footerLinks = {
+  Vision: "/vision",
+  Mission: "/vision#mission",
+  Leadership: "/vision#leadership",
+  Careers: "/contact#careers",
+  Contact: "/contact",
+  "Orbital Infrastructure": "/platforms#orbital-infrastructure",
+  "Lunar Infrastructure": "/platforms#lunar-infrastructure",
+  "Deep Space Systems": "/platforms#deep-space-systems",
+  "Autonomous Space Ecosystems": "/platforms#autonomous-space-ecosystems",
+  "Commercial Space": "/applications#commercial-space",
+  "National Security Space": "/applications#national-security-space",
+  "Deep Space Exploration": "/applications#deep-space-exploration",
+  "Infrastructure Platform": "/technology#infrastructure-platform",
+  "Intelligent Systems": "/technology#intelligent-systems",
+  "Advanced Engineering": "/technology#advanced-engineering",
+  News: "/media#news",
+  Videos: "/media#videos",
+  Insights: "/media#insights",
+};
+
 const socialLinks = [
   ["X", <FaXTwitter />],
   ["LinkedIn", <FaLinkedinIn />],
@@ -37,7 +58,7 @@ export default function Footer() {
         <div className="footer-group" key={title}>
           <h3>{title}</h3>
           {items.map((item) => (
-            <a href={`#${item.toLowerCase().replaceAll(" ", "-")}`} key={item}>
+            <a href={footerLinks[item] || `#${item.toLowerCase().replaceAll(" ", "-")}`} key={item}>
               {item}
             </a>
           ))}
