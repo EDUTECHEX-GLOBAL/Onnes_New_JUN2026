@@ -22,9 +22,13 @@ import Footer from "./Footer.jsx";
 import "../styles/platforms.css";
 import heroBg from "../assets/platform-hero-clean.png";
 import orbitalImg from "../assets/platform-orbital-clean.png";
+import orbitalMobileImg from "../assets/platform-orbital-new.png";
 import lunarImg from "../assets/platform-lunar-clean.png";
+import lunarMobileImg from "../assets/platform-lunar-new.png";
 import deepImg from "../assets/platform-deep-clean.png";
+import deepMobileImg from "../assets/platform-deep-space-new.png";
 import ecosystemImg from "../assets/platform-ecosystem-clean.png";
+import ecosystemMobileImg from "../assets/platform-ecosystem-new.png";
 import ctaBg from "../assets/journey-bg.png";
 
 const platformSections = [
@@ -34,6 +38,7 @@ const platformSections = [
     title: "Orbital Infrastructure",
     body: "Robust, scalable infrastructure enabling persistent operations in Earth orbit and beyond. From orbital depots and logistics hubs to in-space servicing platforms, our systems provide the backbone for a thriving orbital economy.",
     image: orbitalImg,
+    mobileImage: orbitalMobileImg,
     imageSide: "left",
     cta: "Explore Our Platforms",
     features: [
@@ -49,6 +54,7 @@ const platformSections = [
     title: "Lunar Infrastructure",
     body: "End-to-end infrastructure for sustained lunar presence. Our systems support logistics, surface operations, habitats, resource utilization, and energy solutions to build the foundation of a lunar economy.",
     image: lunarImg,
+    mobileImage: lunarMobileImg,
     imageSide: "right",
     features: [
       ["Lunar Logistics", "Reliable transport and delivery systems across the lunar surface.", <Truck />],
@@ -63,6 +69,7 @@ const platformSections = [
     title: "Deep Space Systems",
     body: "Engineered for the challenges of the unknown. Our deep space systems provide the reliability, autonomy, and endurance required for missions far beyond Earth.",
     image: deepImg,
+    mobileImage: deepMobileImg,
     imageSide: "left",
     features: [
       ["Long-Duration Missions", "Systems built for extreme distance and extended mission timelines.", <Rocket />],
@@ -77,6 +84,7 @@ const platformSections = [
     title: "Autonomous Space Ecosystems",
     body: "Intelligent, self-operating ecosystems that sense, decide, and act. Our autonomous platforms enable resilient, adaptive, and scalable operations across all domains.",
     image: ecosystemImg,
+    mobileImage: ecosystemMobileImg,
     imageSide: "right",
     features: [
       ["Autonomous Platforms", "Self-operating systems that adapt and evolve in dynamic missions.", <Bot />],
@@ -101,7 +109,10 @@ function PlatformSection({ section }) {
   const media = (
     <div
       className={`platform-page-media ${section.imageSide === "left" ? "media-left" : "media-right"}`}
-      style={{ backgroundImage: `url(${section.image})` }}
+      style={{
+        "--platform-image": `url(${section.image})`,
+        "--platform-mobile-image": `url(${section.mobileImage || section.image})`,
+      }}
       aria-hidden="true"
     />
   );

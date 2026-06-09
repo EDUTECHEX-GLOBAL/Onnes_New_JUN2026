@@ -95,7 +95,7 @@ export default function ContactPage() {
     setStatus("Transmitting...");
 
     try {
-      await api.post("/api/contact", {
+      await api.post("/api/admin-contact", {
         fullName: `${form.firstName} ${form.lastName}`.trim(),
         email: form.email,
         product: form.area || form.interest,

@@ -273,11 +273,13 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+/* ── Form fields: consistent dark styling ── */
 .mission-form input,
 .mission-form select,
 .mission-form textarea {
   appearance: none;
-  background: rgba(0, 0, 0, 0.28);
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 4px;
   color: #eef3fb;
@@ -286,13 +288,16 @@
   min-height: 54px;
   outline: none;
   padding: 0 20px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  width: 100%;
 }
 
+/* ── Custom select arrow ── */
 .mission-form select {
   background:
     linear-gradient(45deg, transparent 50%, #aeb7c5 50%) calc(100% - 19px) 50% / 7px 7px no-repeat,
     linear-gradient(135deg, #aeb7c5 50%, transparent 50%) calc(100% - 14px) 50% / 7px 7px no-repeat,
-    rgba(0, 0, 0, 0.28);
+    rgba(255, 255, 255, 0.05);
 }
 
 .mission-form textarea {
@@ -303,6 +308,58 @@
 
 .mission-form input::placeholder,
 .mission-form textarea::placeholder {
+  color: #aab1bd;
+}
+
+/* ── Focus state: subtle blue border, no jarring background shift ── */
+.mission-form input:focus,
+.mission-form select:focus,
+.mission-form textarea:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--blue);
+  outline: none;
+}
+
+/* ── Keep select arrow visible on focus too ── */
+.mission-form select:focus {
+  background:
+    linear-gradient(45deg, transparent 50%, #aeb7c5 50%) calc(100% - 19px) 50% / 7px 7px no-repeat,
+    linear-gradient(135deg, #aeb7c5 50%, transparent 50%) calc(100% - 14px) 50% / 7px 7px no-repeat,
+    rgba(255, 255, 255, 0.07);
+}
+
+/* ── Fix Chrome/Edge autofill overriding the background ── */
+.mission-form input:-webkit-autofill,
+.mission-form input:-webkit-autofill:hover,
+.mission-form input:-webkit-autofill:focus,
+.mission-form input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 60px #0a0d12 inset !important;
+  -webkit-text-fill-color: #eef3fb !important;
+  caret-color: #eef3fb;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ── Fix native dropdown options panel ── */
+.mission-form select option {
+  background-color: #0d1117;
+  color: #eef3fb;
+  font-family: var(--font-din);
+  font-size: 15px;
+  padding: 10px 20px;
+}
+
+.mission-form select option:checked {
+  background-color: #0a3d6b;
+  color: #ffffff;
+}
+
+/* ── Default empty option looks like a placeholder ── */
+.mission-form select option[value=""] {
+  color: #aab1bd;
+}
+
+/* ── Placeholder colour for unselected selects ── */
+.mission-form select.placeholder-active {
   color: #aab1bd;
 }
 

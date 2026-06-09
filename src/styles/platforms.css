@@ -105,6 +105,7 @@
 }
 
 .platform-page-media {
+  background-image: var(--platform-image);
   background-position: left center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -274,6 +275,9 @@
   justify-content: center;
 }
 
+/* ─────────────────────────────────────────
+   RESPONSIVE — 1320px and below
+───────────────────────────────────────── */
 @media (max-width: 1320px) {
   .platform-page-section {
     grid-template-columns: 1fr;
@@ -281,12 +285,14 @@
 
   .platform-page-media {
     min-height: 520px;
+    order: 0;
   }
 
-  .platform-page-media::after {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), #000 96%);
+  .platform-page-copy {
+    order: 1;
   }
 
+  .platform-page-media::after,
   .platform-page-media.media-right::after {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), #000 96%);
   }
@@ -300,6 +306,9 @@
   }
 }
 
+/* ─────────────────────────────────────────
+   RESPONSIVE — 900px and below
+───────────────────────────────────────── */
 @media (max-width: 900px) {
   .platform-page-hero {
     min-height: 760px;
@@ -331,6 +340,9 @@
   }
 }
 
+/* ─────────────────────────────────────────
+   RESPONSIVE — 620px and below (mobile)
+───────────────────────────────────────── */
 @media (max-width: 620px) {
   .platforms-page,
   .platforms-page * {
@@ -343,15 +355,7 @@
     overflow-x: hidden;
   }
 
-  .platforms-page section,
-  .platform-page-hero-copy,
-  .platform-page-copy,
-  .platform-page-cta > div {
-    max-width: 100%;
-    overflow: hidden;
-    width: 100%;
-  }
-
+  /* ── consistent padding across every section ── */
   .platform-page-hero,
   .platform-page-copy,
   .platform-page-cta {
@@ -362,89 +366,156 @@
   .platform-page-hero {
     min-height: 690px;
     padding-top: 118px;
+    padding-bottom: 56px;
   }
 
+  /* ── image always stacks on top, copy below ── */
+  .platform-page-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .platform-page-media {
+    order: 0;
+    aspect-ratio: 4 / 3;
+    background-image: var(--platform-mobile-image);
+    background-position: center center;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .platform-page-media::after,
+  .platform-page-media.media-right::after {
+    display: none;
+  }
+
+  #orbital-infrastructure .platform-page-media {
+    background-position: 44% center;
+  }
+
+  #lunar-infrastructure .platform-page-media {
+    background-position: 54% center;
+  }
+
+  #deep-space-systems .platform-page-media {
+    background-position: 48% center;
+  }
+
+  #autonomous-space-ecosystems .platform-page-media {
+    background-position: 52% center;
+  }
+
+  .platform-page-copy {
+    order: 1;
+    padding-top: 36px;
+    padding-bottom: 44px;
+    width: 100%;
+  }
+
+  /* ── typography ── */
   .platform-page-eyebrow {
     font-size: 13px;
     letter-spacing: 0.28em;
     margin-bottom: 20px;
   }
 
+  .platform-page-kicker {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
   .platform-page-hero h1,
   .platform-page-copy h2,
   .platform-page-cta h2 {
-    display: block;
-    font-size: clamp(20px, 5.8vw, 25px);
-    max-width: calc(100vw - 40px);
+    font-size: clamp(22px, 6vw, 32px);
     overflow-wrap: break-word;
-    white-space: normal;
-    width: calc(100vw - 40px);
     word-break: break-word;
-  }
-
-  .platform-page-hero-copy > p:not(.platform-page-eyebrow),
-  .platform-page-copy > p,
-  .platform-page-cta p,
-  .platform-page-feature h4,
-  .platform-page-feature p {
-    max-width: 100%;
-    overflow-wrap: break-word;
     white-space: normal;
-    width: 100%;
-    word-break: break-word;
   }
 
   .platform-page-hero-copy > p:not(.platform-page-eyebrow),
   .platform-page-copy > p,
   .platform-page-cta p {
-    font-size: 12px;
-    line-height: 1.45;
-    max-width: calc(100vw - 40px);
-    width: calc(100vw - 40px);
+    font-size: 14px;
+    line-height: 1.55;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .platform-title-rule {
-    margin: 20px 0 22px;
-    width: 54px;
+    margin: 18px 0 20px;
+    width: 50px;
   }
 
-  .platform-page-media {
-    aspect-ratio: 16 / 11;
-    min-height: 0;
-  }
-
-  .platform-page-copy {
-    padding-bottom: 44px;
-    padding-top: 42px;
-  }
-
+  /* ── feature cards ── */
   .platform-page-features {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
   .platform-page-feature {
     min-height: 0;
-    padding: 18px 16px;
+    padding: 18px 14px;
+  }
+
+  .platform-page-feature > span {
+    height: 44px;
+    width: 44px;
+    margin-bottom: 16px;
+  }
+
+  .platform-page-feature svg {
+    height: 22px;
+    width: 22px;
   }
 
   .platform-page-feature h4 {
-    font-size: 15px;
-    margin-bottom: 10px;
+    font-size: 13px;
+    margin-bottom: 8px;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .platform-page-feature p {
-    font-size: 11px;
+    font-size: 12px;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .platform-learn-link {
     font-size: 14px;
+    gap: 16px;
+    margin-top: 28px;
   }
 
+  /* ── hero button ── */
   .platform-hero-button {
-    font-size: 12px;
-    justify-content: center;
-    min-height: 46px;
-    padding-inline: 14px;
+    font-size: 13px;
+    min-height: 48px;
+    min-width: 0;
+    padding-inline: 16px;
     white-space: normal;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── CTA section ── */
+  .platform-page-cta {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .platform-page-cta .cta-actions {
+    width: 100%;
+  }
+
+  .platform-page-cta .solid-button,
+  .platform-page-cta .outline-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 14px;
+    min-height: 48px;
   }
 }

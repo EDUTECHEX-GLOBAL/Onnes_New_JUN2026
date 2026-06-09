@@ -1,91 +1,157 @@
 import { Link, useLocation, Outlet } from "react-router-dom";
 import {
-  FaEnvelope,
-  FaUserPlus,
-  FaUsers,
-  FaSignOutAlt,
-  FaBars,
-  FaBell,
-  FaHome
+  FaEnvelope, FaUserPlus, FaUsers,
+  FaSignOutAlt, FaBars, FaBell, FaHome, FaTimes,
 } from "react-icons/fa";
-
 import assessalogo from "../../logos/onnes-adminlogo.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./AdminStyles.css";
 
 export default function AdminDashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) setSidebarOpen(true);
+      else setSidebarOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="admin-dashboard d-flex vh-100 bg-light">
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    <div style={{ display: "flex", height: "100vh", backgroundColor: "#f0f4f8", fontFamily: "'Inter', sans-serif", position: "relative", overflow: "hidden" }}>
 
-      <div className="flex-grow-1 p-3 overflow-auto">
-        <div className="d-flex flex-wrap justify-content-between align-items-center mb-4">
-          <button
-            className="btn btn-outline-secondary d-md-none"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+      {/* Mobile overlay backdrop */}
+      {isMobile && sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: "fixed", inset: 0,
+            backgroundColor: "rgba(0,0,0,0.4)",
+            zIndex: 40,
+          }}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div style={{
+        position: isMobile ? "fixed" : "relative",
+        top: 0, left: 0, bottom: 0,
+        zIndex: isMobile ? 50 : "auto",
+        width: 230,
+        transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
+        transition: "transform 0.25s ease",
+        backgroundColor: "#fff",
+        borderRight: "1px solid #e2e8f0",
+        display: "flex",
+        flexDirection: "column",
+        flexShrink: 0,
+      }}>
+        {/* Logo */}
+        <div style={{
+          padding: "20px 24px 16px",
+          borderBottom: "1px solid #e2e8f0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+          <img src={assessalogo} alt="Logo" style={{ width: 120, objectFit: "contain" }} />
+          {isMobile && (
+            <button onClick={() => setSidebarOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#94a3b8", padding: 4 }}>
+              <FaTimes size={16} />
+            </button>
+          )}
+        </div>
+
+        {/* Nav */}
+        <nav style={{ flex: 1, padding: "12px 12px 0", overflowY: "auto" }}>
+          <NavItem icon={FaHome}     label="Home"       path="/admin-dashboard/admin-home"      onNavigate={() => isMobile && setSidebarOpen(false)} />
+          <NavItem icon={FaEnvelope} label="Contact Us" path="/admin-dashboard/admin-contact"   onNavigate={() => isMobile && setSidebarOpen(false)} />
+          <NavItem icon={FaUserPlus} label="Subscribe"  path="/admin-dashboard/admin-subscribe" onNavigate={() => isMobile && setSidebarOpen(false)} />
+          <NavItem icon={FaUsers}    label="Visitors"   path="/admin-dashboard/admin-visitors"  onNavigate={() => isMobile && setSidebarOpen(false)} />
+        </nav>
+
+        {/* Logout */}
+        <div style={{ padding: "12px 12px 24px" }}>
+          <div
+            onClick={() => { localStorage.removeItem("adminToken"); window.location.href = "/admin-login"; }}
+            style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 8, cursor: "pointer", color: "#ef4444", fontSize: 14, fontWeight: 500 }}
+            onMouseEnter={e => e.currentTarget.style.backgroundColor = "#fef2f2"}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
           >
-            <FaBars />
+            <FaSignOutAlt size={14} />
+            <span>Logout</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0 }}>
+        {/* Top Bar */}
+        <div style={{
+          height: 56,
+          backgroundColor: "#fff",
+          borderBottom: "1px solid #e2e8f0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 16px",
+          flexShrink: 0,
+        }}>
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#64748b", padding: 4, display: isMobile ? "flex" : "none", alignItems: "center" }}
+          >
+            <FaBars size={18} />
           </button>
 
-          <div className="d-flex align-items-center gap-3 ms-auto">
-            <FaBell size={24} />
+          {/* Bell icon pinned to the right */}
+          <div style={{
+            marginLeft: "auto",
+            width: 34, height: 34, borderRadius: "50%",
+            backgroundColor: "#e0f2fe",
+            display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
+          }}>
+            <FaBell size={15} color="#00B5F9" />
           </div>
         </div>
 
-        <Outlet />
-      </div>
-    </div>
-  );
-}
-
-function Sidebar({ sidebarOpen }) {
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    window.location.href = "/admin-login";
-  };
-
-  return (
-    <div
-      className={`bg-white border-end ${sidebarOpen ? "d-block" : "d-none"} d-md-block`}
-      style={{ width: "250px" }}
-    >
-      <div className="text-center p-3 border-bottom">
-        <img src={assessalogo} alt="Logo" style={{ width: "150px" }} />
-      </div>
-
-      <nav className="nav flex-column p-3">
-        <NavItem icon={FaHome} label="Home" path="/admin-dashboard/admin-home" />
-        <NavItem icon={FaEnvelope} label="Contact Us" path="/admin-dashboard/admin-contact" />
-        <NavItem icon={FaUserPlus} label="Subscribe" path="/admin-dashboard/admin-subscribe" />
-        <NavItem icon={FaUsers} label="Visitors" path="/admin-dashboard/admin-visitors" />
-
-        <div
-          className="nav-link d-flex align-items-center gap-2 text-danger"
-          style={{ cursor: "pointer" }}
-          onClick={handleLogout}
-        >
-          <FaSignOutAlt /> Logout
+        {/* Content */}
+        <div style={{ flex: 1, overflow: "auto" }}>
+          <Outlet />
         </div>
-      </nav>
+      </div>
     </div>
   );
 }
 
-function NavItem({ icon: Icon, label, path }) {
+function NavItem({ icon: Icon, label, path, onNavigate }) {
   const location = useLocation();
   const isActive = location.pathname === path;
 
   return (
     <Link
       to={path}
-      className={`nav-link d-flex align-items-center gap-2 ${
-        isActive ? "fw-bold text-primary" : "text-dark"
-      }`}
+      onClick={onNavigate}
+      style={{
+        display: "flex", alignItems: "center", gap: 10,
+        padding: "10px 14px", borderRadius: 8, marginBottom: 4,
+        fontSize: 14, fontWeight: isActive ? 600 : 400,
+        color: isActive ? "#00B5F9" : "#475569",
+        backgroundColor: isActive ? "#e0f7ff" : "transparent",
+        textDecoration: "none",
+        transition: "background 0.15s, color 0.15s",
+      }}
+      onMouseEnter={e => { if (!isActive) { e.currentTarget.style.backgroundColor = "#f1f5f9"; e.currentTarget.style.color = "#0f172a"; } }}
+      onMouseLeave={e => { if (!isActive) { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#475569"; } }}
     >
-      <Icon /> {label}
+      <Icon size={14} />
+      <span>{label}</span>
     </Link>
   );
 }
