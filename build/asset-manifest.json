@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.87d3df33.css",
+    "main.css": "/static/css/main.d1f81118.css",
     "main.js": "/static/js/main.bddbe7a0.js",
     "static/css/903.1e284957.chunk.css": "/static/css/903.1e284957.chunk.css",
     "static/js/903.e91bf377.chunk.js": "/static/js/903.e91bf377.chunk.js",
@@ -77,7 +77,7 @@
     "static/media/D-DIN-PRO-700-Bold.woff2": "/static/media/D-DIN-PRO-700-Bold.49e5f91a62686db6a8a9.woff2",
     "static/media/D-DIN-PRO-400-Regular.woff2": "/static/media/D-DIN-PRO-400-Regular.5a8b7862c17d22dfa3ce.woff2",
     "index.html": "/index.html",
-    "main.87d3df33.css.map": "/static/css/main.87d3df33.css.map",
+    "main.d1f81118.css.map": "/static/css/main.d1f81118.css.map",
     "main.bddbe7a0.js.map": "/static/js/main.bddbe7a0.js.map",
     "903.1e284957.chunk.css.map": "/static/css/903.1e284957.chunk.css.map",
     "903.e91bf377.chunk.js.map": "/static/js/903.e91bf377.chunk.js.map",
@@ -97,7 +97,7 @@
     "850.97126df8.chunk.css.map": "/static/css/850.97126df8.chunk.css.map"
   },
   "entrypoints": [
-    "static/css/main.87d3df33.css",
+    "static/css/main.d1f81118.css",
     "static/js/main.bddbe7a0.js"
   ]
 }
