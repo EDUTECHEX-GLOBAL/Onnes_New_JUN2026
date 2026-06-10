@@ -1,6 +1,18 @@
+import heroBg from "../assets/hero-bg-3.mp4";
+
 export default function Hero() {
   return (
     <section className="hero section-bg" id="home">
+      <video
+        className="hero-video"
+        src={heroBg}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+      <div className="hero-video-mask" aria-hidden="true" />
+
       <div className="hero-copy">
         <p className="eyebrow">The Next-Generation Deep Space Infrastructure Company</p>
         <h1>Shaping Humanity Beyond Earth</h1>

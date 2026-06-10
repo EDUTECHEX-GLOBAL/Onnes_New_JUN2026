@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import api from "../../api"; // ✅ use central axios instance
+import api from "../../api";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   Tooltip,
@@ -12,61 +12,115 @@ import {
   Cell,
   Legend,
   CartesianGrid,
-  AreaChart,
-  Area
 } from "recharts";
-import { FaEnvelope, FaUsers, FaEye } from "react-icons/fa";
+import { FaEnvelope, FaUsers, FaEye, FaArrowUp, FaArrowDown, FaMinus } from "react-icons/fa";
 import CountUp from "react-countup";
-import { useMediaQuery } from 'react-responsive';
 
+// ─── Stat card config ───────────────────────────────────────────────────────
+const CARD_CONFIG = [
+  {
+    key: "contacts",
+    label: "Contacts",
+    icon: FaEnvelope,
+    gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    shadow: "rgba(102, 126, 234, 0.35)",
+  },
+  {
+    key: "visitors",
+    label: "Visitors",
+    icon: FaEye,
+    gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+    shadow: "rgba(67, 233, 123, 0.35)",
+  },
+  {
+    key: "subscribers",
+    label: "Subscribers",
+    icon: FaUsers,
+    gradient: "linear-gradient(135deg, #fe9496 0%, #ff6b6b 100%)",
+    shadow: "rgba(254, 148, 150, 0.35)",
+  },
+];
+
+const PIE_COLORS = [
+  "rgba(155, 49, 146, 0.85)",
+  "rgba(89, 11, 247, 0.85)",
+  "rgba(251, 122, 58, 0.85)",
+];
+
+// ─── Custom Tooltip ──────────────────────────────────────────────────────────
+const CustomTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{
+      background: "#fff",
+      border: "1px solid #e2e8f0",
+      borderRadius: 10,
+      padding: "10px 16px",
+      boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
+      fontSize: 13,
+      color: "#1a365d",
+    }}>
+      <p style={{ margin: 0, fontWeight: 600, marginBottom: 4 }}>{label}</p>
+      {payload.map((p) => (
+        <p key={p.dataKey} style={{ margin: 0, color: "#3b82f6" }}>
+          {p.value.toLocaleString()}
+        </p>
+      ))}
+    </div>
+  );
+};
+
+// ─── Custom Pie Label (outside, non-overlapping) ─────────────────────────────
+const RADIAN = Math.PI / 180;
+const renderCustomLabel = ({ cx, cy, midAngle, outerRadius, percent, name }) => {
+  // Only render label if slice is large enough to show
+  if (percent < 0.04) return null;
+  const radius = outerRadius + 28;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="#475569"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+      fontSize={12}
+      fontWeight={500}
+    >
+      {`${name} ${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 const HomeDashboard = () => {
-  const [counts, setCounts] = useState({
-    contacts: 0,
-    visitors: 0,
-    subscribers: 0,
-  });
+  const [counts, setCounts] = useState({ contacts: 0, visitors: 0, subscribers: 0 });
+  const [pctChange, setPctChange] = useState({ contacts: null, visitors: null, subscribers: null });
   const [loading, setLoading] = useState(true);
 
-  const [weekData, setWeekData] = useState({
-    contacts: { current: 0, previousWeek: 0 },
-    visitors: { current: 0, previousWeek: 0 },
-    subscribers: { current: 0, previousWeek: 0 },
-  });
-  const [pctChange, setPctChange] = useState({
-    contacts: 0,
-    visitors: 0,
-    subscribers: 0,
-  });
-
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
-  const isDesktop = useMediaQuery({ minWidth: 1024 });
-
-  // ✅ Fetch total counts — now correctly calls Render backend
   useEffect(() => {
-    const fetchCounts = async () => {
+    const fetchAll = async () => {
       try {
         const [contactRes, visitorRes, subRes] = await Promise.all([
           api.get("/api/admin-contact/count"),
           api.get("/api/admin-visitors/count"),
           api.get("/api/admin-subscribe/count"),
         ]);
-        const newCounts = {
+        setCounts({
           contacts: contactRes.data.count || 0,
           visitors: visitorRes.data.count || 0,
           subscribers: subRes.data.count || 0,
-        };
-        setCounts(newCounts);
-        setLoading(false);
+        });
       } catch (err) {
         console.error("Failed to fetch counts:", err);
+      } finally {
         setLoading(false);
       }
     };
-    fetchCounts();
+    fetchAll();
   }, []);
 
-  // ✅ Fetch week-over-week data — now correctly calls Render backend
   useEffect(() => {
     const fetchWeekData = async () => {
       try {
@@ -75,27 +129,16 @@ const HomeDashboard = () => {
           api.get("/api/week-data/visitors"),
           api.get("/api/week-data/subscribers"),
         ]);
-
-        const data = {
-          contacts: c.data,
-          visitors: v.data,
-          subscribers: s.data,
-        };
-        setWeekData(data);
-
-        // compute % change
+        const data = { contacts: c.data, visitors: v.data, subscribers: s.data };
         const pct = {};
         Object.entries(data).forEach(([key, { current, previousWeek }]) => {
-          pct[key] = previousWeek === 0
-            ? null
-            : ((current - previousWeek) / previousWeek) * 100;
+          pct[key] = previousWeek === 0 ? null : ((current - previousWeek) / previousWeek) * 100;
         });
         setPctChange(pct);
       } catch (err) {
         console.error("Failed to fetch weekly data:", err);
       }
     };
-
     fetchWeekData();
   }, []);
 
@@ -105,139 +148,91 @@ const HomeDashboard = () => {
     { name: "Subscribers", value: counts.subscribers },
   ];
 
-  const pieColors = [
-    'rgba(155, 49, 146, 0.8)',
-    'rgba(89, 11, 247, 0.8)',
-    'rgba(251, 122, 58, 0.8)',
-  ];
-
-  const getChartHeight = () => (isMobile ? 250 : 320);
-
   return (
-    <div style={{
-      padding: isMobile ? '16px' : '24px',
-      backgroundColor: '#f0f4f8',
-      minHeight: '100vh',
-      backgroundImage: 'radial-gradient(at 40% 20%, hsla(212,100%,74%,0.2) 0px, transparent 50%)'
-    }}>
-      {/* Dashboard Heading */}
-      <h2 style={{
-        color: '#1a365d',
-        fontWeight: '600',
-        fontSize: isMobile ? '1.5rem' : '1.75rem',
-        marginBottom: isMobile ? '20px' : '28px',
-        textShadow: '0 1px 2px rgba(0,0,0,0.05)'
-      }}>
-        Dashboard Overview
-      </h2>
+    <div style={{ padding: "28px 28px 40px", backgroundColor: "#f0f4f8", minHeight: "100vh" }}>
 
-      {/* Stats Cards */}
+      {/* ── Page heading ── */}
+      <div style={{ marginBottom: 28 }}>
+        <h2 style={{
+          margin: 0,
+          fontSize: "1.45rem",
+          fontWeight: 700,
+          color: "#1a365d",
+          letterSpacing: "-0.3px",
+        }}>
+          Dashboard Overview
+        </h2>
+        <p style={{ margin: "4px 0 0", fontSize: 13, color: "#94a3b8" }}>
+          All-time totals and week-over-week change
+        </p>
+      </div>
+
+      {/* ── Stat cards ── */}
       <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile
-          ? '1fr'
-          : 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: isMobile ? '16px' : '24px',
-        marginBottom: isMobile ? '24px' : '32px'
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+        gap: 20,
+        marginBottom: 28,
       }}>
-        {chartData.map((item, index) => {
-          const key = item.name.toLowerCase();
+        {CARD_CONFIG.map(({ key, label, icon: Icon, gradient, shadow }) => {
           const delta = pctChange[key];
           const hasPrev = delta !== null && delta !== undefined;
           const isUp = delta > 0;
 
           return (
-            <div key={item.name} style={{
-              background: index === 0
-                ? 'linear-gradient(135deg, #667eea, #764ba2)'
-                : index === 1
-                  ? 'linear-gradient(135deg, #43e97b, #38f9d7)'
-                  : 'linear-gradient(135deg, #fe9496, #ff6b6b)',
-              borderRadius: '16px',
-              padding: isMobile ? '16px' : '24px',
-              boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
-              position: 'relative',
-              overflow: 'hidden',
-              color: 'white',
-              minHeight: isMobile ? '120px' : '160px'
+            <div key={key} style={{
+              background: gradient,
+              borderRadius: 16,
+              padding: "22px 24px",
+              boxShadow: `0 8px 24px ${shadow}`,
+              position: "relative",
+              overflow: "hidden",
+              color: "#fff",
             }}>
-              {/* Large overlapping circle */}
+              {/* Decorative circles */}
               <div style={{
-                position: 'absolute',
-                right: '-30px',
-                top: '-30px',
-                width: '120px',
-                height: '120px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.15)'
+                position: "absolute", right: -24, top: -24,
+                width: 110, height: 110, borderRadius: "50%",
+                background: "rgba(255,255,255,0.12)",
+                pointerEvents: "none",
               }} />
-              {/* Small overlapping circle */}
               <div style={{
-                position: 'absolute',
-                right: '20px',
-                top: '20px',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.2)'
-              }} />
+                position: "absolute", right: 18, top: 18,
+                width: 44, height: 44, borderRadius: "50%",
+                background: "rgba(255,255,255,0.18)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                pointerEvents: "none",
+              }}>
+                <Icon size={16} color="rgba(255,255,255,0.9)" />
+              </div>
 
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <p style={{
-                  fontSize: isMobile ? '0.9rem' : '1rem',
-                  marginBottom: isMobile ? '12px' : '16px',
-                  fontWeight: '500',
-                  opacity: 0.9
-                }}>{item.name}</p>
-
-                <p style={{
-                  fontSize: isMobile ? '1.5rem' : '1.8rem',
-                  fontWeight: '700',
-                  margin: '0 0 8px 0',
-                  lineHeight: '1.2'
-                }}>
-                  {!loading
-                    ? <CountUp end={item.value} duration={2.5} separator="," />
-                    : '--'
-                  }
+              <div style={{ position: "relative", zIndex: 1 }}>
+                {/* Label */}
+                <p style={{ margin: "0 0 10px", fontSize: 13, fontWeight: 500, opacity: 0.88 }}>
+                  {label}
                 </p>
 
-                {/* Trend indicator */}
+                {/* Count */}
+                <p style={{ margin: "0 0 14px", fontSize: "2rem", fontWeight: 800, lineHeight: 1, letterSpacing: "-1px" }}>
+                  {loading ? "—" : <CountUp end={counts[key]} duration={2.2} separator="," />}
+                </p>
+
+                {/* Trend */}
                 <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontSize: isMobile ? '0.8rem' : '0.9rem',
-                  opacity: 0.9
+                  display: "inline-flex", alignItems: "center", gap: 6,
+                  background: "rgba(255,255,255,0.22)",
+                  borderRadius: 20, padding: "4px 10px 4px 8px",
+                  fontSize: 12, fontWeight: 500,
                 }}>
-                  <div style={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginRight: '8px'
-                  }}>
-                    {hasPrev ? (
-                      isUp ? (
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M5 15l7-7 7 7" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      ) : (
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      )
-                    ) : (
-                      <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>–</span>
-                    )}
-                  </div>
+                  {hasPrev ? (
+                    isUp ? <FaArrowUp size={10} /> : <FaArrowDown size={10} />
+                  ) : (
+                    <FaMinus size={10} />
+                  )}
                   <span>
                     {hasPrev
-                      ? `${isUp ? 'Increased' : 'Decreased'} by ${Math.abs(delta).toFixed(1)}%`
-                      : 'No data from previous week'
-                    }
+                      ? `${isUp ? "+" : ""}${delta.toFixed(1)}% this week`
+                      : "No prior week data"}
                   </span>
                 </div>
               </div>
@@ -246,119 +241,60 @@ const HomeDashboard = () => {
         })}
       </div>
 
-      {/* Charts Section */}
+      {/* ── Charts ── */}
       <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))',
-        gap: isMobile ? '20px' : '28px'
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
+        gap: 20,
       }}>
-        {/* Modern Area Chart */}
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.3)',
-          borderRadius: '14px',
-          padding: isMobile ? '16px' : '22px',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: '-50%',
-            left: '-50%',
-            width: '200%',
-            height: '200%',
-            background: 'linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)',
-            transform: 'rotate(30deg)',
-            animation: 'shine 6s infinite linear',
-            zIndex: 0
-          }}></div>
 
-          <h3 style={{
-            color: '#1a365d',
-            fontSize: isMobile ? '1rem' : '1.1rem',
-            fontWeight: '600',
-            marginBottom: isMobile ? '14px' : '18px',
-            position: 'relative',
-            zIndex: 1
-          }}>Category Trends</h3>
-          <div style={{ height: getChartHeight(), position: 'relative', zIndex: 1 }}>
+        {/* Area chart */}
+        <div style={cardStyle}>
+          <p style={chartHeading}>Category Trends</p>
+          <p style={chartSubheading}>Total count by category</p>
+          <div style={{ height: 280, marginTop: 16 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={chartData}>
+              <AreaChart data={chartData} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>
                 <defs>
-                  <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.18} />
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                   </linearGradient>
                 </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e9eef4" vertical={false} />
                 <XAxis
                   dataKey="name"
-                  stroke="#64748b"
-                  tick={{ fill: '#64748b', fontSize: isMobile ? 10 : 12 }}
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "#94a3b8", fontSize: 12 }}
                 />
                 <YAxis
-                  stroke="#64748b"
-                  tick={{ fill: '#64748b', fontSize: isMobile ? 10 : 12 }}
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "#94a3b8", fontSize: 11 }}
+                  width={52}
+                  tickFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v}
                 />
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                    border: '1px solid rgba(203, 213, 224, 0.5)',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                    backdropFilter: 'blur(4px)',
-                    padding: '12px',
-                    fontSize: isMobile ? '12px' : '14px'
-                  }}
-                />
+                <Tooltip content={<CustomTooltip />} />
                 <Area
                   type="monotone"
                   dataKey="value"
                   stroke="#3b82f6"
-                  fillOpacity={1}
-                  fill="url(#colorValue)"
-                  strokeWidth={2}
-                  activeDot={{ r: isMobile ? 4 : 6, stroke: '#fff', strokeWidth: 2 }}
+                  strokeWidth={2.5}
+                  fill="url(#areaGrad)"
+                  dot={{ r: 5, fill: "#3b82f6", stroke: "#fff", strokeWidth: 2 }}
+                  activeDot={{ r: 6, stroke: "#fff", strokeWidth: 2 }}
                 />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        {/* Category Distribution */}
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.3)',
-          borderRadius: '14px',
-          padding: isMobile ? '16px' : '22px',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: '-50%',
-            left: '-50%',
-            width: '200%',
-            height: '200%',
-            background: 'linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)',
-            transform: 'rotate(30deg)',
-            animation: 'shine 6s infinite linear',
-            zIndex: 0
-          }}></div>
-
-          <h3 style={{
-            color: '#1a365d',
-            fontSize: isMobile ? '1rem' : '1.1rem',
-            fontWeight: '600',
-            marginBottom: isMobile ? '14px' : '18px',
-            position: 'relative',
-            zIndex: 1
-          }}>Category Distribution</h3>
-          <div style={{ height: getChartHeight(), position: 'relative', zIndex: 1 }}>
+        {/* Pie chart */}
+        <div style={cardStyle}>
+          <p style={chartHeading}>Category Distribution</p>
+          <p style={chartSubheading}>Proportional breakdown</p>
+          <div style={{ height: 280, marginTop: 16 }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -366,54 +302,75 @@ const HomeDashboard = () => {
                   dataKey="value"
                   nameKey="name"
                   cx="50%"
-                  cy="50%"
-                  outerRadius={isMobile ? 70 : 90}
-                  innerRadius={isMobile ? 30 : 50}
-                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                  cy="46%"
+                  outerRadius={95}
+                  innerRadius={52}
+                  paddingAngle={3}
                   labelLine={false}
+                  label={renderCustomLabel}
                 >
-                  {chartData.map((entry, index) => (
+                  {chartData.map((_, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={pieColors[index % pieColors.length]}
-                      stroke="rgba(255,255,255,0.3)"
-                      strokeWidth={1}
+                      fill={PIE_COLORS[index % PIE_COLORS.length]}
+                      stroke="none"
                     />
                   ))}
                 </Pie>
-                <Legend
-                  wrapperStyle={{
-                    paddingTop: '20px',
-                    fontSize: isMobile ? '0.75rem' : '0.85rem'
+                <Tooltip
+                  formatter={(value, name) => [value.toLocaleString(), name]}
+                  contentStyle={{
+                    background: "#fff",
+                    border: "1px solid #e2e8f0",
+                    borderRadius: 10,
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
+                    fontSize: 13,
                   }}
                 />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    border: '1px solid rgba(203, 213, 224, 0.5)',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                    backdropFilter: 'blur(4px)',
-                    padding: '12px',
-                    fontSize: isMobile ? '12px' : '14px'
-                  }}
-                  formatter={(value, name) => [value, name]}
+                <Legend
+                  iconType="circle"
+                  iconSize={8}
+                  wrapperStyle={{ fontSize: 12, color: "#64748b", paddingTop: 12 }}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
+
       </div>
 
-      {/* ✅ Fixed: removed jsx attribute from style tag */}
+      {/* ── Responsive styles ── */}
       <style>{`
-        @keyframes shine {
-          0% { transform: rotate(30deg) translate(-30%, -30%); }
-          100% { transform: rotate(30deg) translate(30%, 30%); }
+        @media (max-width: 640px) {
+          .dashboard-grid-charts {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </div>
   );
+};
+
+// ─── Shared card style object ────────────────────────────────────────────────
+const cardStyle = {
+  background: "#fff",
+  borderRadius: 16,
+  padding: "22px 24px",
+  boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+  border: "1px solid #e9eef4",
+};
+
+const chartHeading = {
+  margin: 0,
+  fontSize: "0.95rem",
+  fontWeight: 700,
+  color: "#1a365d",
+};
+
+const chartSubheading = {
+  margin: "3px 0 0",
+  fontSize: 12,
+  color: "#94a3b8",
 };
 
 export default HomeDashboard;
