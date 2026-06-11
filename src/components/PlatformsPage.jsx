@@ -20,14 +20,14 @@ import {
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/platforms.css";
-import heroBg from "../assets/platform-hero-clean.png";
-import orbitalImg from "../assets/platform-orbital-clean.png";
+import heroBg from "../assets/OrbitalInfrastructure.png";
+import orbitalImg from "../assets/OrbitalInfra1.png";
 import orbitalMobileImg from "../assets/platform-orbital-new.png";
-import lunarImg from "../assets/platform-lunar-clean.png";
+import lunarImg from "../assets/LunarInfra1.png";
 import lunarMobileImg from "../assets/platform-lunar-new.png";
-import deepImg from "../assets/platform-deep-clean.png";
+import deepImg from "../assets/DeepSpace2.png";
 import deepMobileImg from "../assets/platform-deep-space-new.png";
-import ecosystemImg from "../assets/platform-ecosystem-clean.png";
+import ecosystemImg from "../assets//SpaceEcosystems.png";
 import ecosystemMobileImg from "../assets/platform-ecosystem-new.png";
 import ctaBg from "../assets/journey-bg.png";
 

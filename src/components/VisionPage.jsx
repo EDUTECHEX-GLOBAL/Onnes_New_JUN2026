@@ -16,10 +16,10 @@ import FinalCta from "./FinalCta";
 import Footer from "./Footer";
 import "../styles/vision.css";
 
-import futureEarth from "../assets/vision-earth.png";
-import futureLunar from "../assets/platform-lunar-new.png";
-import futureDeep from "../assets/platform-deep-space-new.png";
-import futureHumanity from "../assets/platform-ecosystem-new.png";
+import futureEarth from "../assets/OrbitalInfra.png";
+import futureLunar from "../assets/LunarInfra2.png";
+import futureDeep from "../assets/DeepSpace3.png";
+import futureHumanity from "../assets/NationalSecuritySpace.jpeg";
 import ramImage from "../assets/vision-page/founder-ram.png";
 import vikramImage from "../assets/vision-page/founder-vikram.png";
 import rajeshImage from "../assets/vision-page/founder-rajesh.png";
@@ -131,7 +131,10 @@ export default function VisionPage() {
         <div className="future-card-grid">
           {futureCards.map(([title, text, image, icon]) => (
             <article className="future-card" key={title}>
-              <div className="future-card-image" style={{ backgroundImage: `url(${image})` }} />
+              {/* CHANGED: using <img> instead of background-image for perfect fit */}
+              <div className="future-card-image">
+                <img src={image} alt={title} />
+              </div>
               <div className="future-card-body">
                 <span>{icon}</span>
                 <div>

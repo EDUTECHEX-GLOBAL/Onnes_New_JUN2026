@@ -41,6 +41,7 @@ body {
   background: #000;
   color: var(--text);
   font-family: var(--font-din);
+  overflow-x: hidden; /* ← ADDED: prevents horizontal scroll on mobile */
 }
 
 a {
@@ -56,4 +57,3 @@ a {
     radial-gradient(circle at 86% 30%, rgba(255, 128, 32, 0.08), transparent 25rem),
     #000;
 }
-

@@ -1,4 +1,7 @@
-﻿.final-cta {
+﻿/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta {
   align-items: center;
   background:
     linear-gradient(90deg, #000 0 42%, rgba(0, 0, 0, 0.38)),
@@ -25,6 +28,9 @@
   gap: 20px;
 }
 
+/* ============================================================
+   FOOTER
+   ============================================================ */
 .footer {
   background: #020202;
   border-top: 1px solid var(--muted-line);
@@ -114,4 +120,132 @@
   margin-right: auto;
 }
 
+/* ============================================================
+   RESPONSIVE — 1100px
+   ============================================================ */
+@media (max-width: 1100px) {
+  .final-cta {
+    grid-template-columns: 1fr 280px;
+    padding: 52px 48px;
+  }
 
+  .footer {
+    grid-template-columns: 1.2fr repeat(3, 1fr);
+    gap: 36px;
+    padding: 48px 48px 32px;
+  }
+
+  .footer-group:nth-child(6),
+  .footer-group:nth-child(7) {
+    grid-column: auto;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 760px
+   ============================================================ */
+@media (max-width: 760px) {
+  /* Final CTA */
+  .final-cta {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 48px 24px 52px;
+    background:
+      linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.75) 50%, #000 100%),
+      url("../assets/hero-bg.png") center / cover no-repeat;
+    gap: 28px;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(26px, 8vw, 40px);
+    max-width: 100%;
+  }
+
+  .final-cta p {
+    font-size: 15px;
+    max-width: 100%;
+  }
+
+  .cta-actions {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .cta-actions .solid-button,
+  .cta-actions .outline-button {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Footer */
+  .footer {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px 20px;
+    padding: 44px 24px 32px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand p {
+    max-width: 100%;
+  }
+
+  .footer-logo {
+    width: 110px;
+  }
+
+  .footer-group h3 {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .footer-group a {
+    font-size: 14px;
+  }
+
+  .legal {
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    padding-top: 20px;
+    font-size: 13px;
+  }
+
+  .legal span:first-child {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 480px
+   ============================================================ */
+@media (max-width: 480px) {
+  .final-cta {
+    padding: 40px 18px 44px;
+  }
+
+  .cta-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-actions .solid-button,
+  .cta-actions .outline-button {
+    width: 100%;
+  }
+
+  .footer {
+    grid-template-columns: 1fr 1fr;
+    padding: 36px 18px 28px;
+    gap: 24px 16px;
+  }
+
+  .footer-group:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .legal {
+    font-size: 12px;
+    gap: 8px 16px;
+  }
+}

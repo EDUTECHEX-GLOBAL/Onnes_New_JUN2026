@@ -1,4 +1,4 @@
-import heroBg from "../assets/hero-bg-3.mp4";
+import heroBg from "../assets/hero-bg-4hd.mp4";
 
 export default function Hero() {
   return (
@@ -35,5 +35,3 @@ export default function Hero() {
     </section>
   );
 }
-
-//updates
