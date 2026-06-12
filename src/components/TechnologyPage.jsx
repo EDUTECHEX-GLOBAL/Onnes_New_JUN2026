@@ -19,13 +19,13 @@ import {
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/technology.css";
-import heroBg from "../assets/technology-hero-visual.png";
-import platformBg from "../assets/technology-platform-visual.png";
+import heroBg from "../assets/OrionTakeOff.jpg";
+import platformBg from "../assets/LunarInfra4.png";
 import systemsDashboard from "../assets/technology-systems-dashboard.png";
-import engineeringOne from "../assets/technology-engineering-materials.png";
-import engineeringTwo from "../assets/technology-engineering-precision.png";
-import engineeringThree from "../assets/technology-engineering-testing.png";
-import engineeringFour from "../assets/technology-engineering-digital.png";
+import engineeringOne from "../assets/AdvMaterials.jpeg";
+import engineeringTwo from "../assets/PrecisionEngineering.jpeg";
+import engineeringThree from "../assets/RigorousTesting.jpeg";
+import engineeringFour from "../assets/DigitalInnovation.jpeg";
 import ctaBg from "../assets/journey-bg.png";
 
 const advantages = [
@@ -58,11 +58,13 @@ const systemCards = [
   ["Propulsion", "100%", "Ready", <Orbit />],
 ];
 
+// bgPos tuned per image: AdvMaterials = diagonal texture (center), PrecisionEngineering = drill top (top center),
+// RigorousTesting = satellite in chamber (center top), DigitalInnovation = control room + screen (center 20%)
 const engineeringCards = [
-  ["Advanced Materials", "Next-generation composites and materials for superior strength-to-weight ratios.", engineeringOne],
-  ["Precision Engineering", "High-precision manufacturing and assembly for mission-critical components.", engineeringTwo],
-  ["Rigorous Testing", "Validated through extreme environment testing and mission qualification.", engineeringThree],
-  ["Digital Innovation", "Modeling, simulation, and digital engineering for optimal mission performance.", engineeringFour],
+  ["Advanced Materials", "Next-generation composites and materials for superior strength-to-weight ratios.", engineeringOne, "center center"],
+  ["Precision Engineering", "High-precision manufacturing and assembly for mission-critical components.", engineeringTwo, "center top"],
+  ["Rigorous Testing", "Validated through extreme environment testing and mission qualification.", engineeringThree, "center 20%"],
+  ["Digital Innovation", "Modeling, simulation, and digital engineering for optimal mission performance.", engineeringFour, "center 25%"],
 ];
 
 function Advantage({ item }) {
@@ -95,8 +97,13 @@ export default function TechnologyPage() {
   return (
     <main className="site-shell technology-page">
       <Header />
+
+      {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="technology-hero" id="technology-top">
-        <div className="technology-hero-bg" style={{ backgroundImage: `url(${heroBg})` }} />
+        <div
+          className="technology-hero-bg"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
         <div className="technology-hero-copy">
           <p className="technology-eyebrow">Our Technology</p>
           <h1>
@@ -116,6 +123,7 @@ export default function TechnologyPage() {
         </div>
       </section>
 
+      {/* ── Advantage band ───────────────────────────────────────── */}
       <section className="technology-advantage-band">
         <p className="technology-eyebrow">Our Technology Advantage</p>
         <div className="technology-advantages">
@@ -125,6 +133,7 @@ export default function TechnologyPage() {
         </div>
       </section>
 
+      {/* ── 01 Infrastructure Platform ───────────────────────────── */}
       <section className="technology-platform-panel" id="infrastructure-platform">
         <div className="technology-section-copy">
           <p className="technology-number">01</p>
@@ -136,7 +145,10 @@ export default function TechnologyPage() {
           <CheckList items={platformBullets} />
           <a href="#infrastructure-platform">Learn More <span aria-hidden="true">→</span></a>
         </div>
-        <div className="technology-platform-visual" style={{ backgroundImage: `url(${platformBg})` }}>
+        <div
+          className="technology-platform-visual"
+          style={{ backgroundImage: `url(${platformBg})` }}
+        >
           {callouts.map(([title, body], index) => (
             <article className={`technology-callout callout-${index + 1}`} key={title}>
               <h3>{title}</h3>
@@ -146,6 +158,7 @@ export default function TechnologyPage() {
         </div>
       </section>
 
+      {/* ── 02 Intelligent Systems ───────────────────────────────── */}
       <section className="technology-systems-panel" id="intelligent-systems">
         <div className="technology-section-copy">
           <p className="technology-number">02</p>
@@ -162,6 +175,7 @@ export default function TechnologyPage() {
         </div>
       </section>
 
+      {/* ── 03 Advanced Engineering ──────────────────────────────── */}
       <section className="technology-engineering-panel" id="advanced-engineering">
         <div className="technology-section-copy">
           <p className="technology-number">03</p>
@@ -171,16 +185,24 @@ export default function TechnologyPage() {
           <a href="#advanced-engineering">Learn More <span aria-hidden="true">→</span></a>
         </div>
         <div className="engineering-card-grid">
-          {engineeringCards.map(([title, body, image]) => (
+          {engineeringCards.map(([title, body, image, objPos]) => (
             <article className="engineering-card" key={title}>
-              <div style={{ backgroundImage: `url(${image})` }} />
-              <h3>{title}</h3>
-              <p>{body}</p>
+              <img
+                src={image}
+                alt={title}
+                className="engineering-card-img"
+                style={{ objectPosition: objPos }}
+              />
+              <div className="engineering-card-body">
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
             </article>
           ))}
         </div>
       </section>
 
+      {/* ── CTA ──────────────────────────────────────────────────── */}
       <section className="technology-cta" style={{ backgroundImage: `url(${ctaBg})` }}>
         <h2>Engineering The Future. Powering Humanity Beyond Earth.</h2>
         <p>Our technology is the foundation for a new era of space infrastructure and limitless exploration.</p>

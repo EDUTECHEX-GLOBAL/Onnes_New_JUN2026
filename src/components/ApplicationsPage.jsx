@@ -17,11 +17,11 @@ import {
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/applications.css";
-import heroBg from "../assets/platforms-bg.png";
-import commercialBg from "../assets/Platforms1.png";
-import securityBg from "../assets/Platforms2.png";
-import defenseBg from "../assets/Platforms3.png";
-import explorationBg from "../assets/platform-lunar-new.png";
+import heroBg from "../assets/ApplicationsHeroBg.jpeg";
+import commercialBg from "../assets/CommercialSpace1.jpeg";
+import securityBg from "../assets/NationalSecuritySpace.jpeg";
+import defenseBg from "../assets/Space_X_Air_Water_Ground.jpeg";
+import explorationBg from "../assets/DeepSpaceExploration.jpeg";
 import ctaBg from "../assets/journey-bg.png";
 
 const domains = [
@@ -85,7 +85,11 @@ const domains = [
 
 function ApplicationDomain({ domain }) {
   return (
-    <article className="application-domain" id={domain.id} style={{ backgroundImage: `url(${domain.image})` }}>
+    <article
+      className="application-domain"
+      id={domain.id}
+      style={{ backgroundImage: `url(${domain.image})` }}
+    >
       <div className="application-domain-copy">
         <p className="applications-number">{domain.number}</p>
         <h3>{domain.title}</h3>
@@ -111,8 +115,12 @@ export default function ApplicationsPage() {
   return (
     <main className="site-shell applications-page">
       <Header />
+
       <section className="applications-hero" id="applications-top">
-        <div className="applications-hero-bg" style={{ backgroundImage: `url(${heroBg})` }} />
+        <div
+          className="applications-hero-bg"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
         <div className="applications-hero-copy">
           <p className="applications-eyebrow">Our Applications</p>
           <h1>
@@ -123,8 +131,9 @@ export default function ApplicationsPage() {
             Mission That Matters
           </h1>
           <p>
-            From commercial space to national security and space-enabled defense systems, Onnes Aerospace
-            provides the critical infrastructure that empowers the world's most ambitious missions.
+            From commercial space to national security and space-enabled defense
+            systems, Onnes Aerospace provides the critical infrastructure that
+            empowers the world's most ambitious missions.
           </p>
           <a className="outline-button" href="/platforms">
             Explore Our Platforms <span aria-hidden="true">→</span>
@@ -145,14 +154,17 @@ export default function ApplicationsPage() {
         </div>
       </section>
 
-      <section className="applications-cta" style={{ backgroundImage: `url(${ctaBg})` }}>
+      <section
+        className="applications-cta"
+        style={{ backgroundImage: `url(${ctaBg})` }}
+      >
         <div>
           <p className="applications-eyebrow">Together, We Go Further</p>
           <h2>Let's Build The Future Beyond Earth.</h2>
         </div>
         <p>
-          Partner with Onnes Aerospace to create the infrastructure that enables a safer, smarter, and more
-          prosperous future for humanity.
+          Partner with Onnes Aerospace to create the infrastructure that enables
+          a safer, smarter, and more prosperous future for humanity.
         </p>
         <div className="cta-actions">
           <a className="solid-button" href="mailto:hello@onnes.in">

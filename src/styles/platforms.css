@@ -44,6 +44,7 @@
   width: 74px;
 }
 
+/* ── HERO ─────────────────────────────────────────────────── */
 .platform-page-hero {
   border-bottom: 1px solid var(--muted-line);
   min-height: 820px;
@@ -53,7 +54,7 @@
 }
 
 .platform-page-hero-bg {
-  background-position: center center;
+  background-position: 70% center;
   background-repeat: no-repeat;
   background-size: cover;
   inset: 0;
@@ -62,15 +63,26 @@
 
 .platform-page-hero::after {
   background:
-    linear-gradient(90deg, #000 0 32%, rgba(0, 0, 0, 0.18) 64%, rgba(0, 0, 0, 0.42) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0 8%, rgba(0, 0, 0, 0.08) 34%, rgba(0, 0, 0, 0.62) 100%);
+    linear-gradient(90deg,
+      #000 0%,
+      #000 22%,
+      rgba(0, 0, 0, 0.72) 38%,
+      rgba(0, 0, 0, 0.18) 58%,
+      rgba(0, 0, 0, 0.08) 100%
+    ),
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.0) 25%,
+      rgba(0, 0, 0, 0.0) 72%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
   content: "";
   inset: 0;
   position: absolute;
 }
 
 .platform-page-hero-copy {
-  max-width: 660px;
+  max-width: 620px;
   position: relative;
   z-index: 2;
 }
@@ -87,7 +99,7 @@
   font-size: 22px;
   line-height: 1.45;
   margin: 0 0 26px;
-  max-width: 640px;
+  max-width: 580px;
 }
 
 .platform-hero-button {
@@ -96,74 +108,111 @@
   min-width: 420px;
 }
 
+/* ── PLATFORM SECTIONS ────────────────────────────────────── */
+/*
+  KEY FIX: image column gets more space (1.2fr) than copy (1fr).
+  Previously copy had minmax(760px, 1fr) which crushed the image.
+  Now both are flexible with image slightly wider.
+*/
 .platform-page-section {
   align-items: stretch;
   border-bottom: 1px solid var(--muted-line);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(760px, 1fr);
+  grid-template-columns: 1.2fr 1fr;
   min-height: 610px;
+}
+
+/* When image is on the RIGHT side, flip column sizes */
+.platform-page-section:has(.media-right) {
+  grid-template-columns: 1fr 1.2fr;
 }
 
 .platform-page-media {
   background-image: var(--platform-image);
-  background-position: left center;
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 610px;
   position: relative;
 }
 
+/*
+  LEFT media: image fully visible across ~62%,
+  then fades to black only at the right edge to blend into copy
+*/
 .platform-page-media::after {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.02), #000 94%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 62%,
+    rgba(0, 0, 0, 0.35) 76%,
+    rgba(0, 0, 0, 0.82) 90%,
+    #000 100%
+  );
   content: "";
   inset: 0;
   position: absolute;
 }
 
+/*
+  RIGHT media: image fully visible across most of width,
+  fades from black only on the left edge to blend into copy
+*/
 .platform-page-media.media-right::after {
-  background: linear-gradient(90deg, #000 0, rgba(0, 0, 0, 0.04) 34%, rgba(0, 0, 0, 0.18) 100%);
+  background: linear-gradient(
+    90deg,
+    #000 0%,
+    rgba(0, 0, 0, 0.82) 10%,
+    rgba(0, 0, 0, 0.35) 24%,
+    transparent 38%,
+    transparent 100%
+  );
 }
 
+/* Per-section image positions */
 #orbital-infrastructure .platform-page-media {
-  background-position: left center;
+  background-position: center 20%;
+  background-size: cover;
 }
 
 #lunar-infrastructure .platform-page-media {
-  background-position: left center;
+  background-position: center center;
 }
 
 #deep-space-systems .platform-page-media {
-  background-position: left center;
+  background-position: center center;
 }
 
 #autonomous-space-ecosystems .platform-page-media {
-  background-position: left center;
+  background-position: center center;
 }
 
+/* ── COPY PANEL ───────────────────────────────────────────── */
 .platform-page-copy {
   align-self: center;
-  padding: 82px 70px;
+  padding: 82px 64px;
 }
 
 .platform-page-copy h2 {
-  font-size: clamp(34px, 2.65vw, 52px);
+  font-size: clamp(28px, 2.4vw, 48px);
   margin: 0;
-  max-width: 720px;
+  max-width: 680px;
   text-transform: uppercase;
 }
 
 .platform-page-copy > p {
   color: #d9dde6;
-  font-size: 21px;
+  font-size: 18px;
   line-height: 1.5;
-  margin-bottom: 44px;
-  max-width: 720px;
+  margin-bottom: 36px;
+  max-width: 620px;
 }
 
+/* ── FEATURE CARDS ────────────────────────────────────────── */
 .platform-page-features {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .platform-page-feature {
@@ -171,9 +220,9 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 6px;
   min-width: 0;
-  min-height: 230px;
+  min-height: 0;
   overflow: hidden;
-  padding: 28px 20px;
+  padding: 22px 16px;
 }
 
 .platform-page-feature > span {
@@ -182,22 +231,22 @@
   border-radius: 50%;
   color: var(--blue);
   display: inline-flex;
-  height: 58px;
+  height: 50px;
   justify-content: center;
-  margin-bottom: 30px;
-  width: 58px;
+  margin-bottom: 22px;
+  width: 50px;
 }
 
 .platform-page-feature svg {
-  height: 28px;
-  width: 28px;
+  height: 24px;
+  width: 24px;
 }
 
 .platform-page-feature h4 {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.25;
-  margin: 0 0 20px;
+  margin: 0 0 12px;
   max-width: 100%;
   overflow-wrap: break-word;
   text-transform: uppercase;
@@ -206,8 +255,8 @@
 
 .platform-page-feature p {
   color: #bfc5d0;
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.5;
   margin: 0;
   overflow-wrap: break-word;
 }
@@ -216,13 +265,14 @@
   align-items: center;
   color: var(--blue);
   display: inline-flex;
-  font-size: 24px;
-  gap: 28px;
+  font-size: 20px;
+  gap: 22px;
   letter-spacing: 0.04em;
-  margin-top: 36px;
+  margin-top: 32px;
   text-transform: uppercase;
 }
 
+/* ── CTA SECTION ──────────────────────────────────────────── */
 .platform-page-cta {
   align-items: center;
   background-position: center center;
@@ -275,58 +325,126 @@
   justify-content: center;
 }
 
-/* ─────────────────────────────────────────
-   RESPONSIVE — 1320px and below
-───────────────────────────────────────── */
-@media (max-width: 1320px) {
-  .platform-page-section {
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* ── 1400px ───────────────────────────────────────────────── */
+@media (max-width: 1400px) {
+  .platform-page-copy {
+    padding: 70px 52px;
+  }
+}
+
+/* ── 1200px: start stacking ───────────────────────────────── */
+@media (max-width: 1200px) {
+  .platform-page-section,
+  .platform-page-section:has(.media-right) {
     grid-template-columns: 1fr;
   }
 
   .platform-page-media {
-    min-height: 520px;
+    min-height: 500px;
     order: 0;
+    width: 100%;
   }
 
   .platform-page-copy {
     order: 1;
+    padding: 58px 48px;
   }
 
+  /*
+    Stacked: image fills full width, only bottom fades
+    so the copy below reads clearly on black background
+  */
   .platform-page-media::after,
   .platform-page-media.media-right::after {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), #000 96%);
-  }
-
-  .platform-page-copy {
-    padding: 62px 48px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 52%,
+      rgba(0, 0, 0, 0.4) 72%,
+      rgba(0, 0, 0, 0.85) 88%,
+      #000 100%
+    );
   }
 
   .platform-page-features {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .platform-page-copy h2 {
+    font-size: clamp(32px, 4vw, 48px);
+  }
+
+  .platform-page-copy > p {
+    font-size: 18px;
+  }
 }
 
-/* ─────────────────────────────────────────
-   RESPONSIVE — 900px and below
-───────────────────────────────────────── */
+/* ── 1024px ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .platform-page-hero {
+    min-height: 700px;
+    padding: 150px 42px 72px;
+  }
+
+  .platform-page-hero h1 {
+    font-size: clamp(42px, 6vw, 58px);
+  }
+
+  .platform-page-hero-copy > p:not(.platform-page-eyebrow) {
+    font-size: 18px;
+  }
+
+  .platform-hero-button {
+    font-size: 17px;
+    min-width: 320px;
+  }
+
+  .platform-page-copy {
+    padding: 52px 40px;
+  }
+
+  .platform-page-copy > p {
+    font-size: 17px;
+  }
+
+  .platform-page-cta {
+    grid-template-columns: 1fr;
+    padding: 50px 42px;
+    gap: 36px;
+  }
+
+  .platform-page-cta p {
+    font-size: 17px;
+  }
+
+  .platform-page-media {
+    min-height: 440px;
+  }
+}
+
+/* ── 900px ────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .platform-page-hero {
-    min-height: 760px;
+    min-height: 660px;
     padding: 142px 30px 64px;
   }
 
   .platform-page-hero-bg {
-    background-position: 58% center;
+    background-position: 72% center;
   }
 
   .platform-page-hero h1 {
-    font-size: clamp(38px, 8vw, 58px);
+    font-size: clamp(38px, 8vw, 52px);
   }
 
   .platform-page-hero-copy > p:not(.platform-page-eyebrow),
   .platform-page-copy > p,
   .platform-page-cta p {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .platform-hero-button {
@@ -334,15 +452,16 @@
     width: 100%;
   }
 
-  .platform-page-cta {
-    grid-template-columns: 1fr;
-    padding: 50px 30px;
+  .platform-page-media {
+    min-height: 400px;
+  }
+
+  .platform-page-copy {
+    padding: 46px 32px;
   }
 }
 
-/* ─────────────────────────────────────────
-   RESPONSIVE — 620px and below (mobile)
-───────────────────────────────────────── */
+/* ── 620px — mobile ───────────────────────────────────────── */
 @media (max-width: 620px) {
   .platforms-page,
   .platforms-page * {
@@ -355,7 +474,6 @@
     overflow-x: hidden;
   }
 
-  /* ── consistent padding across every section ── */
   .platform-page-hero,
   .platform-page-copy,
   .platform-page-cta {
@@ -363,14 +481,39 @@
     padding-right: 20px;
   }
 
+  /* ── hero ── */
   .platform-page-hero {
-    min-height: 690px;
+    min-height: 620px;
     padding-top: 118px;
-    padding-bottom: 56px;
+    padding-bottom: 52px;
   }
 
-  /* ── image always stacks on top, copy below ── */
-  .platform-page-section {
+  .platform-page-hero-bg {
+    background-position: 72% center;
+  }
+
+  .platform-page-hero h1 {
+    font-size: clamp(26px, 7.5vw, 38px);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  .platform-page-hero-copy > p:not(.platform-page-eyebrow) {
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .platform-page-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    margin-bottom: 20px;
+  }
+
+  /* ── platform sections ── */
+  .platform-page-section,
+  .platform-page-section:has(.media-right) {
     display: flex;
     flex-direction: column;
   }
@@ -380,13 +523,21 @@
     aspect-ratio: 4 / 3;
     background-image: var(--platform-mobile-image);
     background-position: center center;
+    background-size: cover;
     min-height: 0;
     width: 100%;
   }
 
+  /* Mobile: only fade bottom edge */
   .platform-page-media::after,
   .platform-page-media.media-right::after {
-    display: none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 52%,
+      rgba(0, 0, 0, 0.55) 76%,
+      #000 100%
+    );
   }
 
   #orbital-infrastructure .platform-page-media {
@@ -407,16 +558,9 @@
 
   .platform-page-copy {
     order: 1;
-    padding-top: 36px;
-    padding-bottom: 44px;
+    padding-top: 32px;
+    padding-bottom: 40px;
     width: 100%;
-  }
-
-  /* ── typography ── */
-  .platform-page-eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.28em;
-    margin-bottom: 20px;
   }
 
   .platform-page-kicker {
@@ -424,7 +568,6 @@
     margin-bottom: 16px;
   }
 
-  .platform-page-hero h1,
   .platform-page-copy h2,
   .platform-page-cta h2 {
     font-size: clamp(22px, 6vw, 32px);
@@ -433,11 +576,11 @@
     white-space: normal;
   }
 
-  .platform-page-hero-copy > p:not(.platform-page-eyebrow),
   .platform-page-copy > p,
   .platform-page-cta p {
     font-size: 14px;
     line-height: 1.55;
+    margin-bottom: 28px;
     overflow-wrap: break-word;
     word-break: break-word;
   }
@@ -447,7 +590,6 @@
     width: 50px;
   }
 
-  /* ── feature cards ── */
   .platform-page-features {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -455,40 +597,39 @@
 
   .platform-page-feature {
     min-height: 0;
-    padding: 18px 14px;
+    padding: 16px 12px;
   }
 
   .platform-page-feature > span {
-    height: 44px;
-    width: 44px;
-    margin-bottom: 16px;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 14px;
   }
 
   .platform-page-feature svg {
-    height: 22px;
-    width: 22px;
+    height: 20px;
+    width: 20px;
   }
 
   .platform-page-feature h4 {
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 8px;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
   .platform-page-feature p {
-    font-size: 12px;
+    font-size: 11px;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
   .platform-learn-link {
     font-size: 14px;
-    gap: 16px;
-    margin-top: 28px;
+    gap: 14px;
+    margin-top: 24px;
   }
 
-  /* ── hero button ── */
   .platform-hero-button {
     font-size: 13px;
     min-height: 48px;
@@ -499,12 +640,11 @@
     justify-content: center;
   }
 
-  /* ── CTA section ── */
   .platform-page-cta {
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding-top: 48px;
-    padding-bottom: 48px;
+    gap: 28px;
+    padding-top: 44px;
+    padding-bottom: 44px;
   }
 
   .platform-page-cta .cta-actions {
@@ -517,5 +657,30 @@
     justify-content: center;
     font-size: 14px;
     min-height: 48px;
+  }
+}
+
+/* ── 400px — very small phones ────────────────────────────── */
+@media (max-width: 400px) {
+  .platform-page-hero h1 {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+
+  .platform-page-hero {
+    min-height: 560px;
+    padding-top: 108px;
+  }
+
+  .platform-page-copy h2,
+  .platform-page-cta h2 {
+    font-size: clamp(20px, 5.8vw, 26px);
+  }
+
+  .platform-page-features {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-page-feature {
+    padding: 16px 12px;
   }
 }

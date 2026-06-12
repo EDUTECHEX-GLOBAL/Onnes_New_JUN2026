@@ -21,7 +21,7 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/platforms.css";
 import heroBg from "../assets/OrbitalInfrastructure.png";
-import orbitalImg from "../assets/OrbitalInfra1.png";
+import orbitalImg from "../assets/OrbitalInfra3.png";
 import orbitalMobileImg from "../assets/platform-orbital-new.png";
 import lunarImg from "../assets/LunarInfra1.png";
 import lunarMobileImg from "../assets/platform-lunar-new.png";
