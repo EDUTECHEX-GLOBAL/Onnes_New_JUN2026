@@ -377,7 +377,7 @@ h2 {
   background:
     linear-gradient(90deg, #000 0 12%, rgba(0, 0, 0, 0.55) 46%, #000 100%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.3)),
-    url("../assets/journey-bg.png") center bottom / cover no-repeat;
+    url("../assets/OuterSpace.jpg") center bottom / cover no-repeat;
   border-top: 1px solid var(--muted-line);
   min-height: 520px;
   padding: 60px 80px 100px;
@@ -555,6 +555,11 @@ h2 {
     padding: 100px 24px 52px;
   }
 
+  .hero::after {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0) 58%, #000 100%);
+  }
+
   .hero-video {
     height: clamp(200px, 56.25vw, 400px);
     object-fit: cover;
@@ -564,8 +569,8 @@ h2 {
 
   .hero-video-mask {
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 30%, #000 72%, #000 100%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent 40%, transparent 60%, rgba(0, 0, 0, 0.3));
+      linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 48%, rgba(0, 0, 0, 0.42) 72%, #000 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 35%, transparent 65%, rgba(0, 0, 0, 0.12));
   }
 
   .hero-copy {

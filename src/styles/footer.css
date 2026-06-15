@@ -5,7 +5,7 @@
   align-items: center;
   background:
     linear-gradient(90deg, #000 0 42%, rgba(0, 0, 0, 0.38)),
-    url("../assets/hero-bg.png") bottom right / cover no-repeat;
+    url("../assets/journey-bg.png") bottom right / cover no-repeat;
   border-top: 1px solid var(--muted-line);
   display: grid;
   gap: 40px;
@@ -152,7 +152,7 @@
     padding: 48px 24px 52px;
     background:
       linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.75) 50%, #000 100%),
-      url("../assets/hero-bg.png") center / cover no-repeat;
+      url("../assets/journey-bg.png") center / cover no-repeat;
     gap: 28px;
   }
 

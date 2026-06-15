@@ -19,7 +19,7 @@ import {
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/technology.css";
-import heroBg from "../assets/OrionTakeOff.jpg";
+import heroBg from "../assets/OrionTakeOff1.png";
 import platformBg from "../assets/LunarInfra4.png";
 import systemsDashboard from "../assets/technology-systems-dashboard.png";
 import engineeringOne from "../assets/AdvMaterials.jpeg";
@@ -61,7 +61,7 @@ const systemCards = [
 // bgPos tuned per image: AdvMaterials = diagonal texture (center), PrecisionEngineering = drill top (top center),
 // RigorousTesting = satellite in chamber (center top), DigitalInnovation = control room + screen (center 20%)
 const engineeringCards = [
-  ["Advanced Materials", "Next-generation composites and materials for superior strength-to-weight ratios.", engineeringOne, "center center"],
+  ["Advanced Materials", "Next-generation composites and materials for superior strength-to-weight ratios.", engineeringOne, "center center", "scale(1.08)"],
   ["Precision Engineering", "High-precision manufacturing and assembly for mission-critical components.", engineeringTwo, "center top"],
   ["Rigorous Testing", "Validated through extreme environment testing and mission qualification.", engineeringThree, "center 20%"],
   ["Digital Innovation", "Modeling, simulation, and digital engineering for optimal mission performance.", engineeringFour, "center 25%"],
@@ -149,6 +149,7 @@ export default function TechnologyPage() {
           className="technology-platform-visual"
           style={{ backgroundImage: `url(${platformBg})` }}
         >
+          <img src={platformBg} alt="" className="technology-platform-img" />
           {callouts.map(([title, body], index) => (
             <article className={`technology-callout callout-${index + 1}`} key={title}>
               <h3>{title}</h3>
@@ -185,13 +186,16 @@ export default function TechnologyPage() {
           <a href="#advanced-engineering">Learn More <span aria-hidden="true">→</span></a>
         </div>
         <div className="engineering-card-grid">
-          {engineeringCards.map(([title, body, image, objPos]) => (
+          {engineeringCards.map(([title, body, image, objPos, transform]) => (
             <article className="engineering-card" key={title}>
               <img
                 src={image}
                 alt={title}
                 className="engineering-card-img"
-                style={{ objectPosition: objPos }}
+                style={{
+                  objectPosition: objPos,
+                  transform: transform || "none",
+                }}
               />
               <div className="engineering-card-body">
                 <h3>{title}</h3>

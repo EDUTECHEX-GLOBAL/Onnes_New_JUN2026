@@ -1,14 +1,13 @@
 /* ============================================================
    Applications inner page
    Breakpoints:
-   - Desktop large : > 1320px   (default styles)
+   - Desktop large : > 1320px
    - Desktop mid   : 981–1320px
    - Tablet        : 621–980px
    - Mobile large  : 481–620px
    - Mobile small  : ≤ 480px
    ============================================================ */
 
-/* ---------- Base / Reset ---------- */
 .applications-page,
 .applications-page * {
   box-sizing: border-box;
@@ -21,7 +20,6 @@
   overflow-x: hidden;
 }
 
-/* ---------- Header overlay ---------- */
 .applications-page .header {
   background: linear-gradient(
     180deg,
@@ -31,7 +29,6 @@
   );
 }
 
-/* ---------- Shared typography ---------- */
 .applications-page h1,
 .applications-page h2,
 .applications-page h3 {
@@ -63,6 +60,7 @@
 /* ============================================================
    HERO
    ============================================================ */
+
 .applications-hero {
   border-bottom: 1px solid var(--muted-line);
   min-height: 820px;
@@ -71,12 +69,6 @@
   position: relative;
 }
 
-/*
-  Hero image: astronaut is dead-center horizontally.
-  We want text on the LEFT and astronaut visible on the RIGHT.
-  background-position X > 50% pushes the image left,
-  revealing the right side (astronaut + glow) in the right half.
-*/
 .applications-hero-bg {
   background-position: center center;
   background-repeat: no-repeat;
@@ -84,15 +76,24 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  /* Push image to the right: start 20% in from left, extend 20% beyond right edge */
   left: 20%;
   right: -20%;
 }
 
 .applications-hero::after {
   background:
-    linear-gradient(90deg, #000 0 26%, rgba(0, 0, 0, 0.18) 55%, rgba(0, 0, 0, 0.38) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0 8%, rgba(0, 0, 0, 0.02) 40%, rgba(0, 0, 0, 0.68) 100%);
+    linear-gradient(
+      90deg,
+      #000 0 26%,
+      rgba(0, 0, 0, 0.18) 55%,
+      rgba(0, 0, 0, 0.38) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.88) 0 8%,
+      rgba(0, 0, 0, 0.02) 40%,
+      rgba(0, 0, 0, 0.68) 100%
+    );
   content: "";
   inset: 0;
   position: absolute;
@@ -127,6 +128,7 @@
 /* ============================================================
    DOMAIN SECTION
    ============================================================ */
+
 .application-domains-section {
   background:
     radial-gradient(circle at 50% 0%, rgba(0, 140, 255, 0.12), transparent 22rem),
@@ -160,7 +162,6 @@
   margin: 0;
 }
 
-/* 2-column grid on desktop */
 .application-domains-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -168,18 +169,10 @@
   max-width: 1830px;
 }
 
-/* ---------- Individual domain card ---------- */
-/*
-  KEY FIX: Do NOT use min-height on the card itself for image sizing.
-  Instead the card is position:relative, the ::before overlay is absolute,
-  and the copy div drives the height. The background image fills the card
-  naturally via background-size: cover.
-  
-  background-size: cover always fills the element — on a landscape image
-  in a roughly-square card, the image will be zoomed in (cropping sides).
-  We combat this with carefully chosen background-position per card so the
-  interesting subject stays in frame.
-*/
+/* ============================================================
+   DOMAIN CARDS
+   ============================================================ */
+
 .application-domain {
   background-repeat: no-repeat;
   background-size: cover;
@@ -189,22 +182,6 @@
   position: relative;
 }
 
-/* --- Per-card background positions ---
-   These are tuned to the actual image content:
-   
-   #commercial-space (ISS, wide horizontal):
-     Subject (station body) is center-left. Use center center so the 
-     station fills the card without top-cropping the solar panels.
-   
-   #national-security-space (satellite network, subject top-left area):
-     Main satellite is left-center. Pull bg left so it's visible.
-   
-   #space-enabled-air-ground-water-systems (satellite top, ships bottom):
-     Wide composite — center works well, ships and satellite both visible.
-   
-   #deep-space-exploration (Mars, center-right):
-     Mars planet is right-center. Align accordingly.
-*/
 #commercial-space {
   background-position: center 30%;
 }
@@ -222,22 +199,17 @@
   background-position: 55% center;
 }
 
-/* --- Overlay gradients ---
-   Horizontal: dark on left for text legibility, fades to transparent
-   so the right half of the image is fully visible.
-   Vertical: very light top, moderate dark at bottom for "Learn More" link.
-   
-   Opacities deliberately kept low so images shine through.
-*/
 .application-domain::before {
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       rgba(0, 0, 0, 0.82) 0%,
       rgba(0, 0, 0, 0.60) 30%,
       rgba(0, 0, 0, 0.20) 55%,
       rgba(0, 0, 0, 0.00) 100%
     ),
-    linear-gradient(180deg,
+    linear-gradient(
+      180deg,
       rgba(0, 0, 0, 0.10) 0%,
       rgba(0, 0, 0, 0.05) 40%,
       rgba(0, 0, 0, 0.55) 100%
@@ -248,24 +220,24 @@
   z-index: 0;
 }
 
-/* Even cards (02, 04) — same principle, text is still on the left */
 .application-domain:nth-child(2)::before,
 .application-domain:nth-child(4)::before {
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       rgba(0, 0, 0, 0.82) 0%,
       rgba(0, 0, 0, 0.55) 32%,
       rgba(0, 0, 0, 0.18) 58%,
       rgba(0, 0, 0, 0.00) 100%
     ),
-    linear-gradient(180deg,
+    linear-gradient(
+      180deg,
       rgba(0, 0, 0, 0.10) 0%,
       rgba(0, 0, 0, 0.05) 40%,
       rgba(0, 0, 0, 0.52) 100%
     );
 }
 
-/* --- Card copy area --- */
 .application-domain-copy {
   display: flex;
   flex-direction: column;
@@ -338,6 +310,7 @@
 /* ============================================================
    CTA SECTION
    ============================================================ */
+
 .applications-cta {
   align-items: center;
   background-position: center bottom;
@@ -354,7 +327,12 @@
 
 .applications-cta::before {
   background:
-    linear-gradient(90deg, #000 0 28%, rgba(0, 0, 0, 0.28) 62%, rgba(0, 0, 0, 0.72) 100%),
+    linear-gradient(
+      90deg,
+      #000 0 28%,
+      rgba(0, 0, 0, 0.28) 62%,
+      rgba(0, 0, 0, 0.72) 100%
+    ),
     linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.74));
   content: "";
   inset: 0;
@@ -395,8 +373,9 @@
 }
 
 /* ============================================================
-   RESPONSIVE — Desktop mid  (981px – 1320px)
+   RESPONSIVE — Desktop mid
    ============================================================ */
+
 @media (max-width: 1320px) {
   .applications-hero {
     min-height: 780px;
@@ -431,18 +410,17 @@
 }
 
 /* ============================================================
-   RESPONSIVE — Tablet  (621px – 980px)
+   RESPONSIVE — Tablet
    ============================================================ */
+
 @media (max-width: 980px) {
-  /* Hero */
   .applications-hero {
     min-height: 680px;
     padding: 140px 30px 64px;
   }
 
-  /* On tablet, show more of the hero image centrally */
   .applications-hero-bg {
-    background-position: 55% center;
+    background-position: center center;
   }
 
   .applications-hero h1 {
@@ -463,7 +441,6 @@
     justify-content: center;
   }
 
-  /* Domain section */
   .application-domains-section {
     padding: 56px 24px;
   }
@@ -472,65 +449,39 @@
     margin-bottom: 44px;
   }
 
-  /* Single column — cards are now full viewport width */
   .application-domains-grid {
     grid-template-columns: 1fr;
   }
 
-  /*
-    On single-col at ~980px, each card is ~932px wide.
-    The 16:9 image at 932px wide needs ~521px height to show fully.
-    We give 580px — image will show nearly in full, very slight crop.
-    background-position y-axis is tuned per card so subject stays visible.
-  */
   .application-domain {
-    min-height: 580px;
+    background-size: contain;
+    background-position: top center;
+    background-color: #000;
+    min-height: 760px;
   }
 
   .application-domain-copy {
-    min-height: 580px;
-    padding: 36px 30px 40px;
+    min-height: 760px;
+    padding: 420px 30px 40px;
   }
 
-  /* Tablet single-col: adjust per-card positions */
-  #commercial-space {
-    background-position: center 25%;
-  }
-
-  #national-security-space {
-    background-position: 35% center;
-  }
-
-  #space-enabled-air-ground-water-systems {
-    background-position: center 35%;
-  }
-
+  #commercial-space,
+  #national-security-space,
+  #space-enabled-air-ground-water-systems,
   #deep-space-exploration {
-    background-size: cover;
-    background-position: 52% center;
+    background-size: contain;
+    background-position: top center;
   }
 
-  /* Overlay: same approach, slightly stronger on left for readability */
   .application-domain::before,
   .application-domain:nth-child(2)::before,
   .application-domain:nth-child(4)::before {
-    background:
-      linear-gradient(90deg,
-        rgba(0, 0, 0, 0.85) 0%,
-        rgba(0, 0, 0, 0.62) 28%,
-        rgba(0, 0, 0, 0.22) 52%,
-        rgba(0, 0, 0, 0.00) 100%
-      ),
-      linear-gradient(180deg,
-        rgba(0, 0, 0, 0.10) 0%,
-        rgba(0, 0, 0, 0.05) 38%,
-        rgba(0, 0, 0, 0.60) 100%
-      );
+    background: none;
   }
 
   .application-domain h3 {
     font-size: clamp(28px, 4.5vw, 40px);
-    margin-top: 26px;
+    margin-top: 20px;
   }
 
   .application-domain-copy > p:not(.applications-number) {
@@ -538,7 +489,6 @@
     max-width: 520px;
   }
 
-  /* CTA */
   .applications-cta {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -562,18 +512,29 @@
 }
 
 /* ============================================================
-   RESPONSIVE — Mobile large  (481px – 620px)
+   RESPONSIVE — Mobile large
    ============================================================ */
+
 @media (max-width: 620px) {
-  /* Hero */
   .applications-hero {
     min-height: 100svh;
     padding: 118px 20px 56px;
   }
 
-  /* On small screens, hero image should show astronaut center-right */
   .applications-hero-bg {
-    background-position: 58% center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-position: center center;
+  }
+
+  .applications-hero::after {
+    background: none;
+  }
+
+  .applications-hero-copy {
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
   }
 
   .applications-eyebrow,
@@ -602,7 +563,6 @@
     min-width: 0;
   }
 
-  /* Domain section */
   .application-domains-section {
     padding: 44px 16px;
   }
@@ -620,54 +580,30 @@
     font-size: 14px;
   }
 
-  /*
-    Mobile large: card is ~588px wide.
-    16:9 at 588px wide = 329px height needed for full image.
-    We give 540px — image zooms in moderately.
-    Subject positions tuned to keep key elements in view.
-  */
   .application-domain {
-    min-height: 540px;
+    background-size: contain;
+    background-position: top center;
+    background-color: #000;
+    min-height: 720px;
   }
 
   .application-domain-copy {
-    min-height: 540px;
-    padding: 28px 20px 32px;
+    min-height: 720px;
+    padding: 300px 20px 32px;
   }
 
-  #commercial-space {
-    background-position: center 28%;
-  }
-
-  #national-security-space {
-    background-position: 38% center;
-  }
-
-  #space-enabled-air-ground-water-systems {
-    background-position: center 38%;
-  }
-
+  #commercial-space,
+  #national-security-space,
+  #space-enabled-air-ground-water-systems,
   #deep-space-exploration {
-    background-size: cover;
-    background-position: 52% center;
+    background-size: contain;
+    background-position: top center;
   }
 
-  /* Mobile: stronger left overlay for small-screen readability */
   .application-domain::before,
   .application-domain:nth-child(2)::before,
   .application-domain:nth-child(4)::before {
-    background:
-      linear-gradient(90deg,
-        rgba(0, 0, 0, 0.88) 0%,
-        rgba(0, 0, 0, 0.70) 30%,
-        rgba(0, 0, 0, 0.28) 55%,
-        rgba(0, 0, 0, 0.02) 100%
-      ),
-      linear-gradient(180deg,
-        rgba(0, 0, 0, 0.12) 0%,
-        rgba(0, 0, 0, 0.06) 40%,
-        rgba(0, 0, 0, 0.65) 100%
-      );
+    background: none;
   }
 
   .application-domain h3 {
@@ -713,7 +649,6 @@
     gap: 14px;
   }
 
-  /* CTA */
   .applications-cta {
     gap: 22px;
     padding: 42px 20px;
@@ -744,17 +679,23 @@
 }
 
 /* ============================================================
-   RESPONSIVE — Mobile small  (≤ 480px)
+   RESPONSIVE — Mobile small
    ============================================================ */
+
 @media (max-width: 480px) {
-  /* Hero */
   .applications-hero {
     min-height: 100svh;
     padding: 108px 16px 48px;
   }
 
   .applications-hero-bg {
-    background-position: 60% center;
+    left: 0;
+    right: 0;
+    background-position: center center;
+  }
+
+  .applications-hero::after {
+    background: none;
   }
 
   .applications-hero h1 {
@@ -767,7 +708,6 @@
     margin-bottom: 22px;
   }
 
-  /* Domain section */
   .application-domains-section {
     padding: 32px 14px;
   }
@@ -780,51 +720,30 @@
     font-size: clamp(20px, 7.5vw, 28px);
   }
 
-  /*
-    Mobile small: card ~452px wide.
-    We keep height at 520px — gives a moderate zoom-in on 16:9 images.
-  */
   .application-domain {
-    min-height: 520px;
+    background-size: contain;
+    background-position: top center;
+    background-color: #000;
+    min-height: 690px;
   }
 
   .application-domain-copy {
-    min-height: 520px;
-    padding: 22px 14px 26px;
+    min-height: 690px;
+    padding: 245px 14px 26px;
   }
 
-  #commercial-space {
-    background-position: center 30%;
-  }
-
-  #national-security-space {
-    background-position: 40% center;
-  }
-
-  #space-enabled-air-ground-water-systems {
-    background-position: center 40%;
-  }
-
+  #commercial-space,
+  #national-security-space,
+  #space-enabled-air-ground-water-systems,
   #deep-space-exploration {
-    background-size: cover;
-    background-position: 52% center;
+    background-size: contain;
+    background-position: top center;
   }
 
   .application-domain::before,
   .application-domain:nth-child(2)::before,
   .application-domain:nth-child(4)::before {
-    background:
-      linear-gradient(90deg,
-        rgba(0, 0, 0, 0.90) 0%,
-        rgba(0, 0, 0, 0.72) 32%,
-        rgba(0, 0, 0, 0.30) 56%,
-        rgba(0, 0, 0, 0.04) 100%
-      ),
-      linear-gradient(180deg,
-        rgba(0, 0, 0, 0.12) 0%,
-        rgba(0, 0, 0, 0.06) 38%,
-        rgba(0, 0, 0, 0.68) 100%
-      );
+    background: none;
   }
 
   .application-domain h3 {
@@ -867,7 +786,6 @@
     gap: 12px;
   }
 
-  /* CTA */
   .applications-cta {
     gap: 18px;
     padding: 32px 14px;
@@ -886,5 +804,16 @@
   .applications-cta .outline-button {
     min-height: 48px;
     font-size: 13px;
+  }
+}
+
+@media (max-width: 390px) {
+  .application-domain {
+    min-height: 660px;
+  }
+
+  .application-domain-copy {
+    min-height: 660px;
+    padding-top: 225px;
   }
 }
