@@ -21,11 +21,11 @@ import Footer from "./Footer.jsx";
 import "../styles/technology.css";
 import heroBg from "../assets/OrionTakeOff1.png";
 import platformBg from "../assets/LunarInfra4.png";
-import systemsDashboard from "../assets/technology-systems-dashboard.png";
+import systemsDashboard from "../assets/IntelligentSystems.png";
 import engineeringOne from "../assets/AdvMaterials.jpeg";
 import engineeringTwo from "../assets/PrecisionEngineering.jpeg";
 import engineeringThree from "../assets/RigorousTesting.jpeg";
-import engineeringFour from "../assets/DigitalInnovation.jpeg";
+import engineeringFour from "../assets/DigitalInnovation.png";
 import ctaBg from "../assets/journey-bg.png";
 
 const advantages = [

@@ -160,12 +160,12 @@ h2 {
     linear-gradient(
       90deg,
       #000 0%,
-      #000 30%,
-      rgba(0, 0, 0, 0.96) 39%,
-      rgba(0, 0, 0, 0.72) 51%,
-      rgba(0, 0, 0, 0.28) 67%,
-      rgba(0, 0, 0, 0.06) 81%,
-      transparent 92%
+      #000 36%,          /* was 30% — extended solid black further right */
+      rgba(0, 0, 0, 0.98) 43%,   /* was 39% */
+      rgba(0, 0, 0, 0.80) 54%,   /* was 51% */
+      rgba(0, 0, 0, 0.32) 68%,   /* was 67% */
+      rgba(0, 0, 0, 0.08) 82%,   /* was 81% */
+      transparent 93%
     ),
     linear-gradient(180deg, #000 0%, transparent 16%, transparent 78%, #000 100%),
     radial-gradient(circle at 78% 50%, transparent 0 34%, rgba(0, 0, 0, 0.22) 66%, #000 100%);
@@ -347,7 +347,7 @@ h2 {
   width: calc(100% + 76px);
 }
 
-.platform-1 .platform-image { background-image: url("../assets/Orbital INfra.jpeg"); }
+.platform-1 .platform-image { background-image: url("../assets/OrbitalINfra.jpeg"); }
 .platform-2 .platform-image { background-image: url("../assets/LunarInfra3.png"); }
 .platform-3 .platform-image { background-image: url("../assets/DeepSpace5.png"); }
 .platform-4 .platform-image { background-image: url("../assets/SpaceEcosystems.png"); }
