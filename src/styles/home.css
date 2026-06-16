@@ -479,9 +479,14 @@ h2 {
 
 .reason-icon {
   border: 0;
-  font-size: 50px;
+  font-size: 0;
   height: 70px;
   width: 70px;
+}
+.reason-icon svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--blue);
 }
 
 /* ============================================================
@@ -838,11 +843,16 @@ h2 {
   }
 
   .reason-icon {
-    font-size: 36px;
-    height: 54px;
-    width: 54px;
-    margin-bottom: 14px;
-  }
+  font-size: 0;
+  height: 54px;
+  width: 54px;
+  margin-bottom: 14px;
+}
+
+.reason-icon svg {
+  width: 38px;
+  height: 38px;
+}
 }
 
 /* ============================================================
