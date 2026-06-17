@@ -4,9 +4,8 @@
 .final-cta {
   align-items: center;
   background:
-    linear-gradient(90deg, #000 0 42%, rgba(0, 0, 0, 0.38)),
-    url("../assets/journey-bg.png") bottom right / cover no-repeat;
-  border-top: 1px solid var(--muted-line);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.22) 45%, rgba(0, 0, 0, 0.05) 100%),
+    url("../assets/journey-bg.png") right bottom / 115% auto no-repeat;
   display: grid;
   gap: 40px;
   grid-template-columns: 1fr 330px;
@@ -33,7 +32,6 @@
    ============================================================ */
 .footer {
   background: #020202;
-  border-top: 1px solid var(--muted-line);
   display: grid;
   gap: 46px;
   grid-template-columns: 1.3fr repeat(5, minmax(120px, 1fr));
@@ -127,6 +125,9 @@
   .final-cta {
     grid-template-columns: 1fr 280px;
     padding: 52px 48px;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.24) 48%, rgba(0, 0, 0, 0.08) 100%),
+      url("../assets/journey-bg.png") right center / 135% auto no-repeat;
   }
 
   .footer {
@@ -145,14 +146,13 @@
    RESPONSIVE — 760px
    ============================================================ */
 @media (max-width: 760px) {
-  /* Final CTA */
   .final-cta {
     grid-template-columns: 1fr;
     min-height: auto;
     padding: 48px 24px 52px;
     background:
-      linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.75) 50%, #000 100%),
-      url("../assets/journey-bg.png") center / cover no-repeat;
+      linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.46)),
+      url("../assets/journey-bg.png") 75% center / cover no-repeat;
     gap: 28px;
   }
 
@@ -177,7 +177,6 @@
     text-align: center;
   }
 
-  /* Footer */
   .footer {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 28px 20px;
@@ -223,6 +222,9 @@
 @media (max-width: 480px) {
   .final-cta {
     padding: 40px 18px 44px;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.5)),
+      url("../assets/journey-bg.png") 72% center / cover no-repeat;
   }
 
   .cta-actions {

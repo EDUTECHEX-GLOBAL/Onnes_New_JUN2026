@@ -9,7 +9,7 @@
    ============================================================ */
 
 .applications-page,
-.applications-page * {
+.applications-page *:not(.header):not(.header *) {
   box-sizing: border-box;
   min-width: 0;
 }
@@ -62,7 +62,6 @@
    ============================================================ */
 
 .applications-hero {
-  border-bottom: 1px solid var(--muted-line);
   min-height: 820px;
   overflow: hidden;
   padding: 170px 66px 86px;
@@ -133,7 +132,6 @@
   background:
     radial-gradient(circle at 50% 0%, rgba(0, 140, 255, 0.12), transparent 22rem),
     #000;
-  border-top: 1px solid var(--muted-line);
   padding: 70px 64px;
   position: relative;
 }
@@ -176,7 +174,6 @@
 .application-domain {
   background-repeat: no-repeat;
   background-size: cover;
-  border: 1px solid rgba(255, 255, 255, 0.28);
   min-height: 640px;
   overflow: hidden;
   position: relative;
@@ -316,7 +313,6 @@
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
-  border-bottom: 1px solid var(--muted-line);
   display: grid;
   grid-template-columns: minmax(420px, 0.9fr) minmax(360px, 520px) 360px;
   gap: 68px;

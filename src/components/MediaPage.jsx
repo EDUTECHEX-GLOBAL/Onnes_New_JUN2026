@@ -74,8 +74,8 @@ export default function MediaPage() {
       <section className="media-tabs" id="news">
         <nav aria-label="Media sections">
           <a className="active" href="#news">News</a>
-          <a href="#videos">Videos</a>
-          <a href="#insights">Insights</a>
+          {/* <a href="#videos">Videos</a>
+          <a href="#insights">Insights</a> */}
         </nav>
         <TextLink>View All News</TextLink>
       </section>
@@ -138,7 +138,7 @@ export default function MediaPage() {
         </div>
       </section>
 
-      <section className="media-insights" id="insights">
+      {/* <section className="media-insights" id="insights">
         <div className="media-section-head">
           <p className="media-eyebrow">Latest Insights</p>
           <TextLink>View All Insights</TextLink>
@@ -154,7 +154,7 @@ export default function MediaPage() {
             </article>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section className="media-newsletter" style={{ backgroundImage: `url(${newsletterBg})` }}>
         <div>

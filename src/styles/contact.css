@@ -51,7 +51,6 @@
 }
 
 .contact-hero {
-  border-bottom: 1px solid var(--muted-line);
   min-height: 600px;
   overflow: hidden;
   padding: 170px 64px 70px;
@@ -113,7 +112,6 @@
 }
 
 .contact-capabilities {
-  border-bottom: 1px solid var(--muted-line);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin: 0 auto;
@@ -154,7 +152,6 @@
 }
 
 .contact-work-section {
-  border-bottom: 1px solid var(--muted-line);
   padding: 42px 64px 20px;
 }
 

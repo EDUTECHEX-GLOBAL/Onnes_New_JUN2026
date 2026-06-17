@@ -48,6 +48,8 @@
   display: flex;
   gap: clamp(20px, 2vw, 42px);
   justify-content: center;
+  position: relative; /* FIX: ensure nav creates its own stacking context */
+  z-index: 500;       /* FIX: sit above hero content on all pages */
 }
 
 .nav a {
@@ -106,7 +108,7 @@
   top: 34px;
   transform: translateY(8px);
   transition: opacity 160ms ease, transform 160ms ease;
-  z-index: 50;
+  z-index: 500; /* FIX: raised from 50 to 500 to clear hero z-index layers */
 }
 
 .nav-dropdown:hover .nav-menu,

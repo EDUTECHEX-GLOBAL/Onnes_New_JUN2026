@@ -76,7 +76,7 @@ export default function VisionPage() {
           <p>We envision a humanity that is multi-planetary, sustained by intelligent infrastructure spanning orbit, the Moon, and deep space.</p>
           <p>Onnes Aerospace is building the operational backbone that makes this future possible.</p>
           <div className="actions">
-            <a className="solid-button" href="#film"><span className="play-dot" aria-hidden="true">▶</span> Watch Our Vision Film</a>
+            {/* <a className="solid-button" href="#film"><span className="play-dot" aria-hidden="true">▶</span> Watch Our Vision Film</a> */}
             <a className="outline-button" href="#mission">Explore Our Vision <span aria-hidden="true">↗</span></a>
           </div>
         </div>

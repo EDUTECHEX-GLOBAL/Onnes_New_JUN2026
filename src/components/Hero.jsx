@@ -21,12 +21,12 @@ export default function Hero() {
           operations, lunar logistics, autonomous space ecosystems, and deep-space missions.
         </p>
         <div className="actions">
-          <a className="solid-button" href="#vision">
+          <a className="solid-button" href="/vision">
             Explore Our Vision <span aria-hidden="true">↗</span>
           </a>
-          <a className="outline-button" href="#media">
+          {/* <a className="outline-button" href="#media">
             <span className="play-dot" aria-hidden="true">▶</span> Watch Vision Film
-          </a>
+          </a> */}
         </div>
       </div>
       <a className="scroll-cue" href="#vision" aria-label="Scroll to explore">

@@ -135,8 +135,8 @@ export default function ApplicationsPage() {
             systems, Onnes Aerospace provides the critical infrastructure that
             empowers the world's most ambitious missions.
           </p>
-          <a className="outline-button" href="/platforms">
-            Explore Our Platforms <span aria-hidden="true">→</span>
+          <a className="outline-button" href="#commercial-space">
+            Explore Our Applications <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
