@@ -1,4 +1,4 @@
-import heroBg from "../assets/hero-bg-4hd.mp4";
+import heroBg from "../assets/Homepagevid.mp4";
 
 export default function Hero() {
   return (

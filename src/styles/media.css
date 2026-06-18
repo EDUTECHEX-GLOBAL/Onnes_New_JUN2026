@@ -30,18 +30,18 @@
 
 .media-hero {
   background-color: #000;
-  background-position: center top;
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: clamp(360px, 42vw, 520px);
+  min-height: clamp(420px, 52vw, 640px);
   padding: clamp(120px, 10vw, 170px) clamp(20px, 3vw, 36px) clamp(56px, 6vw, 90px);
   position: relative;
 }
 
 .media-hero::after {
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0 26%, rgba(0, 0, 0, 0.25) 58%, rgba(0, 0, 0, 0.48) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.04) 44%, rgba(0, 0, 0, 0.62));
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0 26%, rgba(0, 0, 0, 0.10) 58%, rgba(0, 0, 0, 0.22) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.02) 44%, rgba(0, 0, 0, 0.30));
   content: "";
   inset: 0;
   position: absolute;
@@ -427,8 +427,8 @@
 
 @media (max-width: 720px) {
   .media-hero {
-    background-position: center top;
-    min-height: 520px;
+    background-position: center center;
+    min-height: 580px;
     padding: 120px 20px 54px;
   }
 

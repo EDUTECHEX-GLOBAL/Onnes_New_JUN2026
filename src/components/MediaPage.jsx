@@ -3,7 +3,7 @@ import { ArrowUpRight, Play } from "lucide-react";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/media.css";
-import heroBg from "../assets/media-hero.png";
+import heroBg from "../assets/MediaPageMain.jpg";
 import featuredNews from "../assets/media-featured-news1.png";
 import newsThumb1 from "../assets/media-news-thumb-1.png";
 import newsThumb2 from "../assets/media-news-thumb-2.png";
@@ -107,7 +107,7 @@ export default function MediaPage() {
         </div>
       </section>
 
-      <section className="media-video-section" id="videos">
+      {/* <section className="media-video-section" id="videos">
         <div className="media-section-head">
           <p className="media-eyebrow">Featured Video</p>
           <TextLink>View All Videos</TextLink>
@@ -136,7 +136,7 @@ export default function MediaPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* <section className="media-insights" id="insights">
         <div className="media-section-head">

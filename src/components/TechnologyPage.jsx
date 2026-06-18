@@ -20,12 +20,12 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/technology.css";
 import heroBg from "../assets/OrionTakeOff1.png";
-import platformBg from "../assets/LunarInfra4.png";
+import platformBg from "../assets/InfraPlatform2.png";
 import systemsDashboard from "../assets/IntelligentSystems.png";
 import engineeringOne from "../assets/AdvMaterials.jpeg";
 import engineeringTwo from "../assets/PrecisionEngineering.jpeg";
 import engineeringThree from "../assets/RigorousTesting.jpeg";
-import engineeringFour from "../assets/DigitalInnovation.png";
+import engineeringFour from "../assets/DigitalInnovationTech.png";
 import ctaBg from "../assets/journey-bg.png";
 
 const advantages = [
@@ -58,13 +58,11 @@ const systemCards = [
   ["Propulsion", "100%", "Ready", <Orbit />],
 ];
 
-// bgPos tuned per image: AdvMaterials = diagonal texture (center), PrecisionEngineering = drill top (top center),
-// RigorousTesting = satellite in chamber (center top), DigitalInnovation = control room + screen (center 20%)
 const engineeringCards = [
   ["Advanced Materials", "Next-generation composites and materials for superior strength-to-weight ratios.", engineeringOne, "center center", "scale(1.08)"],
   ["Precision Engineering", "High-precision manufacturing and assembly for mission-critical components.", engineeringTwo, "center top"],
   ["Rigorous Testing", "Validated through extreme environment testing and mission qualification.", engineeringThree, "center 20%"],
-  ["Digital Innovation", "Modeling, simulation, and digital engineering for optimal mission performance.", engineeringFour, "center 25%"],
+  ["Digital Innovation", "Modeling, simulation, and digital engineering for optimal mission performance.", engineeringFour, "20% center"],
 ];
 
 function Advantage({ item }) {
@@ -134,30 +132,37 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 01 Infrastructure Platform ───────────────────────────── */}
-      <section className="technology-platform-panel" id="infrastructure-platform">
-        <div className="technology-section-copy">
-          <p className="technology-number">01</p>
-          <h2>Infrastructure Platform</h2>
-          <p>
-            A modular, high-performance infrastructure platform engineered for persistent operations across orbit,
-            the Moon, and deep space.
-          </p>
-          <CheckList items={platformBullets} />
-          <a href="#infrastructure-platform">Learn More <span aria-hidden="true">→</span></a>
-        </div>
-        <div
-          className="technology-platform-visual"
-          style={{ backgroundImage: `url(${platformBg})` }}
-        >
-          <img src={platformBg} alt="" className="technology-platform-img" />
-          {callouts.map(([title, body], index) => (
-            <article className={`technology-callout callout-${index + 1}`} key={title}>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      {/* ── 01 Infrastructure Platform ───────────────────────────── */}
+<section className="technology-platform-panel" id="infrastructure-platform">
+  <div className="technology-platform-row">
+    <div className="technology-section-copy">
+      <p className="technology-number">01</p>
+      <h2>Infrastructure Platform</h2>
+      <p>
+        A modular, high-performance infrastructure platform engineered for persistent operations across orbit,
+        the Moon, and deep space.
+      </p>
+      <CheckList items={platformBullets} />
+      <a href="#infrastructure-platform">Learn More <span aria-hidden="true">→</span></a>
+    </div>
+    <div
+      className="technology-platform-visual"
+      style={{ backgroundImage: `url(${platformBg})` }}
+    >
+      <img src={platformBg} alt="" className="technology-platform-img" />
+    </div>
+  </div>
+  
+  {/* Callouts moved below the image */}
+  <div className="technology-callouts-grid">
+    {callouts.map(([title, body]) => (
+      <div className="technology-callout-item" key={title}>
+        <h3>{title}</h3>
+        <p>{body}</p>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* ── 02 Intelligent Systems ───────────────────────────────── */}
       <section className="technology-systems-panel" id="intelligent-systems">

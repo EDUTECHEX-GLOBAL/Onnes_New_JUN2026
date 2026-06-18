@@ -140,7 +140,6 @@
   width: 22px;
 }
 
-/* FIX 1: Advantage titles — single line on all desktop widths */
 .technology-advantage h3 {
   font-size: clamp(11px, 1.05vw, 16px);
   margin: 0 0 10px;
@@ -157,7 +156,6 @@
 }
 
 /* ── Shared panel layout ─────────────────────────────────────────── */
-.technology-platform-panel,
 .technology-systems-panel,
 .technology-engineering-panel {
   display: grid;
@@ -215,32 +213,49 @@
   text-transform: uppercase;
 }
 
-/* ── 01 Infrastructure Platform visual ──────────────────────────── */
+/* ── 01 Infrastructure Platform - FIXED ──────────────────────────── */
+.technology-platform-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0 auto;
+  max-width: 1810px;
+  padding: 0 32px 40px;
+  min-height: auto;
+}
+
+.technology-platform-row {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 40px;
+  align-items: center;
+  min-height: 520px;
+  padding: 0;
+}
+
 .technology-platform-visual {
   background-color: #000;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 520px;
+  min-height: 650px;
   position: relative;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .technology-platform-visual::before {
   background:
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.28) 0%,
-      rgba(0, 0, 0, 0.08) 28%,
-      rgba(0, 0, 0, 0.02) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.06),
-      rgba(0, 0, 0, 0.10)
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.02) 50%,
+      rgba(0, 0, 0, 0.08) 100%
     );
   content: "";
   inset: 0;
   position: absolute;
+  pointer-events: none;
 }
 
 .technology-platform-img {
@@ -248,32 +263,46 @@
 }
 
 .technology-callout {
+  display: none;
+}
+
+.technology-callouts-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  padding-top: 30px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.technology-callout-item {
   background: rgba(1, 6, 12, 0.92);
-  border: 1px solid rgba(0, 140, 255, 0.46);
-  border-radius: 4px;
-  padding: 16px 18px;
-  position: absolute;
-  width: 220px;
-  z-index: 1;
+  border: 1px solid rgba(0, 140, 255, 0.25);
+  border-radius: 6px;
+  padding: 18px 16px;
+  transition: all 0.3s ease;
 }
 
-.technology-callout h3 {
-  font-size: 12px;
+.technology-callout-item:hover {
+  border-color: rgba(0, 140, 255, 0.6);
+  background: rgba(1, 10, 20, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 140, 255, 0.08);
+}
+
+.technology-callout-item h3 {
+  font-size: 13px;
   margin: 0 0 8px;
+  color: #fff;
+  letter-spacing: 0.3px;
 }
 
-.technology-callout p {
+.technology-callout-item p {
   color: #c4cbd5;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.45;
   margin: 0;
 }
-
-.callout-1 { left: 120px; top: 72px; }
-.callout-2 { left: 120px; top: 210px; }
-.callout-3 { left: 120px; bottom: 58px; }
-.callout-4 { right: 26px; top: 112px; }
-.callout-5 { right: 26px; bottom: 94px; }
 
 /* ── 02 Intelligent Systems ──────────────────────────────────────── */
 .technology-systems-panel {
@@ -455,7 +484,6 @@
 }
 
 /* ── CTA ─────────────────────────────────────────────────────────── */
-/* FIX 2: CTA background — lighter overlay matching other pages */
 .technology-cta {
   align-items: center;
   background-position: right bottom;
@@ -499,7 +527,6 @@
 }
 
 /* ── SECTION SPACING ─────────────────────────────────────────────── */
-/* ADDED: Vertical spacing between major sections for breathing room */
 .technology-hero,
 .technology-advantage-band,
 .technology-platform-panel,
@@ -509,7 +536,6 @@
   margin-bottom: 60px;
 }
 
-/* Last section doesn't need bottom margin */
 .technology-cta {
   margin-bottom: 0;
 }
@@ -520,7 +546,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* FIX 1 continued: 2-col layout has enough width — restore normal wrapping */
   .technology-advantage h3 {
     white-space: normal;
     font-size: 15px;
@@ -530,14 +555,27 @@
     border-right: 0;
   }
 
-  .technology-platform-panel,
   .technology-systems-panel,
   .technology-engineering-panel {
     grid-template-columns: 1fr;
   }
 
+  .technology-platform-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .technology-platform-row {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    min-height: auto;
+  }
+
   .technology-platform-visual {
-    min-height: 560px;
+    min-height: 380px;
+  }
+
+  .technology-callouts-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .engineering-card-grid {
@@ -555,7 +593,6 @@
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.24) 48%, rgba(0, 0, 0, 0.08) 100%);
   }
 
-  /* Responsive spacing for tablet */
   .technology-hero,
   .technology-advantage-band,
   .technology-platform-panel,
@@ -605,13 +642,18 @@
     grid-template-columns: 1fr;
   }
 
-  .engineering-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .technology-platform-panel {
+    padding: 0 20px 30px;
   }
 
-  .technology-callout {
-    position: relative;
-    width: auto;
+  .technology-platform-visual {
+    min-height: 320px;
+  }
+
+  .technology-callouts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding-top: 20px;
   }
 
   .technology-platform-visual {
@@ -619,9 +661,8 @@
     background-color: transparent;
     display: flex;
     flex-direction: column;
-    gap: 12px;
     min-height: auto;
-    padding: 16px;
+    padding: 0;
   }
 
   .technology-platform-visual::before {
@@ -633,18 +674,12 @@
     width: 100%;
     height: auto;
     border-radius: 4px;
-    margin-bottom: 4px;
   }
 
-  .callout-1,
-  .callout-2,
-  .callout-3,
-  .callout-4,
-  .callout-5 {
-    inset: auto;
+  .engineering-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* CTA on tablet — vertical stack, image from bottom */
   .technology-cta {
     background-size: cover;
     background-position: 75% center;
@@ -654,7 +689,6 @@
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.46));
   }
 
-  /* Responsive spacing for tablet */
   .technology-hero,
   .technology-advantage-band,
   .technology-platform-panel,
@@ -686,6 +720,32 @@
     padding-right: 20px;
   }
 
+  .technology-platform-panel {
+    padding: 0 16px 30px;
+  }
+
+  .technology-platform-visual {
+    min-height: 200px;
+  }
+
+  .technology-callouts-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-top: 16px;
+  }
+
+  .technology-callout-item {
+    padding: 14px 16px;
+  }
+
+  .technology-callout-item h3 {
+    font-size: 12px;
+  }
+
+  .technology-callout-item p {
+    font-size: 12px;
+  }
+
   .technology-hero h1,
   .technology-section-copy h2,
   .technology-cta h2 {
@@ -710,7 +770,6 @@
     padding: 0;
   }
 
-  /* FIX 1 continued: single column on mobile — full width, normal wrap */
   .technology-advantage h3 {
     white-space: normal;
     font-size: 14px;
@@ -725,13 +784,21 @@
     height: auto;
   }
 
+  /* ── FIX: Digital Innovation is 1:1 square, others are 1.77 portrait
+     At ~340px card width, portrait images render ~602px tall.
+     Force last card image to same height so all cards match. ── */
+  .engineering-card:last-child .engineering-card-img {
+    height: calc(100vw * 1.77);
+    object-fit: cover;
+    object-position: center center;
+  }
+
   .technology-hero .solid-button,
   .technology-cta .solid-button {
     justify-content: center;
     width: 100%;
   }
 
-  /* CTA on mobile — full cover, lighter overlay */
   .technology-cta {
     background-size: cover;
     background-position: 72% center;
@@ -742,7 +809,6 @@
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.50));
   }
 
-  /* Responsive spacing for mobile */
   .technology-hero,
   .technology-advantage-band,
   .technology-platform-panel,

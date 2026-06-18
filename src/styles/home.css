@@ -146,11 +146,11 @@ h2 {
 .hero-video {
   height: 100%;
   left: 0;
-  object-fit: contain;
+  object-fit: contain;          /* change from contain → cover */
   object-position: right center;
   position: absolute;
   top: 0;
-  width: 130%;
+  width: 120%;                /* change from 130% → 100% */
   z-index: 0;
 }
 
@@ -159,12 +159,12 @@ h2 {
     linear-gradient(
       90deg,
       #000 0%,
-      #000 36%,          /* was 30% — extended solid black further right */
-      rgba(0, 0, 0, 0.98) 43%,   /* was 39% */
-      rgba(0, 0, 0, 0.80) 54%,   /* was 51% */
-      rgba(0, 0, 0, 0.32) 68%,   /* was 67% */
-      rgba(0, 0, 0, 0.08) 82%,   /* was 81% */
-      transparent 93%
+      #000 38%,                      /* solid black covers more of the left */
+      rgba(0, 0, 0, 0.85) 46%,       /* soft start of fade */
+      rgba(0, 0, 0, 0.60) 54%,
+      rgba(0, 0, 0, 0.25) 66%,
+      rgba(0, 0, 0, 0.08) 78%,
+      transparent 90%
     ),
     linear-gradient(180deg, #000 0%, transparent 16%, transparent 78%, #000 100%),
     radial-gradient(circle at 78% 50%, transparent 0 34%, rgba(0, 0, 0, 0.22) 66%, #000 100%);
