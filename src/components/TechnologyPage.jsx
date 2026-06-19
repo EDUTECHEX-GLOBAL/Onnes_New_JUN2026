@@ -15,6 +15,7 @@ import {
   Target,
   Zap,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
@@ -215,9 +216,9 @@ export default function TechnologyPage() {
       <section className="technology-cta" style={{ backgroundImage: `url(${ctaBg})` }}>
         <h2>Engineering The Future. Powering Humanity Beyond Earth.</h2>
         <p>Our technology is the foundation for a new era of space infrastructure and limitless exploration.</p>
-        <a className="solid-button" href="mailto:hello@onnes.in">
+        <Link className="solid-button" to="/contact#mission-brief">
           Partner With Us <span aria-hidden="true">→</span>
-        </a>
+        </Link>
       </section>
 
       <Footer />

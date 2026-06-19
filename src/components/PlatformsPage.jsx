@@ -16,6 +16,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
@@ -177,10 +178,10 @@ export default function PlatformsPage() {
           <p>From orbit to deep space, our platforms are built to enable the missions of today and the civilizations of tomorrow.</p>
         </div>
         <div className="cta-actions">
-          <a className="solid-button" href="mailto:hello@onnes.in">
+          <Link className="solid-button" to="/contact#mission-brief">
             Partner With Us <span aria-hidden="true">→</span>
-          </a>
-          <a className="outline-button" href="/#applications">
+          </Link>
+          <a className="outline-button" href="/applications">
             Explore Applications <span aria-hidden="true">→</span>
           </a>
         </div>

@@ -118,7 +118,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <Link className="outline-button small desktop-cta" to="/contact">
+        <Link className="outline-button small desktop-cta" to="/contact#mission-brief">
           Partner With Us <span aria-hidden="true">↗</span>
         </Link>
 

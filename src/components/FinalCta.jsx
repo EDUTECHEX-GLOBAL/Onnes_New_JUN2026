@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function FinalCta() {
   return (
     <section className="final-cta" id="contact">
@@ -10,10 +12,10 @@ export default function FinalCta() {
         </p>
       </div>
       <div className="cta-actions">
-        <a className="solid-button" href="mailto:hello@onnes.in">
+        <Link className="solid-button" to="/contact#mission-brief">
           Partner With Us <span aria-hidden="true">↗</span>
-        </a>
-        <a className="outline-button" href="#careers">
+        </Link>
+        <a className="outline-button" href="/contact#careers">
           Explore Careers <span aria-hidden="true">↗</span>
         </a>
       </div>

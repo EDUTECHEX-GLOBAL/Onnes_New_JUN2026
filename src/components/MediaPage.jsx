@@ -1,3 +1,5 @@
+import { useState } from "react";
+import axios from "axios";
 import { ArrowUpRight, Play } from "lucide-react";
 
 import Header from "./Header.jsx";
@@ -5,10 +7,6 @@ import Footer from "./Footer.jsx";
 import "../styles/media.css";
 import heroBg from "../assets/MediaPageMain.jpg";
 import featuredNews from "../assets/AerospaceWorkshop.png";
-import newsThumb1 from "../assets/medianews1.png";
-import newsThumb2 from "../assets/medianews2.png";
-import newsThumb3 from "../assets/medianews3.png";
-import newsThumb4 from "../assets/medianews4.png";
 import featuredVideo from "../assets/media-featured-video.png";
 import insight1 from "../assets/media-insight-1.png";
 import insight2 from "../assets/media-insight-2.png";
@@ -16,12 +14,43 @@ import insight3 from "../assets/media-insight-3.png";
 import insight4 from "../assets/media-insight-4.png";
 import newsletterBg from "../assets/media-newsletter-bg.png";
 
+const API = process.env.REACT_APP_API_URL;
+
 const newsItems = [
-  ["May 06, 2025", "Advancing Lunar Logistics: Onnes Aerospace Partners on Robotic Surface Operations", newsThumb1],
-  ["Apr 28, 2025", "Onnes Aerospace Selected for Phase II SBIR Contract to Advance Deep Space Systems", newsThumb2],
-  ["Apr 18, 2025", "Building the Backbone: Why Infrastructure Defines the Future of Space", newsThumb3],
-  ["Apr 02, 2025", "Onnes Aerospace Expands Leadership Team to Accelerate Global Growth", newsThumb4],
+  [
+    "Jun 17, 2026",
+    "Advanced Health Research Continues Aboard the Space Station With AR and VR Tools",
+    "https://www.nasa.gov/blogs/spacestation/2026/06/17/advanced-health-research-on-station-using-augmented-virtual-reality-tools/",
+  ],
+  [
+    "Jun 17, 2026",
+    "Ariane 6 Launches With More Powerful Boosters, Setting a New Record for Europe",
+    "https://www.esa.int/Newsroom/Press_Releases/Ariane_6_launches_with_more_powerful_boosters_a_new_record_for_Europe",
+  ],
+  [
+    "Jun 08, 2026",
+    "ESA Signs an Agreement With Vast on Behalf of the Czech Republic",
+    "https://www.esa.int/Newsroom/Press_Releases/ESA_signs_an_Agreement_with_Vast_on_behalf_of_the_Czech_Republic",
+  ],
+  [
+    "Mar 27, 2026",
+    "NASA Selects Intuitive Machines to Deliver Artemis Science and Tech to the Moon",
+    "https://www.nasa.gov/missions/artemis/clps/nasa-selects-intuitive-machines-to-deliver-artemis-science-tech-to-moon/",
+  ],
+  [
+    "Mar 24, 2026",
+    "NASA's Water-Hunting Tool Will Help Scout the Moon's South Pole",
+    "https://www.nasa.gov/solar-system/moon/nasas-water-hunting-tool-will-help-scout-moons-south-pole/",
+  ],
 ];
+
+const featuredArticle = {
+  date: "Jun 18, 2026",
+  title: "Key Outcomes of the 347th ESA Council Meeting",
+  url: "https://www.esa.int/Newsroom/Press_Releases/Key_outcomes_of_the_347th_ESA_Council_meeting",
+  blurb:
+    "ESA's governing council met in Paris to confirm new leadership appointments, advance its crewed mission concept, and deepen international partnerships spanning Earth observation and human spaceflight.",
+};
 
 // videos array commented out — video section is not yet active
 // const videos = [
@@ -37,9 +66,9 @@ const insights = [
   ["Apr 07, 2025", "Beyond Orbit: Preparing for Humanity's Next Great Leap", "Deep space missions demand a new era of engineering and endurance.", insight4],
 ];
 
-function TextLink({ children }) {
+function TextLink({ children, href }) {
   return (
-    <a className="media-link" href="#news">
+    <a className="media-link" href={href} target="_blank" rel="noopener noreferrer">
       {children} <ArrowUpRight />
     </a>
   );
@@ -54,6 +83,35 @@ function PlayMark() {
 }
 
 export default function MediaPage() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [feedback, setFeedback] = useState("");
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+
+    if (!email.trim()) {
+      setStatus("error");
+      setFeedback("Please enter your email address.");
+      return;
+    }
+
+    setStatus("loading");
+    setFeedback("");
+
+    try {
+      const res = await axios.post(`${API}/api/admin-subscribe`, { email });
+      setStatus("success");
+      setFeedback(res.data?.message || "Subscribed successfully!");
+      setEmail("");
+    } catch (err) {
+      setStatus("error");
+      setFeedback(
+        err.response?.data?.message || "Something went wrong. Please try again."
+      );
+    }
+  };
+
   return (
     <main className="site-shell media-page">
       <Header />
@@ -75,7 +133,7 @@ export default function MediaPage() {
           {/* <a href="#videos">Videos</a>
           <a href="#insights">Insights</a> */}
         </nav>
-        <TextLink>View All News</TextLink>
+        {/* <TextLink href="#news">View All News</TextLink> */}
       </section>
 
       <section className="media-news-grid">
@@ -84,21 +142,20 @@ export default function MediaPage() {
             <span>Featured</span>
           </div>
           <div className="media-card-copy">
-            <p className="media-date">May 15, 2025</p>
-            <h2>Onnes Aerospace Announces Next-Generation Orbital Infrastructure Platform</h2>
-            <p>A modular, intelligent infrastructure platform designed to enable persistent operations across orbit, the Moon, and deep space.</p>
-            <TextLink>Read More</TextLink>
+            <p className="media-date">{featuredArticle.date}</p>
+            <h2>{featuredArticle.title}</h2>
+            <p>{featuredArticle.blurb}</p>
+            <TextLink href={featuredArticle.url}>Read More</TextLink>
           </div>
         </article>
 
         <div className="media-news-list">
-          {newsItems.map(([date, title, image]) => (
+          {newsItems.map(([date, title, url]) => (
             <article className="media-list-item" key={title}>
-              <div style={{ backgroundImage: `url(${image})` }} />
               <div>
                 <p className="media-date">{date}</p>
                 <h3>{title}</h3>
-                <TextLink>Read More</TextLink>
+                <TextLink href={url}>Read More</TextLink>
               </div>
             </article>
           ))}
@@ -108,7 +165,7 @@ export default function MediaPage() {
       {/* <section className="media-video-section" id="videos">
         <div className="media-section-head">
           <p className="media-eyebrow">Featured Video</p>
-          <TextLink>View All Videos</TextLink>
+          <TextLink href="#videos">View All Videos</TextLink>
         </div>
         <div className="media-video-grid">
           <article className="media-video-feature" style={{ backgroundImage: `url(${featuredVideo})` }}>
@@ -139,7 +196,7 @@ export default function MediaPage() {
       {/* <section className="media-insights" id="insights">
         <div className="media-section-head">
           <p className="media-eyebrow">Latest Insights</p>
-          <TextLink>View All Insights</TextLink>
+          <TextLink href="#insights">View All Insights</TextLink>
         </div>
         <div className="media-insight-grid">
           {insights.map(([date, title, body, image]) => (
@@ -148,7 +205,7 @@ export default function MediaPage() {
               <p className="media-date">{date}</p>
               <h3>{title}</h3>
               <p>{body}</p>
-              <TextLink>Read Insight</TextLink>
+              <TextLink href="#insights">Read Insight</TextLink>
             </article>
           ))}
         </div>
@@ -160,10 +217,29 @@ export default function MediaPage() {
           <h2>Get The Latest News And Insights</h2>
           <p>Delivered to your inbox.</p>
         </div>
-        <form>
-          <input aria-label="Email address" placeholder="Enter your email" type="email" />
-          <button type="button">Subscribe <ArrowUpRight /></button>
+        <form onSubmit={handleSubscribe} noValidate>
+          <input
+            aria-label="Email address"
+            placeholder="Enter your email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={status === "loading"}
+          />
+          <button type="submit" disabled={status === "loading"}>
+            {status === "loading" ? "Subscribing..." : "Subscribe"} <ArrowUpRight />
+          </button>
         </form>
+        {feedback && (
+          <p
+            className={`media-newsletter-feedback ${
+              status === "success" ? "is-success" : "is-error"
+            }`}
+            role="status"
+          >
+            {feedback}
+          </p>
+        )}
       </section>
 
       <Footer />

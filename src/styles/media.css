@@ -6,10 +6,18 @@
 }
 
 .media-page h1,
-.media-page h2,
-.media-page h3 {
+.media-page h2 {
   font-family: var(--font-din);
   font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.media-page h3 {
+  font-family: var(--font-din);
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 1.08;
   margin: 0;
@@ -182,16 +190,18 @@
 .media-list-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.13);
   display: grid;
-  gap: clamp(16px, 2vw, 24px);
-  grid-template-columns: clamp(130px, 13vw, 170px) 1fr;
-  padding-bottom: clamp(18px, 2vw, 26px);
+  gap: 6px;
+  padding-bottom: clamp(16px, 1.8vw, 22px);
 }
 
 .media-list-item + .media-list-item {
-  padding-top: clamp(18px, 2vw, 26px);
+  padding-top: clamp(16px, 1.8vw, 22px);
 }
 
-.media-list-item > div:first-child,
+.media-list-item:last-child {
+  border-bottom: none;
+}
+
 .media-video-item > div:first-child {
   background-position: center;
   background-size: cover;
@@ -466,12 +476,10 @@
     padding-bottom: 64px;
   }
 
-  .media-list-item,
   .media-video-item {
     grid-template-columns: 1fr;
   }
 
-  .media-list-item > div:first-child,
   .media-video-item > div:first-child {
     min-height: 180px;
   }
@@ -507,7 +515,6 @@
     font-size: 34px;
   }
 
-  .media-list-item > div:first-child,
   .media-video-item > div:first-child {
     min-height: 150px;
   }

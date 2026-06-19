@@ -33,10 +33,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  ["X", <FaXTwitter />],
-  ["LinkedIn", <FaLinkedinIn />],
-  ["YouTube", <FaYoutube />],
-  ["Instagram", <FaInstagram />],
+  ["X", <FaXTwitter />, "#x"],
+  ["LinkedIn", <FaLinkedinIn />, "https://www.linkedin.com/company/onnesaerospace/"],
+  ["YouTube", <FaYoutube />, "#youtube"],
+  ["Instagram", <FaInstagram />, "#instagram"],
 ];
 
 export default function Footer() {
@@ -47,8 +47,8 @@ export default function Footer() {
         <span className="brand-sub">AEROSPACE</span>
         <p>The next-generation deep space infrastructure company shaping humanity beyond Earth.</p>
         <div className="socials" aria-label="Social links">
-          {socialLinks.map(([label, icon]) => (
-            <a href={`#${label.toLowerCase()}`} aria-label={label} key={label}>
+          {socialLinks.map(([label, icon, url]) => (
+            <a href={url} target="_blank" rel="noopener noreferrer" aria-label={label} key={label}>
               {icon}
             </a>
           ))}

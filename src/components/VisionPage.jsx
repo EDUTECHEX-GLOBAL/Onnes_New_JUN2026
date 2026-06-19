@@ -52,9 +52,27 @@ const futureCards = [
 ];
 
 const founders = [
-  ["Ram", "CEO & Co-Founder", "Visionary leader with a passion for building transformative companies that solve some of the world's most complex challenges. Ram drives the strategic direction and partnerships that position Onnes Aerospace at the forefront of the new space economy.", ramImage],
-  ["Vikram", "CTO & Co-Founder", "Deep technology innovator and systems architect focused on advanced engineering, autonomy, and next-generation space systems. Vikram leads the technology strategy, R&D, and engineering excellence that power our infrastructure platforms.", vikramImage],
-  ["Rajesh", "CSO & Co-Founder", "Strategic leader with extensive experience in defense, space systems, and global markets. Rajesh leads strategic initiatives, government partnerships, and market expansion across commercial and national security space.", rajeshImage],
+  [
+    "Ram K Aluru",
+    "CEO & Co-Founder",
+    "Visionary leader with a passion for building transformative companies that solve some of the world's most complex challenges. Ram drives the strategic direction and partnerships that position Onnes Aerospace at the forefront of the new space economy.",
+    ramImage,
+    "https://www.linkedin.com/in/ram-k-aluru-ph-d-77608a3b",
+  ],
+  [
+    "Vikram S Raghavan",
+    "CTO & Co-Founder",
+    "Deep technology innovator and systems architect focused on advanced engineering, autonomy, and next-generation space systems. Vikram leads the technology strategy, R&D, and engineering excellence that power our infrastructure platforms.",
+    vikramImage,
+    "https://www.linkedin.com/in/vikram-s-raghavan-ph-d-5293481a3",
+  ],
+  [
+    "Rajesh Adla",
+    "CSO & Co-Founder",
+    "Strategic leader with extensive experience in defense, space systems, and global markets. Rajesh leads strategic initiatives, government partnerships, and market expansion across commercial and national security space.",
+    rajeshImage,
+    "https://www.linkedin.com/in/rajeshkumaradla",
+  ],
 ];
 
 const values = [
@@ -154,14 +172,14 @@ export default function VisionPage() {
           <p>Complementary expertise. Unified purpose. Building the infrastructure for humanity's future in space.</p>
         </div>
         <div className="founder-grid">
-          {founders.map(([name, role, text, image]) => (
+          {founders.map(([name, role, text, image, linkedin]) => (
             <article className="founder-card" key={name}>
               <div className="founder-image" style={{ backgroundImage: `url(${image})` }} />
               <div className="founder-content">
                 <h3>{name}</h3>
                 <strong>{role}</strong>
                 <p>{text}</p>
-                <a href="#linkedin" aria-label={`${name} LinkedIn`}><FaLinkedinIn /></a>
+                <a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${name} LinkedIn`}><FaLinkedinIn /></a>
               </div>
             </article>
           ))}
@@ -187,5 +205,3 @@ export default function VisionPage() {
     </main>
   );
 }
-
-//changes
