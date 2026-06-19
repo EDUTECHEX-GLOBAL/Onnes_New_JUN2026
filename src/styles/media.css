@@ -140,7 +140,7 @@
 .media-card-image {
   background-position: center;
   background-size: cover;
-  height: clamp(170px, 18vw, 220px);
+  height: clamp(170px, 18vw, 250px);
   position: relative;
 }
 

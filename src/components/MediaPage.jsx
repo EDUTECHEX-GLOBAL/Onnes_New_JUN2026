@@ -4,15 +4,12 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/media.css";
 import heroBg from "../assets/MediaPageMain.jpg";
-import featuredNews from "../assets/media-featured-news1.png";
-import newsThumb1 from "../assets/media-news-thumb-1.png";
-import newsThumb2 from "../assets/media-news-thumb-2.png";
-import newsThumb3 from "../assets/media-news-thumb-3.png";
-import newsThumb4 from "../assets/media-news-thumb-4.png";
+import featuredNews from "../assets/AerospaceWorkshop.png";
+import newsThumb1 from "../assets/medianews1.png";
+import newsThumb2 from "../assets/medianews2.png";
+import newsThumb3 from "../assets/medianews3.png";
+import newsThumb4 from "../assets/medianews4.png";
 import featuredVideo from "../assets/media-featured-video.png";
-import videoThumb1 from "../assets/media-video-thumb-1.png";
-import videoThumb2 from "../assets/media-video-thumb-2.png";
-import videoThumb3 from "../assets/media-video-thumb-3.png";
 import insight1 from "../assets/media-insight-1.png";
 import insight2 from "../assets/media-insight-2.png";
 import insight3 from "../assets/media-insight-3.png";
@@ -26,11 +23,12 @@ const newsItems = [
   ["Apr 02, 2025", "Onnes Aerospace Expands Leadership Team to Accelerate Global Growth", newsThumb4],
 ];
 
-const videos = [
-  ["02:18", "Lunar Infrastructure for a Sustainable Future", "Enabling long-term human presence and operations on the Moon.", videoThumb1],
-  ["02:55", "Deep Space Logistics Reimagined", "Autonomous systems that extend human reach to Mars and beyond.", videoThumb2],
-  ["02:31", "Autonomous Space Ecosystems: The Next Operational Paradigm", "Self-operating infrastructure for a resilient and adaptive space economy.", videoThumb3],
-];
+// videos array commented out — video section is not yet active
+// const videos = [
+//   ["02:18", "Lunar Infrastructure for a Sustainable Future", "Enabling long-term human presence and operations on the Moon.", videoThumb1],
+//   ["02:55", "Deep Space Logistics Reimagined", "Autonomous systems that extend human reach to Mars and beyond.", videoThumb2],
+//   ["02:31", "Autonomous Space Ecosystems: The Next Operational Paradigm", "Self-operating infrastructure for a resilient and adaptive space economy.", videoThumb3],
+// ];
 
 const insights = [
   ["May 12, 2025", "The New Space Economy Requires a New Infrastructure Layer", "Why infrastructure is the next trillion-dollar opportunity in space.", insight1],

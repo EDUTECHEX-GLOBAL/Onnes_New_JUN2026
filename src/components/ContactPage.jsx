@@ -23,10 +23,10 @@ import heroImage from "../assets/OrbitalINfra.jpeg";
 import commercialImage from "../assets/CommercialSpace2.jpeg";
 import securityImage from "../assets/NationalSecuritySpace.jpeg";
 import partnersImage from "../assets/IndustryPartners.png";
-import investorsImage from "../assets/platform-lunar-new.png";
+import investorsImage from "../assets/Investors.png";
 import missionEarth from "../assets/contact/generated-earth-sunrise.png";
 import globalMap from "../assets/contact/generated-global-map.png";
-import careersLab from "../assets/contact/generated-careers-lab.png";
+import careersLab from "../assets/contactcareers.png";
 import investorEarth from "../assets/contact/generated-earth-sunrise.png";
 import futureEarth from "../assets/hero-bg.png";
 

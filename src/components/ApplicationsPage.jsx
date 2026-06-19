@@ -15,14 +15,15 @@ import {
 } from "lucide-react";
 
 import Header from "./Header.jsx";
+import FinalCta from "./FinalCta.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/applications.css";
+
 import heroBg from "../assets/ApplicationsHeroBg.jpeg";
 import commercialBg from "../assets/CommercialSpace1.jpeg";
 import securityBg from "../assets/NationalSecuritySpace.jpeg";
 import defenseBg from "../assets/Space_X_Air_Water_Ground.jpeg";
 import explorationBg from "../assets/DeepSpaceExploration.jpeg";
-import ctaBg from "../assets/journey-bg.png";
 
 const domains = [
   {
@@ -95,6 +96,7 @@ function ApplicationDomain({ domain }) {
         <h3>{domain.title}</h3>
         <span className="applications-rule" />
         <p>{domain.body}</p>
+
         <ul>
           {domain.items.map(([label, icon]) => (
             <li key={label}>
@@ -103,6 +105,7 @@ function ApplicationDomain({ domain }) {
             </li>
           ))}
         </ul>
+
         <a href={`#${domain.id}`}>
           Learn More <span aria-hidden="true">→</span>
         </a>
@@ -121,6 +124,7 @@ export default function ApplicationsPage() {
           className="applications-hero-bg"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
+
         <div className="applications-hero-copy">
           <p className="applications-eyebrow">Our Applications</p>
           <h1>
@@ -133,7 +137,7 @@ export default function ApplicationsPage() {
           <p>
             From commercial space to national security and space-enabled defense
             systems, Onnes Aerospace provides the critical infrastructure that
-            empowers the world's most ambitious missions.
+            empowers the world&apos;s most ambitious missions.
           </p>
           <a className="outline-button" href="#commercial-space">
             Explore Our Applications <span aria-hidden="true">→</span>
@@ -147,6 +151,7 @@ export default function ApplicationsPage() {
           <h2>Built For Today. Engineered For Tomorrow.</h2>
           <p>Four domains. One purpose. Limitless potential.</p>
         </div>
+
         <div className="application-domains-grid">
           {domains.map((domain) => (
             <ApplicationDomain domain={domain} key={domain.number} />
@@ -154,27 +159,7 @@ export default function ApplicationsPage() {
         </div>
       </section>
 
-      <section
-        className="applications-cta"
-        style={{ backgroundImage: `url(${ctaBg})` }}
-      >
-        <div>
-          <p className="applications-eyebrow">Together, We Go Further</p>
-          <h2>Let's Build The Future Beyond Earth.</h2>
-        </div>
-        <p>
-          Partner with Onnes Aerospace to create the infrastructure that enables
-          a safer, smarter, and more prosperous future for humanity.
-        </p>
-        <div className="cta-actions">
-          <a className="solid-button" href="mailto:hello@onnes.in">
-            Partner With Us <span aria-hidden="true">→</span>
-          </a>
-          <a className="outline-button" href="/platforms">
-            Explore Platforms <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </section>
+      <FinalCta />
 
       <Footer />
     </main>
