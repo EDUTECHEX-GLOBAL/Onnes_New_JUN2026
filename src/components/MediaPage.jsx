@@ -217,29 +217,32 @@ export default function MediaPage() {
           <h2>Get The Latest News And Insights</h2>
           <p>Delivered to your inbox.</p>
         </div>
-        <form onSubmit={handleSubscribe} noValidate>
-          <input
-            aria-label="Email address"
-            placeholder="Enter your email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={status === "loading"}
-          />
-          <button type="submit" disabled={status === "loading"}>
-            {status === "loading" ? "Subscribing..." : "Subscribe"} <ArrowUpRight />
-          </button>
-        </form>
-        {feedback && (
-          <p
-            className={`media-newsletter-feedback ${
-              status === "success" ? "is-success" : "is-error"
-            }`}
-            role="status"
-          >
-            {feedback}
-          </p>
-        )}
+
+        <div className="media-newsletter-right">
+          <form onSubmit={handleSubscribe} noValidate>
+            <input
+              aria-label="Email address"
+              placeholder="Enter your email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={status === "loading"}
+            />
+            <button type="submit" disabled={status === "loading"}>
+              {status === "loading" ? "Subscribing..." : "Subscribe"} <ArrowUpRight />
+            </button>
+          </form>
+          {feedback && (
+            <p
+              className={`media-newsletter-feedback ${
+                status === "success" ? "is-success" : "is-error"
+              }`}
+              role="status"
+            >
+              {feedback}
+            </p>
+          )}
+        </div>
       </section>
 
       <Footer />
