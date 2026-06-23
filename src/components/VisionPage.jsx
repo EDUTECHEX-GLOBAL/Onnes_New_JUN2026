@@ -16,10 +16,10 @@ import FinalCta from "./FinalCta";
 import Footer from "./Footer";
 import "../styles/vision.css";
 
-import futureEarth from "../assets/OrbitalInfra.png";
-import futureLunar from "../assets/LunarInfra2.png";
-import futureDeep from "../assets/DeepSpace3.png";
-import futureHumanity from "../assets/NationalSecuritySpace.jpeg";
+import futureEarth from "../assets/Orbital_Infra.webp";
+import futureLunar from "../assets/LunarInfra2.webp";
+import futureDeep from "../assets/DeepSpace3.webp";
+import futureHumanity from "../assets/NationalSecuritySpace.webp";
 import ramImage from "../assets/vision-page/founder-ram.png";
 import vikramImage from "../assets/vision-page/founder-vikram.png";
 import rajeshImage from "../assets/vision-page/founder-rajesh.png";
@@ -55,21 +55,18 @@ const founders = [
   [
     "Ram K Aluru",
     "CEO & Co-Founder",
-    "Visionary leader with a passion for building transformative companies that solve some of the world's most complex challenges. Ram drives the strategic direction and partnerships that position Onnes Aerospace at the forefront of the new space economy.",
     ramImage,
     "https://www.linkedin.com/in/ram-k-aluru-ph-d-77608a3b",
   ],
   [
     "Vikram S Raghavan",
     "CTO & Co-Founder",
-    "Deep technology innovator and systems architect focused on advanced engineering, autonomy, and next-generation space systems. Vikram leads the technology strategy, R&D, and engineering excellence that power our infrastructure platforms.",
     vikramImage,
     "https://www.linkedin.com/in/vikram-s-raghavan-ph-d-5293481a3",
   ],
   [
     "Rajesh Adla",
     "CSO & Co-Founder",
-    "Strategic leader with extensive experience in defense, space systems, and global markets. Rajesh leads strategic initiatives, government partnerships, and market expansion across commercial and national security space.",
     rajeshImage,
     "https://www.linkedin.com/in/rajeshkumaradla",
   ],
@@ -149,7 +146,6 @@ export default function VisionPage() {
         <div className="future-card-grid">
           {futureCards.map(([title, text, image, icon]) => (
             <article className="future-card" key={title}>
-              {/* CHANGED: using <img> instead of background-image for perfect fit */}
               <div className="future-card-image">
                 <img src={image} alt={title} />
               </div>
@@ -167,19 +163,29 @@ export default function VisionPage() {
 
       <section className="leadership-section" id="leadership">
         <div className="leadership-intro">
-          <p className="eyebrow">Our Leadership</p>
-          <h2>Three Founders. One Shared Vision.</h2>
-          <p>Complementary expertise. Unified purpose. Building the infrastructure for humanity's future in space.</p>
+          <h2>Leadership</h2>
         </div>
         <div className="founder-grid">
-          {founders.map(([name, role, text, image, linkedin]) => (
+          {founders.map(([name, role, image, linkedin]) => (
             <article className="founder-card" key={name}>
-              <div className="founder-image" style={{ backgroundImage: `url(${image})` }} />
-              <div className="founder-content">
-                <h3>{name}</h3>
-                <strong>{role}</strong>
-                <p>{text}</p>
-                <a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${name} LinkedIn`}><FaLinkedinIn /></a>
+              <div
+                className="founder-image"
+                style={{ backgroundImage: `url(${image})` }}
+              />
+              <div className="founder-overlay">
+                <div className="founder-overlay-info">
+                  <h3>{name}</h3>
+                  <strong>{role}</strong>
+                </div>
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${name} LinkedIn`}
+                  className="founder-linkedin"
+                >
+                  <FaLinkedinIn />
+                </a>
               </div>
             </article>
           ))}

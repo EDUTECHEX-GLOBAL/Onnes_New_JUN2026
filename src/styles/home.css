@@ -26,20 +26,12 @@
 }
 
 .hero-copy {
-  max-width: 520px;
+  max-width: 680px;
   position: relative;
   z-index: 2;
 }
 
-.eyebrow {
-  color: var(--blue);
-  font-size: clamp(15px, 1.05vw, 20px);
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1.35;
-  margin: 0 0 32px;
-  text-transform: uppercase;
-}
+
 
 h1,
 h2,
@@ -58,9 +50,28 @@ h2 {
 }
 
 h1 {
-  font-size: 60px;
   margin-bottom: 28px;
-  max-width: 560px;
+}
+.hero-title {
+  max-width: 980px;
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.hero-blue {
+  color: var(--blue);
+}
+
+.hero-white {
+  color: #fff;
+}
+
+.hero-copy > p:not(.eyebrow) {
+  max-width: 520px;
 }
 
 h2 {
@@ -236,25 +247,25 @@ h2 {
 }
 
 .world-1 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionearth.png");
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionearth.webp");
   background-size: cover;
   background-position: center;
 }
 
 .world-2 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionorbit1.png");
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionorbit1.webp");
   background-size: cover;
   background-position: center;
 }
 
 .world-3 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionmoon.png");
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionmoon.webp");
   background-size: cover;
   background-position: center;
 }
 
 .world-4 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visiondeepspace.png");
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visiondeepspace.webp");
   background-size: 150% auto;
   background-position: 100% center;
 }
@@ -344,10 +355,10 @@ h2 {
   width: calc(100% + 76px);
 }
 
-.platform-1 .platform-image { background-image: url("../assets/OrbitalINfra.jpeg"); }
-.platform-2 .platform-image { background-image: url("../assets/LunarInfra3.png"); }
-.platform-3 .platform-image { background-image: url("../assets/DeepSpace5.png"); }
-.platform-4 .platform-image { background-image: url("../assets/SpaceEcosystems.png"); }
+.platform-1 .platform-image { background-image: url("../assets/OrbitalINfra.webp"); }
+.platform-2 .platform-image { background-image: url("../assets/LunarInfra3.webp"); }
+.platform-3 .platform-image { background-image: url("../assets/DeepSpace5.webp"); }
+.platform-4 .platform-image { background-image: url("../assets/SpaceEcosystems.webp"); }
 
 .icon-ring,
 .reason-icon {
@@ -387,7 +398,7 @@ h2 {
       rgba(0, 0, 0, 0.28) 0%,
       rgba(0, 0, 0, 0.5) 100%
     ),
-    url("../assets/OuterSpace.jpg") center bottom / cover no-repeat;
+    url("../assets/OuterSpace.webp") center bottom / cover no-repeat;
   min-height: 520px;
   padding: 60px 80px 100px;
   position: relative;
@@ -600,8 +611,13 @@ h2 {
     max-width: 100%;
   }
 
-  h1 {
+  .eyebrow {
     font-size: clamp(36px, 9vw, 52px);
+  }
+
+  /* REDUCED FONT SIZE FOR MOBILE */
+  .hero-title {
+    font-size: 32px;
     max-width: 100%;
     margin-bottom: 20px;
   }
@@ -746,7 +762,7 @@ h2 {
         rgba(0, 0, 0, 0.68) 0%,
         rgba(0, 0, 0, 0.72) 100%
       ),
-      url("../assets/OuterSpace.jpg") center / cover no-repeat;
+      url("../assets/OuterSpace.webp") center / cover no-repeat;
   }
 
   .journey-head {
@@ -864,16 +880,16 @@ h2 {
   }
 
   .reason-icon {
-  font-size: 0;
-  height: 54px;
-  width: 54px;
-  margin-bottom: 14px;
-}
+    font-size: 0;
+    height: 54px;
+    width: 54px;
+    margin-bottom: 14px;
+  }
 
-.reason-icon svg {
-  width: 38px;
-  height: 38px;
-}
+  .reason-icon svg {
+    width: 38px;
+    height: 38px;
+  }
 }
 
 /* ============================================================
@@ -884,8 +900,13 @@ h2 {
     padding: 90px 18px 44px;
   }
 
-  h1 {
+  .eyebrow {
     font-size: clamp(32px, 10vw, 44px);
+  }
+
+  /* EVEN SMALLER FONT SIZE FOR SMALL MOBILE */
+  .hero-title {
+    font-size: 26px;
   }
 
   .world-card {

@@ -1,4 +1,4 @@
-import heroBg from "../assets/Homepagevid.mp4";
+import heroBg from "../assets/Homepagevid2.mp4";
 
 export default function Hero() {
   return (
@@ -11,24 +11,32 @@ export default function Hero() {
         loop
         playsInline
       />
+
       <div className="hero-video-mask" aria-hidden="true" />
 
       <div className="hero-copy">
-        <p className="eyebrow">The Next-Generation Deep Space Infrastructure Company</p>
-        <h1>Shaping Humanity Beyond Earth</h1>
+        <h1 className="hero-title">
+          <span className="hero-blue">
+            The Next-Generation Deep Space Infrastructure Company
+          </span>{" "}
+          <span className="hero-white">
+            Shaping Humanity Beyond Earth
+          </span>
+        </h1>
+
         <p>
-          Onnes Aerospace is engineering the infrastructure systems that enable persistent orbital
-          operations, lunar logistics, autonomous space ecosystems, and deep-space missions.
+          Onnes Aerospace is engineering the infrastructure systems that enable
+          persistent orbital operations, lunar logistics, autonomous space
+          ecosystems, and deep-space missions.
         </p>
+
         <div className="actions">
           <a className="solid-button" href="/vision">
             Explore Our Vision <span aria-hidden="true">↗</span>
           </a>
-          {/* <a className="outline-button" href="#media">
-            <span className="play-dot" aria-hidden="true">▶</span> Watch Vision Film
-          </a> */}
         </div>
       </div>
+
       <a className="scroll-cue" href="#vision" aria-label="Scroll to explore">
         <span></span> Scroll To Explore
       </a>

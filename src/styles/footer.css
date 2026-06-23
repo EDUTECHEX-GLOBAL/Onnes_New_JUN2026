@@ -5,7 +5,7 @@
   align-items: center;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.22) 45%, rgba(0, 0, 0, 0.05) 100%),
-    url("../assets/journey-bg.png") right bottom / 115% auto no-repeat;
+    url("../assets/journey-bg.webp") right bottom / 115% auto no-repeat;
   display: grid;
   gap: 40px;
   grid-template-columns: 1fr 330px;
@@ -127,7 +127,7 @@
     padding: 52px 48px;
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.24) 48%, rgba(0, 0, 0, 0.08) 100%),
-      url("../assets/journey-bg.png") right center / 135% auto no-repeat;
+      url("../assets/journey-bg.webp") right center / 135% auto no-repeat;
   }
 
   .footer {
@@ -152,7 +152,7 @@
     padding: 48px 24px 52px;
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.46)),
-      url("../assets/journey-bg.png") 75% center / cover no-repeat;
+      url("../assets/journey-bg.webp") 75% center / cover no-repeat;
     gap: 28px;
   }
 
@@ -224,7 +224,7 @@
     padding: 40px 18px 44px;
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.5)),
-      url("../assets/journey-bg.png") 72% center / cover no-repeat;
+      url("../assets/journey-bg.webp") 72% center / cover no-repeat;
   }
 
   .cta-actions {

@@ -19,14 +19,14 @@ import FinalCta from "./FinalCta.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/contact.css";
 
-import heroImage from "../assets/OrbitalINfra.jpeg";
-import commercialImage from "../assets/CommercialSpace2.jpeg";
-import securityImage from "../assets/NationalSecuritySpace.jpeg";
-import partnersImage from "../assets/IndustryPartners.png";
-import investorsImage from "../assets/Investors.png";
+import heroImage from "../assets/OrbitalINfra.webp";
+import commercialImage from "../assets/CommercialSpace2.webp";
+import securityImage from "../assets/NationalSecuritySpace.webp";
+import partnersImage from "../assets/IndustryPartners.webp";
+import investorsImage from "../assets/Investors.webp";
 import missionEarth from "../assets/contact/generated-earth-sunrise.png";
-import globalMap from "../assets/contact/generated-global-map.png";
-import careersLab from "../assets/contactcareers.png";
+import globalMap from "../assets/generated-global-map.webp";
+import careersLab from "../assets/contactcareers.webp";
 import investorEarth from "../assets/contact/generated-earth-sunrise.png";
 import futureEarth from "../assets/hero-bg.png";
 

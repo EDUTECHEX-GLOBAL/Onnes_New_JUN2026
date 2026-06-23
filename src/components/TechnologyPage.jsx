@@ -20,14 +20,14 @@ import { Link } from "react-router-dom";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/technology.css";
-import heroBg from "../assets/OrionTakeOff1.png";
-import platformBg from "../assets/InfraPlatform2.png";
-import systemsDashboard from "../assets/IntelligentSystems.png";
-import engineeringOne from "../assets/AdvMaterials.jpeg";
-import engineeringTwo from "../assets/PrecisionEngineering.jpeg";
-import engineeringThree from "../assets/RigorousTesting.jpeg";
-import engineeringFour from "../assets/DigitalInnovationTech.png";
-import ctaBg from "../assets/journey-bg.png";
+import heroBg from "../assets/OrionTakeOff1.webp";
+import platformBg from "../assets/InfraPlatform2.webp";
+import systemsDashboard from "../assets/IntelligentSystems.webp";
+import engineeringOne from "../assets/AdvMaterials.webp";
+import engineeringTwo from "../assets/PrecisionEngineering.webp";
+import engineeringThree from "../assets/RigorousTesting.webp";
+import engineeringFour from "../assets/DigitalInnovationTech.webp";
+import ctaBg from "../assets/journey-bg.webp";
 
 const advantages = [
   ["Mission Critical", "Built for reliability and resilience in the harshest environments.", <CircleGauge />],

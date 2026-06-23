@@ -24,7 +24,7 @@
   background:
     linear-gradient(90deg, #000 0 28%, rgba(0, 0, 0, 0.08) 57%, rgba(0, 0, 0, 0.62) 100%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.58) 0 8%, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.95) 88%, #000 100%),
-    url("../assets/CommercialSpace2.jpeg") center center / cover no-repeat;
+    url("../assets/CommercialSpace2.webp") center center / cover no-repeat;
   display: grid;
   grid-template-columns: minmax(560px, 0.78fr) minmax(280px, 1fr) minmax(190px, 250px);
   min-height: clamp(720px, 52.9vw, 900px);
@@ -157,14 +157,14 @@
 .vision-statement-panel {
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0 24%, rgba(0, 0, 0, 0.34) 50%, rgba(0, 0, 0, 0.04) 100%),
-    url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+    url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
     #000;
 }
 
 .mission-panel {
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.84) 0 24%, rgba(0, 0, 0, 0.3) 52%, rgba(0, 0, 0, 0.04) 100%),
-    url("../assets/LunarInfra3.png") right bottom / cover no-repeat,
+    url("../assets/LunarInfra3.webp") right bottom / cover no-repeat,
     #000;
 }
 
@@ -228,7 +228,7 @@
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0 45%, rgba(0, 0, 0, 0.76) 100%),
     linear-gradient(90deg, #000 0 22%, rgba(0, 0, 0, 0.12) 66%, #000 100%),
-    url("../assets/journey-bg.png") top center / cover no-repeat,
+    url("../assets/journey-bg.webp") top center / cover no-repeat,
     #000;
   min-height: 560px;
   padding: 52px clamp(32px, 4.6vw, 66px) 58px;
@@ -338,94 +338,114 @@
     #000;
   display: block;
   min-height: 0;
-  padding: 52px clamp(32px, 4.6vw, 66px) 54px;
+  padding: 52px clamp(32px, 4.6vw, 66px) 56px;
 }
 
 .leadership-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.48fr);
-  margin-bottom: 34px;
-}
-
-.leadership-intro .eyebrow,
-.leadership-intro h2 {
-  grid-column: 1;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
 .leadership-intro h2 {
-  font-size: clamp(34px, 2.8vw, 54px);
-  max-width: 760px;
+  color: #fff;
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0 auto;
+  text-transform: uppercase;
 }
 
-.leadership-intro p:not(.eyebrow) {
-  align-self: start;
-  color: #d9dde6;
-  font-size: 16px;
-  grid-column: 1;
-  margin-top: 14px;
-  max-width: 430px;
-}
-
+/* ── FOUNDER CARDS (photo + overlay) ─────────────────────── */
 .founder-grid {
-  align-items: stretch;
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
 }
 
 .founder-card {
-  background: linear-gradient(180deg, rgba(3, 10, 18, 0.9), rgba(2, 4, 8, 0.96));
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 6px;
-  display: grid;
-  grid-template-columns: minmax(160px, 0.55fr) minmax(0, 1fr);
-  min-height: 360px;
+  border-radius: 10px;
   overflow: hidden;
+  position: relative;
+  aspect-ratio: 3 / 2.8;
+  max-height: 340px;
 }
 
 .founder-image {
-  background-position: center bottom;
+  background-position: center 10%;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
-.founder-content {
-  align-self: stretch;
-  padding: 30px 26px 24px;
+/* gradient scrim — bottom portion only */
+.founder-overlay {
+  align-items: flex-end;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.35) 32%,
+    transparent 52%
+  );
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  padding: 20px 22px;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
-.founder-content h3 {
-  color: var(--blue);
-  font-size: 26px;
-  font-weight: 400;
-  margin-bottom: 6px;
-  text-transform: uppercase;
+.founder-overlay-info {
+  align-self: flex-end;
 }
 
-.founder-content strong {
+.founder-overlay-info h3 {
   color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 4px;
+  text-transform: none;
+}
+
+.founder-overlay-info strong {
+  color: rgba(255, 255, 255, 0.7);
   display: block;
-  font-size: 14px;
-  margin-bottom: 18px;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: none;
 }
 
-.founder-content p {
-  color: #cfd4df;
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.founder-content a {
+.founder-linkedin {
   align-items: center;
-  border: 2px solid var(--blue);
-  border-radius: 4px;
-  color: var(--blue);
+  align-self: flex-end;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 6px;
+  color: #fff;
   display: inline-flex;
-  height: 30px;
+  flex-shrink: 0;
+  height: 32px;
   justify-content: center;
-  margin-top: 18px;
-  width: 30px;
+  margin-left: 12px;
+  transition: background 0.18s, border-color 0.18s;
+  width: 32px;
+}
+
+.founder-linkedin:hover {
+  background: var(--blue, #1c83ff);
+  border-color: var(--blue, #1c83ff);
+}
+
+.founder-linkedin svg {
+  height: 15px;
+  width: 15px;
 }
 
 /* ── VALUES ───────────────────────────────────────────────── */
@@ -470,10 +490,6 @@
     grid-template-columns: minmax(520px, 0.82fr) minmax(260px, 1fr) minmax(180px, 230px);
   }
 
-  .founder-card {
-    grid-template-columns: minmax(150px, 0.5fr) minmax(0, 1fr);
-  }
-
   .future-card-body {
     padding: 22px 20px 26px;
   }
@@ -509,14 +525,6 @@
     gap: 16px;
   }
 
-  .founder-card {
-    grid-template-columns: minmax(140px, 0.5fr) minmax(0, 1fr);
-  }
-
-  .founder-content {
-    padding: 26px 22px 22px;
-  }
-
   .values-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -530,15 +538,6 @@
   .future-card-image {
     aspect-ratio: 16 / 9;
   }
-
-  .founder-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .founder-card {
-    grid-template-columns: minmax(220px, 0.32fr) minmax(0, 1fr);
-    min-height: 340px;
-  }
 }
 
 @media (max-width: 1024px) {
@@ -551,7 +550,7 @@
     background:
       linear-gradient(90deg, #000 0 18%, rgba(0, 0, 0, 0.12) 58%, rgba(0, 0, 0, 0.58) 100%),
       linear-gradient(180deg, rgba(0, 0, 0, 0.52) 0 8%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.95) 86%, #000 100%),
-      url("../assets/CommercialSpace2.jpeg") 58% center / cover no-repeat;
+      url("../assets/CommercialSpace2.webp") 58% center / cover no-repeat;
     min-height: auto;
     padding: 140px 32px 52px;
   }
@@ -587,7 +586,7 @@
   .vision-statement-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
       #000;
   }
 
@@ -604,6 +603,10 @@
   .values-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .founder-grid {
+    gap: 20px;
+  }
 }
 
 @media (max-width: 860px) {
@@ -611,21 +614,21 @@
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.52) 100%),
       linear-gradient(180deg, rgba(0, 0, 0, 0.46) 0 10%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.95) 86%, #000 100%),
-      url("../assets/CommercialSpace2.jpeg") 58% center / cover no-repeat;
+      url("../assets/CommercialSpace2.webp") 58% center / cover no-repeat;
     padding: 130px 28px 46px;
   }
 
   .vision-statement-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
       #000;
   }
 
   .mission-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0 26%, rgba(0, 0, 0, 0.04) 55%, rgba(0, 0, 0, 0.52) 100%),
-      url("../assets/LunarInfra3.png") center bottom / cover no-repeat,
+      url("../assets/LunarInfra3.webp") center bottom / cover no-repeat,
       #000;
   }
 
@@ -634,6 +637,12 @@
     min-height: 700px;
     padding-bottom: 60px;
   }
+
+  .founder-grid {
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
 }
 
 @media (max-width: 760px) {
@@ -655,7 +664,7 @@
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.66) 0 12%, rgba(0, 0, 0, 0.08) 58%, rgba(0, 0, 0, 0.42) 100%),
       linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0 8%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.95) 86%, #000 100%),
-      url("../assets/CommercialSpace2.jpeg") 58% center / cover no-repeat;
+      url("../assets/CommercialSpace2.webp") 58% center / cover no-repeat;
     padding: 128px 22px 42px;
     width: 100%;
   }
@@ -704,7 +713,7 @@
   .vision-statement-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
       #000;
     min-height: 600px;
     padding-bottom: 60px;
@@ -734,7 +743,6 @@
   .vision-point p,
   .mission-step p,
   .future-card-body p,
-  .founder-content p,
   .value-item p {
     overflow-wrap: anywhere;
   }
@@ -747,14 +755,11 @@
     object-position: center 50%;
   }
 
-  .founder-card {
-    grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr);
-    min-height: 300px;
+  .founder-grid {
+    gap: 14px;
+    grid-template-columns: 1fr;
   }
 
-  .founder-content {
-    padding: 22px 18px;
-  }
 }
 
 @media (max-width: 640px) {
@@ -772,7 +777,7 @@
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0 10%, rgba(0, 0, 0, 0.06) 58%, rgba(0, 0, 0, 0.34) 100%),
       linear-gradient(180deg, rgba(0, 0, 0, 0.38) 0 8%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.95) 86%, #000 100%),
-      url("../assets/CommercialSpace2.jpeg") 60% center / cover no-repeat;
+      url("../assets/CommercialSpace2.webp") 60% center / cover no-repeat;
     padding-top: 118px;
   }
 
@@ -851,7 +856,6 @@
   .vision-point p,
   .mission-step p,
   .future-card-body p,
-  .founder-content p,
   .value-item p {
     font-size: 12px;
     line-height: 1.45;
@@ -868,7 +872,7 @@
   .vision-statement-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
       #000;
     min-height: 580px;
     padding-bottom: 60px;
@@ -877,7 +881,7 @@
   .mission-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0 28%, rgba(0, 0, 0, 0.04) 55%, rgba(0, 0, 0, 0.52) 100%),
-      url("../assets/LunarInfra3.png") center bottom / cover no-repeat,
+      url("../assets/LunarInfra3.webp") center bottom / cover no-repeat,
       #000;
     min-height: 580px;
     padding-bottom: 60px;
@@ -905,18 +909,12 @@
     object-position: center 50%;
   }
 
-  .founder-image {
-    background-position: center top;
-    background-size: cover;
-    min-height: 300px;
-    width: 100%;
-  }
-
   .vision-hero .solid-button,
   .vision-hero .outline-button {
     min-width: 0;
     width: 100%;
   }
+
 }
 
 @media (max-width: 520px) {
@@ -924,7 +922,7 @@
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.52) 0 8%, rgba(0, 0, 0, 0.04) 60%, rgba(0, 0, 0, 0.28) 100%),
       linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0 8%, rgba(0, 0, 0, 0) 44%, rgba(0, 0, 0, 0.95) 86%, #000 100%),
-      url("../assets/CommercialSpace2.jpeg") 62% center / cover no-repeat;
+      url("../assets/CommercialSpace2.webp") 62% center / cover no-repeat;
   }
 
   .vision-hero-copy h1 {
@@ -939,7 +937,7 @@
   .vision-statement-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
       #000;
     min-height: 560px;
     padding-bottom: 60px;
@@ -948,18 +946,6 @@
   .mission-panel {
     min-height: 560px;
     padding-bottom: 60px;
-  }
-
-  .founder-card {
-    grid-template-columns: 1fr;
-  }
-
-  .founder-image {
-    min-height: 320px;
-  }
-
-  .founder-content {
-    padding: 24px;
   }
 
   .future-card-image {
@@ -990,7 +976,7 @@
   .vision-statement-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
       #000;
     min-height: 540px;
     padding-bottom: 60px;
@@ -1003,10 +989,6 @@
 
   .future-card-body {
     padding: 20px 18px 22px;
-  }
-
-  .founder-image {
-    min-height: 280px;
   }
 
   .values-grid {
@@ -1039,7 +1021,7 @@
   .vision-statement-panel {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.jpeg") left 60% / cover no-repeat,
+      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
       #000;
     min-height: 520px;
     padding-bottom: 60px;
@@ -1065,9 +1047,5 @@
   .value-item > span {
     height: 32px;
     width: 32px;
-  }
-
-  .founder-image {
-    min-height: 250px;
   }
 }

@@ -21,16 +21,16 @@ import { Link } from "react-router-dom";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/platforms.css";
-import heroBg from "../assets/OrbitalInfrastructure.png";
-import orbitalImg from "../assets/OrbitalInfra3.png";
+import heroBg from "../assets/OrbitalInfrastructure.webp";
+import orbitalImg from "../assets/OrbitalInfra3.webp";
 import orbitalMobileImg from "../assets/platform-orbital-new.png";
-import lunarImg from "../assets/LunarInfra1.png";
+import lunarImg from "../assets/LunarInfra1.webp";
 import lunarMobileImg from "../assets/platform-lunar-new.png";
-import deepImg from "../assets/DeepSpace2.png";
+import deepImg from "../assets/DeepSpace2.webp";
 import deepMobileImg from "../assets/platform-deep-space-new.png";
-import ecosystemImg from "../assets//SpaceEcosystems.png";
+import ecosystemImg from "../assets//SpaceEcosystems.webp";
 import ecosystemMobileImg from "../assets/platform-ecosystem-new.png";
-import ctaBg from "../assets/journey-bg.png";
+import ctaBg from "../assets/journey-bg.webp";
 
 const platformSections = [
   {

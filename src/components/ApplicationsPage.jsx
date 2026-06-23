@@ -19,11 +19,11 @@ import FinalCta from "./FinalCta.jsx";
 import Footer from "./Footer.jsx";
 import "../styles/applications.css";
 
-import heroBg from "../assets/ApplicationsHeroBg.jpeg";
-import commercialBg from "../assets/CommercialSpace1.jpeg";
-import securityBg from "../assets/NationalSecuritySpace.jpeg";
-import defenseBg from "../assets/Space_X_Air_Water_Ground.jpeg";
-import explorationBg from "../assets/DeepSpaceExploration.jpeg";
+import heroBg from "../assets/ApplicationsHeroBg.webp";
+import commercialBg from "../assets/CommercialSpace1.webp";
+import securityBg from "../assets/NationalSecuritySpace.webp";
+import defenseBg from "../assets/Space_X_Air_Water_Ground.webp";
+import explorationBg from "../assets/DeepSpaceExploration.webp";
 
 const domains = [
   {
