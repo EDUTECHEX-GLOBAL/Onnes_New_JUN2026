@@ -282,13 +282,26 @@ h2 {
 
 .world-card h3,
 .platform-card h3,
-.milestone h3,
-.reason h3 {
+.milestone h3 {
   color: #fff;
   font-size: clamp(20px, 1.45vw, 30px);
   line-height: 1.14;
   margin-bottom: 24px;
   text-transform: uppercase;
+}
+
+/* ============================================================
+   WHY — reason h3 kept separate so white-space: nowrap applies
+   ============================================================ */
+.reason h3 {
+  color: #fff;
+  font-size: clamp(15px, 1.05vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.14;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .world-card p {
@@ -575,6 +588,11 @@ h2 {
   .reason:nth-child(4) {
     border-top: 1px solid rgba(255, 255, 255, 0.22);
     padding-top: 32px;
+  }
+
+  /* Allow wrapping at 1100px since columns are narrower */
+  .reason h3 {
+    white-space: normal;
   }
 }
 
@@ -873,6 +891,7 @@ h2 {
   .reason h3 {
     font-size: 16px !important;
     margin-bottom: 10px;
+    white-space: normal;
   }
 
   .reason p {
