@@ -7,12 +7,7 @@ import Footer from "./Footer.jsx";
 import "../styles/media.css";
 import heroBg from "../assets/MediaPageMain.webp";
 import featuredNews from "../assets/AerospaceWorkshop.webp";
-import featuredVideo from "../assets/media-featured-video.png";
-import insight1 from "../assets/media-insight-1.png";
-import insight2 from "../assets/media-insight-2.png";
-import insight3 from "../assets/media-insight-3.png";
-import insight4 from "../assets/media-insight-4.png";
-import newsletterBg from "../assets/media-newsletter-bg.png";
+import newsletterBg from "../assets/journey-bg.webp"; // ← swap filename if different
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -59,12 +54,13 @@ const featuredArticle = {
 //   ["02:31", "Autonomous Space Ecosystems: The Next Operational Paradigm", "Self-operating infrastructure for a resilient and adaptive space economy.", videoThumb3],
 // ];
 
-const insights = [
-  ["May 12, 2025", "The New Space Economy Requires a New Infrastructure Layer", "Why infrastructure is the next trillion-dollar opportunity in space.", insight1],
-  ["May 01, 2025", "Modular by Design: Building Systems for an Uncertain Future", "How modular architectures enable flexibility, resilience, and rapid adaptation.", insight2],
-  ["Apr 21, 2025", "Sustaining Life Beyond Earth: The Role of Intelligent Systems", "Intelligent, autonomous systems are the foundation of sustainable exploration.", insight3],
-  ["Apr 07, 2025", "Beyond Orbit: Preparing for Humanity's Next Great Leap", "Deep space missions demand a new era of engineering and endurance.", insight4],
-];
+// insights array commented out — insights section is not yet active
+// const insights = [
+//   ["May 12, 2025", "The New Space Economy Requires a New Infrastructure Layer", "Why infrastructure is the next trillion-dollar opportunity in space.", insight1],
+//   ["May 01, 2025", "Modular by Design: Building Systems for an Uncertain Future", "How modular architectures enable flexibility, resilience, and rapid adaptation.", insight2],
+//   ["Apr 21, 2025", "Sustaining Life Beyond Earth: The Role of Intelligent Systems", "Intelligent, autonomous systems are the foundation of sustainable exploration.", insight3],
+//   ["Apr 07, 2025", "Beyond Orbit: Preparing for Humanity's Next Great Leap", "Deep space missions demand a new era of engineering and endurance.", insight4],
+// ];
 
 function TextLink({ children, href }) {
   return (

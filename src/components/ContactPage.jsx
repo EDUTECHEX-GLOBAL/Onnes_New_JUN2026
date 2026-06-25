@@ -28,7 +28,7 @@ import missionEarth from "../assets/contact/generated-earth-sunrise.png";
 import globalMap from "../assets/generated-global-map.webp";
 import careersLab from "../assets/contactcareers.webp";
 import investorEarth from "../assets/contact/generated-earth-sunrise.png";
-import futureEarth from "../assets/hero-bg.png";
+// import futureEarth from "../assets/hero-bg.png";
 
 const capabilityItems = [
   ["Global Partnerships", <Globe2 />],

@@ -10,12 +10,14 @@ import Journey from "./components/Journey.jsx";
 import WhyOnnes from "./components/WhyOnnes.jsx";
 import FinalCta from "./components/FinalCta.jsx";
 import Footer from "./components/Footer.jsx";
-import VisionPage from "./components/VisionPage.jsx";
-import PlatformsPage from "./components/PlatformsPage.jsx";
-import ApplicationsPage from "./components/ApplicationsPage.jsx";
-import TechnologyPage from "./components/TechnologyPage.jsx";
-import MediaPage from "./components/MediaPage.jsx";
-import ContactPage from "./components/ContactPage.jsx";
+
+// Lazy-load all page routes
+const VisionPage = lazy(() => import("./components/VisionPage.jsx"));
+const PlatformsPage = lazy(() => import("./components/PlatformsPage.jsx"));
+const ApplicationsPage = lazy(() => import("./components/ApplicationsPage.jsx"));
+const TechnologyPage = lazy(() => import("./components/TechnologyPage.jsx"));
+const MediaPage = lazy(() => import("./components/MediaPage.jsx"));
+const ContactPage = lazy(() => import("./components/ContactPage.jsx"));
 
 // Lazy admin imports
 const AdminLogin = lazy(() => import("./AdminDashboard/pages/AdminLogin"));

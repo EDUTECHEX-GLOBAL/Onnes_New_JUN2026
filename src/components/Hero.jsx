@@ -10,6 +10,7 @@ export default function Hero() {
         muted
         loop
         playsInline
+        preload="none"
       />
 
       <div className="hero-video-mask" aria-hidden="true" />
