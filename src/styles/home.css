@@ -243,6 +243,7 @@ h2 {
   height: 550px;
   min-height: 0;
   padding: 0 34px 52px;
+  position: relative;   /* needed for absolute pin positioning */
   text-align: center;
 }
 
@@ -270,14 +271,24 @@ h2 {
   background-position: 100% center;
 }
 
+/* ── PIN ──────────────────────────────────────────────────────
+   Absolutely positioned so it always sits at the same vertical
+   point (42% from top) regardless of card width or text wrapping.
+   margin-bottom was the root cause of misalignment on wider screens
+   because it spaced the pin relative to the text below it.
+   ──────────────────────────────────────────────────────────── */
 .pin {
   background: var(--blue);
   border: 7px solid #071423;
   border-radius: 50%;
   box-shadow: 0 0 0 2px #fff, 0 0 26px rgba(0, 140, 255, 0.95);
   height: 26px;
-  margin-bottom: 42px;
   width: 26px;
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-bottom: 0;
 }
 
 .world-card h3,
@@ -693,7 +704,12 @@ h2 {
     padding: 0 14px 24px;
   }
 
+  /* Pin override for mobile — revert to flow so it sits above text */
   .pin {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     height: 18px;
     width: 18px;
     margin-bottom: 20px;
