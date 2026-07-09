@@ -26,7 +26,7 @@ import partnersImage from "../assets/IndustryPartners.webp";
 import investorsImage from "../assets/Investors.webp";
 import missionEarth from "../assets/contact/generated-earth-sunrise.png";
 import globalMap from "../assets/generated-global-map.webp";
-import careersLab from "../assets/contactcareers.webp";
+import careersLab from "../assets/contactcareers1.webp";
 import investorEarth from "../assets/contact/generated-earth-sunrise.png";
 // import futureEarth from "../assets/hero-bg.png";
 
