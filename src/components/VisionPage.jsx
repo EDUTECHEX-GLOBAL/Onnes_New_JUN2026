@@ -22,7 +22,7 @@ import futureDeep from "../assets/DeepSpace3.webp";
 import futureHumanity from "../assets/NationalSecuritySpace.webp";
 import ramImage from "../assets/vision-page/founder-ram.png";
 import vikramImage from "../assets/vision-page/founder-vikram.png";
-import rajeshImage from "../assets/vision-page/founder-rajesh.png";
+import rajeshImage from "../assets/founder-rajesh.jpeg";
 
 const heroPillars = [
   ["Persistent Operations", <Target />],
