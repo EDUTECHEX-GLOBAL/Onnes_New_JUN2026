@@ -123,9 +123,9 @@
   align-items: center;
   border-right: 1px solid var(--muted-line);
   display: flex;
-  gap: 22px;
+  gap: 18px;
   min-height: 96px;
-  padding: 22px 34px;
+  padding: 22px 24px;
 }
 
 .contact-capabilities article:first-child {
@@ -672,6 +672,10 @@
   .contact-capabilities article:first-child {
     border-left: 1px solid var(--muted-line);
   }
+  .contact-capabilities strong {
+  font-size: 12px;
+  white-space: nowrap;
+}
 
   .contact-work-section > h2 {
     font-size: 26px;
