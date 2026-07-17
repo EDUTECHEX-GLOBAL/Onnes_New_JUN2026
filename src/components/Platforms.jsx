@@ -104,9 +104,7 @@ export default function Platforms() {
         </div>
         <p>
           Modular. Intelligent. Autonomous.
-          <br />
           Built for the harshest environments.
-          <br />
           Designed for the longest missions.
         </p>
       </div>

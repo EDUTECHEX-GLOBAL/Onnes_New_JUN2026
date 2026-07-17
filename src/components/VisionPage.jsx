@@ -20,8 +20,8 @@ import futureEarth from "../assets/Orbital_Infra.webp";
 import futureLunar from "../assets/LunarInfra2.webp";
 import futureDeep from "../assets/DeepSpace3.webp";
 import futureHumanity from "../assets/NationalSecuritySpace.webp";
-import ramImage from "../assets/vision-page/founder-ram.png";
-import vikramImage from "../assets/vision-page/founder-vikram.png";
+import ramImage from "../assets/founder-ram.png";
+import vikramImage from "../assets/founder-vikram.png";
 import rajeshImage from "../assets/founder-rajesh.jpeg";
 
 const heroPillars = [

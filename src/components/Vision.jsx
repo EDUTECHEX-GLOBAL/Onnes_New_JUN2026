@@ -24,8 +24,11 @@ export default function Vision() {
         {worlds.map(([title, body], index) => (
           <article className={`world-card world-${index + 1}`} key={title}>
             <div className="pin" aria-hidden="true"></div>
-            <h3>{title}</h3>
-            <p>{body}</p>
+
+            <div className="world-content">
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </div>
           </article>
         ))}
       </div>

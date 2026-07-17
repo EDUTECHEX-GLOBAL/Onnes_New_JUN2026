@@ -201,7 +201,7 @@ h2 {
     #000;
   display: grid;
   gap: 36px;
-  grid-template-columns: minmax(470px, 500px) minmax(0, 1fr);
+  grid-template-columns: 420px 1fr;
   min-height: 750px;
   padding: 0 58px;
 }
@@ -222,10 +222,11 @@ h2 {
 }
 
 .world-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
-  z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    justify-content: center;
+    gap: 16px;
+    z-index: 2;
 }
 
 .world-card {
@@ -237,14 +238,28 @@ h2 {
   background-size: cover;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 8px;
+
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+
   height: 550px;
   min-height: 0;
+
   padding: 0 34px 52px;
-  position: relative;   /* needed for absolute pin positioning */
+
+  position: relative;
   text-align: center;
+
+  overflow: hidden;
+}
+.world-content {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
 }
 
 .world-1 {
@@ -285,7 +300,7 @@ h2 {
   height: 26px;
   width: 26px;
   position: absolute;
-  top: 42%;
+  top:230px;
   left: 50%;
   transform: translate(-50%, -50%);
   margin-bottom: 0;
@@ -299,6 +314,33 @@ h2 {
   line-height: 1.14;
   margin-bottom: 24px;
   text-transform: uppercase;
+}
+
+/* ── TITLE / DESCRIPTION HEIGHT RESERVATION ─────────────────────
+   Fixes cross-card misalignment (seen on Mac / Retina screens where
+   text wraps at different widths). By reserving a fixed height for
+   the title and description based on font-relative (em) units, every
+   card's text block occupies identical vertical space regardless of
+   whether the title/body wraps to 1 or 2 lines. This keeps rows
+   aligned at every screen size since em scales with the responsive
+   clamp() font sizes already in place.
+   ──────────────────────────────────────────────────────────── */
+.world-card h3 {
+    height: 58px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    width: 100%;
+    margin-bottom: 18px;
+
+    flex-shrink: 0;
+}
+
+.platform-card h3{
+    min-height:2.3em;
+    flex-shrink:0;
 }
 
 /* ============================================================
@@ -317,8 +359,13 @@ h2 {
 
 .world-card p {
   color: #f0f0f0;
-  font-size: clamp(18px, 1.1vw, 24px);
-  line-height: 1.45;
+  font-size: 16px;
+  line-height: 1.4;
+
+  white-space: nowrap;
+  text-align: center;
+
+  margin: 0;
 }
 
 .vision-cue {
@@ -332,8 +379,7 @@ h2 {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.44), #000 82%),
     #000;
-  min-height: 850px;
-  padding: 100px 60px 80px;
+  padding: 100px 60px 40px;
 }
 
 .platforms-head {
@@ -350,7 +396,8 @@ h2 {
 
 .platforms-head > p {
   margin: 28px 0 0;
-  max-width: 470px;
+  max-width: none;
+  white-space: nowrap;
 }
 
 .platforms-head > div {
@@ -370,6 +417,12 @@ h2 {
   min-height: 475px;
   overflow: hidden;
   padding: 0 38px 36px;
+  /* Flex column so the Explore link can be pinned to the bottom
+     with margin-top: auto, regardless of how much the title/body
+     above it wraps. This is what keeps "Explore" aligned across
+     all four cards in a row on every screen size. */
+  display: flex;
+  flex-direction: column;
 }
 
 .platform-image {
@@ -377,6 +430,7 @@ h2 {
   height: 250px;
   margin: 0 -38px 28px;
   width: calc(100% + 76px);
+  flex-shrink: 0;
 }
 
 .platform-1 .platform-image { background-image: url("../assets/OrbitalINfra.webp"); }
@@ -396,10 +450,15 @@ h2 {
   justify-content: center;
   margin-bottom: 28px;
   width: 62px;
+  flex-shrink: 0;
 }
 
 .platform-card p {
   margin-bottom: 28px;
+}
+
+.platform-card .text-link {
+  margin-top: auto;
 }
 
 /* ============================================================
@@ -718,11 +777,13 @@ h2 {
   .world-card h3 {
     font-size: 15px !important;
     margin-bottom: 8px;
+    min-height: 0;
   }
 
   .world-card p {
     font-size: 13px !important;
     line-height: 1.4;
+    min-height: 0;
   }
 
   .text-link {
@@ -771,6 +832,7 @@ h2 {
   .platform-card h3 {
     font-size: 18px !important;
     margin-bottom: 12px;
+    min-height: 0;
   }
 
   .platform-card p {

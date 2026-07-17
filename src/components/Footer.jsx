@@ -33,10 +33,8 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  ["X", <FaXTwitter />, "#x"],
+  ["X", <FaXTwitter />, "https://x.com/OnnesAerospace"],
   ["LinkedIn", <FaLinkedinIn />, "https://www.linkedin.com/company/onnesaerospace/"],
-  ["YouTube", <FaYoutube />, "#youtube"],
-  ["Instagram", <FaInstagram />, "#instagram"],
 ];
 
 export default function Footer() {
