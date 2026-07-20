@@ -187,7 +187,7 @@ export default function ContactPage() {
       setSelectedFile(null);
       setStatus(CONFIRMATION_MESSAGE);
     } catch (error) {
-      setStatus("Message ready. Please email hello@onnes.in if transmission is unavailable.");
+      setStatus("Message ready. Please email info@onnes.in if transmission is unavailable.");
     } finally {
       setSubmitting(false);
     }
