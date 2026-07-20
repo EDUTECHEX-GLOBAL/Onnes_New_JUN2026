@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
 import { DatePicker, Select, Button, Tag, Modal, Drawer } from 'antd';
 import {
   DoubleLeftOutlined, LeftOutlined, RightOutlined, DoubleRightOutlined,
-  ExportOutlined, FilterOutlined, ReloadOutlined, EyeOutlined,
+  ExportOutlined, FilterOutlined, ReloadOutlined, EyeOutlined, PaperClipOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/reset.css';
 import dayjs from 'dayjs';
@@ -19,14 +19,25 @@ dayjs.extend(isSameOrBefore);
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
+// Current "Area of Interest" options (per the updated contact form).
 const areaOptions = [
   "All",
-  "Global Partnerships",
-  "Space & Defense Applications",
-  "Advanced Infrastructure Platforms",
-  "Deep Space Mission Enablement",
+  "Space Infrastructure",
+  "National Security & Defence",
+  "Advanced Aerospace Systems",
+  "Launch Vehicles",
+  "Satellites",
+  "Orbital Logistics",
+  "Lunar Infrastructure & ISRU",
+  "Hydrogen & Clean Energy",
+  "Strategic Partnership",
+  "Investment",
+  "Media",
+  "Careers",
+  "Other",
 ];
 
+// Legacy "Interested In" tag colors — kept so older submissions still render correctly.
 const interestColors = {
   "Commercial Space":     "#0ea5e9",
   "National Security":    "#ef4444",
@@ -36,11 +47,37 @@ const interestColors = {
   "Media & Speaking":     "#ec4899",
 };
 
+// Colors for the new "Project Stage" field.
+const projectStageColors = {
+  "Concept / Early Research": "#64748b",
+  "Technology Evaluation":    "#0ea5e9",
+  "Prototype Development":    "#8b5cf6",
+  "Qualification & Testing":  "#f97316",
+  "Production Program":       "#22c55e",
+  "Partnership Discussion":   "#ec4899",
+  "General Inquiry":          "#94a3b8",
+};
+
 const areaColors = {
+  // legacy (pre-update) area-of-interest values
   "Global Partnerships":               "#0ea5e9",
   "Space & Defense Applications":      "#ef4444",
   "Advanced Infrastructure Platforms": "#8b5cf6",
   "Deep Space Mission Enablement":     "#f59e0b",
+  // current area-of-interest values
+  "Space Infrastructure":              "#0ea5e9",
+  "National Security & Defence":       "#ef4444",
+  "Advanced Aerospace Systems":        "#8b5cf6",
+  "Launch Vehicles":                   "#f97316",
+  "Satellites":                        "#14b8a6",
+  "Orbital Logistics":                 "#6366f1",
+  "Lunar Infrastructure & ISRU":       "#eab308",
+  "Hydrogen & Clean Energy":           "#22c55e",
+  "Strategic Partnership":             "#ec4899",
+  "Investment":                        "#f59e0b",
+  "Media":                             "#d946ef",
+  "Careers":                           "#10b981",
+  "Other":                             "#64748b",
 };
 
 // inject responsive CSS once
@@ -69,6 +106,21 @@ if (!document.head.querySelector("#cl-styles")) {
   document.head.appendChild(styleTag);
 }
 
+// A submission's "Project Stage" tag — falls back to the legacy "interest" field
+// for records saved before this field existed.
+function getStageValue(c) {
+  return c.projectStage || c.interest || '';
+}
+
+function getStageColor(c) {
+  return projectStageColors[c.projectStage] || interestColors[c.interest] || "#64748b";
+}
+
+function fileUrlFor(c) {
+  if (!c.fileUrl) return null;
+  return `${API}${c.fileUrl}`;
+}
+
 export default function ContactList() {
   const [contacts, setContacts]       = useState([]);
   const [filtered, setFiltered]       = useState([]);
@@ -90,8 +142,9 @@ export default function ContactList() {
     const rows = filtered.map((c, i) => ({
       SNo: i + 1, Name: c.fullName, Email: c.email,
       Organization: c.organization || '', Country: c.country || '',
-      AreaOfInterest: c.product || '', InterestedIn: c.interest || '',
-      Mobile: c.mobile || '', Message: c.message,
+      AreaOfInterest: c.product || '', ProjectStage: getStageValue(c),
+      Phone: c.mobile || '', Message: c.message,
+      Attachment: c.fileName || '',
       CreatedOn: new Date(c.createdAt).toLocaleString(),
     }));
     const ws = XLSX.utils.json_to_sheet(rows);
@@ -214,16 +267,16 @@ export default function ContactList() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
             <thead>
               <tr style={{ backgroundColor: "#00B5F9" }}>
-                {["#", "Full Name", "Email", "Organization", "Country", "Area of Interest", "Interested In", "Mobile", "Message", "Submitted On", ""].map(h => (
+                {["#", "Full Name", "Email", "Organization", "Country", "Area of Interest", "Project Stage", "Phone", "Message", "Attachment", "Submitted On", ""].map(h => (
                   <th key={h} style={{ padding: "13px 16px", color: "#fff", fontWeight: 600, textAlign: "left", whiteSpace: "nowrap", fontSize: 12, letterSpacing: "0.04em", textTransform: "uppercase" }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={11} style={{ textAlign: "center", padding: 48, color: "#94a3b8" }}>Loading...</td></tr>
+                <tr><td colSpan={12} style={{ textAlign: "center", padding: 48, color: "#94a3b8" }}>Loading...</td></tr>
               ) : pageSlice.length === 0 ? (
-                <tr><td colSpan={11} style={{ textAlign: "center", padding: 48, color: "#94a3b8" }}>No contacts found.</td></tr>
+                <tr><td colSpan={12} style={{ textAlign: "center", padding: 48, color: "#94a3b8" }}>No contacts found.</td></tr>
               ) : pageSlice.map((c, i) => (
                 <tr key={c._id} style={{ backgroundColor: i % 2 === 0 ? "#f8fafc" : "#fff", borderBottom: "1px solid #e2e8f0" }}>
                   <td style={tdStyle}>{startIdx + i + 1}</td>
@@ -235,11 +288,18 @@ export default function ContactList() {
                     {c.product ? <Tag color={areaColors[c.product] || "#64748b"} style={{ borderRadius: 6, fontWeight: 500 }}>{c.product}</Tag> : <span style={{ color: "#cbd5e1" }}>—</span>}
                   </td>
                   <td style={tdStyle}>
-                    {c.interest ? <Tag color={interestColors[c.interest] || "#64748b"} style={{ borderRadius: 6, fontWeight: 500 }}>{c.interest}</Tag> : <span style={{ color: "#cbd5e1" }}>—</span>}
+                    {getStageValue(c) ? <Tag color={getStageColor(c)} style={{ borderRadius: 6, fontWeight: 500 }}>{getStageValue(c)}</Tag> : <span style={{ color: "#cbd5e1" }}>—</span>}
                   </td>
                   <td style={{ ...tdStyle, whiteSpace: "nowrap" }}>{c.mobile || <span style={{ color: "#cbd5e1" }}>—</span>}</td>
                   <td style={{ ...tdStyle, maxWidth: 200 }}>
                     <div style={{ overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", lineHeight: 1.5 }}>{c.message}</div>
+                  </td>
+                  <td style={tdStyle}>
+                    {fileUrlFor(c) ? (
+                      <a href={fileUrlFor(c)} target="_blank" rel="noreferrer" style={{ color: "#00B5F9", display: "inline-flex", alignItems: "center", gap: 4 }}>
+                        <PaperClipOutlined /> View
+                      </a>
+                    ) : <span style={{ color: "#cbd5e1" }}>—</span>}
                   </td>
                   <td style={{ ...tdStyle, whiteSpace: "nowrap", fontSize: 12 }}>
                     {dayjs(c.createdAt).format("DD MMM YYYY")}<br />
@@ -276,8 +336,8 @@ export default function ContactList() {
             </div>
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
-              {c.product  && <Tag color={areaColors[c.product]      || "#64748b"} style={{ borderRadius: 6, fontSize: 11 }}>{c.product}</Tag>}
-              {c.interest && <Tag color={interestColors[c.interest] || "#64748b"} style={{ borderRadius: 6, fontSize: 11 }}>{c.interest}</Tag>}
+              {c.product && <Tag color={areaColors[c.product] || "#64748b"} style={{ borderRadius: 6, fontSize: 11 }}>{c.product}</Tag>}
+              {getStageValue(c) && <Tag color={getStageColor(c)} style={{ borderRadius: 6, fontSize: 11 }}>{getStageValue(c)}</Tag>}
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 16px", fontSize: 12, marginBottom: 10 }}>
@@ -288,12 +348,20 @@ export default function ContactList() {
                 <div><span style={mobileLabel}>Country</span><span style={mobileVal}>{c.country}</span></div>
               )}
               {c.mobile && (
-                <div><span style={mobileLabel}>Mobile</span><span style={mobileVal}>{c.mobile}</span></div>
+                <div><span style={mobileLabel}>Phone</span><span style={mobileVal}>{c.mobile}</span></div>
               )}
               <div>
                 <span style={mobileLabel}>Submitted</span>
                 <span style={mobileVal}>{dayjs(c.createdAt).format("DD MMM YYYY")}</span>
               </div>
+              {fileUrlFor(c) && (
+                <div>
+                  <span style={mobileLabel}>Attachment</span>
+                  <a href={fileUrlFor(c)} target="_blank" rel="noreferrer" style={{ ...mobileVal, color: "#00B5F9" }}>
+                    <PaperClipOutlined /> View
+                  </a>
+                </div>
+              )}
             </div>
 
             <div style={{ borderTop: "1px solid #f1f5f9", paddingTop: 8 }}>
@@ -338,9 +406,9 @@ export default function ContactList() {
               ["Email",            modalData.email],
               ["Organization",     modalData.organization || "—"],
               ["Country",          modalData.country      || "—"],
-              ["Mobile",           modalData.mobile       || "—"],
+              ["Phone",            modalData.mobile       || "—"],
               ["Area of Interest", modalData.product      || "—"],
-              ["Interested In",    modalData.interest     || "—"],
+              ["Project Stage",    getStageValue(modalData) || "—"],
               ["Submitted On",     dayjs(modalData.createdAt).format("DD MMM YYYY, h:mm A")],
             ].map(([label, value]) => (
               <div key={label} style={{ display: "flex", gap: 12, fontSize: 13, flexWrap: "wrap" }}>
@@ -348,6 +416,14 @@ export default function ContactList() {
                 <span style={{ color: "#0f172a", flex: 1, wordBreak: "break-word" }}>{value}</span>
               </div>
             ))}
+            {fileUrlFor(modalData) && (
+              <div style={{ display: "flex", gap: 12, fontSize: 13, flexWrap: "wrap" }}>
+                <span style={{ minWidth: 130, fontWeight: 600, color: "#475569" }}>Attachment</span>
+                <a href={fileUrlFor(modalData)} target="_blank" rel="noreferrer" style={{ color: "#00B5F9", display: "inline-flex", alignItems: "center", gap: 4 }}>
+                  <PaperClipOutlined /> {modalData.fileName || "View file"}
+                </a>
+              </div>
+            )}
             <div style={{ borderTop: "1px solid #e2e8f0", paddingTop: 12 }}>
               <p style={{ margin: "0 0 6px", fontWeight: 600, fontSize: 13, color: "#475569" }}>Message</p>
               <p style={{ margin: 0, fontSize: 13, color: "#0f172a", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{modalData.message}</p>

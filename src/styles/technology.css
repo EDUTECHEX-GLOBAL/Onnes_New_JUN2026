@@ -89,6 +89,7 @@
 
 /* ── Advantage band ──────────────────────────────────────────────── */
 .technology-advantage-band {
+  --advantage-pad: 20px;
   background: rgba(1, 5, 10, 0.9);
   margin: 0 auto;
   max-width: 1810px;
@@ -110,15 +111,24 @@
 .technology-advantage {
   align-items: center;
   border-right: 1px solid rgba(255, 255, 255, 0.16);
+  box-sizing: border-box;
   display: grid;
   gap: 20px;
-  grid-template-columns: 58px 1fr;
+  grid-template-columns: 58px minmax(0, 1fr);
   min-height: 92px;
-  padding: 0 20px;
+  padding: 0 var(--advantage-pad);
 }
 
 .technology-advantage:last-child {
   border-right: 0;
+}
+
+/* Text column must be allowed to shrink below its content width, otherwise
+   each item's icon/border sizing reacts to how long its own title text is
+   (nowrap + no min-width:0 forces the track to grow with content), which is
+   what was causing the text-to-divider gap to differ item to item. */
+.technology-advantage > div {
+  min-width: 0;
 }
 
 .technology-advantage > span,
@@ -141,11 +151,10 @@
 }
 
 .technology-advantage h3 {
-  font-size: clamp(11px, 1.05vw, 16px);
+  font-size: clamp(10px, 0.88vw, 15px);
   margin: 0 0 10px;
+  line-height: 1.2;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .technology-advantage p {
@@ -760,14 +769,14 @@
   }
 
   .technology-advantage-band {
+    --advantage-pad: 16px;
     border-left: 0;
     border-right: 0;
     padding: 26px 20px;
   }
 
   .technology-advantage {
-    grid-template-columns: 48px 1fr;
-    padding: 0;
+    grid-template-columns: 48px minmax(0, 1fr);
   }
 
   .technology-advantage h3 {

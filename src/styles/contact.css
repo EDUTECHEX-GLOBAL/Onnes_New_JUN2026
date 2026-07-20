@@ -269,6 +269,27 @@
   max-width: 440px;
 }
 
+/* ── Career Email Styles ── */
+.career-email {
+  color: #c8ced8;
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 12px 0 0;
+  max-width: 440px;
+}
+
+.career-email a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.career-email a:hover {
+  color: #66b8ff;
+  text-decoration: underline;
+}
+
 .mission-form {
   border-left: 1px solid var(--muted-line);
   display: grid;
@@ -315,9 +336,11 @@
   resize: vertical;
 }
 
+/* ── Make placeholder text MUCH lighter ── */
 .mission-form input::placeholder,
 .mission-form textarea::placeholder {
-  color: #aab1bd;
+  color: rgba(255, 255, 255, 0.35); /* Much lighter - 35% opacity white */
+  font-weight: 300; /* Lighter font weight for placeholder */
 }
 
 /* ── Focus state: subtle blue border, no jarring background shift ── */
@@ -372,6 +395,98 @@
   color: #aab1bd;
 }
 
+/* ── File upload field (Technical Brief / NDA / RFP) ── */
+.file-upload-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-upload-label {
+  color: #c8ced8;
+  font-size: 14px;
+}
+
+.file-input-wrap {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+  border-radius: 4px;
+  display: flex;
+  min-height: 54px;
+  padding: 8px 20px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.file-input-wrap:hover,
+.file-input-wrap:focus-within {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--blue);
+}
+
+.file-input-wrap input[type="file"] {
+  color: #c8ced8;
+  cursor: pointer;
+  font-family: var(--font-din);
+  font-size: 13px;
+  width: 100%;
+  padding: 10px 10px;
+  margin: 0;
+}
+
+.file-input-wrap input[type="file"]::file-selector-button {
+  background: var(--blue);
+  border: 0;
+  border-radius: 4px;
+  color: #04101c;
+  cursor: pointer;
+  font-family: var(--font-din);
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 16px;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+}
+
+.file-input-wrap input[type="file"]::file-selector-button:hover {
+  background: #66b8ff;
+}
+
+.file-hint {
+  color: #7f8794;
+  font-size: 12px;
+}
+
+.file-error {
+  color: #ff6b6b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Mission form footer note ── */
+.mission-footer-note {
+  border-top: 1px solid var(--muted-line);
+  margin-top: 6px;
+  padding-top: 18px;
+}
+
+.mission-footer-note p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 2px 0;
+}
+
+.mission-footer-note a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mission-footer-note a:hover {
+  text-decoration: underline;
+}
+
 .form-action-row {
   align-items: center;
   display: flex;
@@ -384,6 +499,11 @@
   cursor: pointer;
   justify-content: center;
   min-width: 260px;
+}
+
+.mission-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .form-action-row p {
@@ -618,8 +738,6 @@
       );
   }
 
-
-
   .contact-hero h1 {
     font-size: clamp(34px, 9vw, 48px);
   }
@@ -672,10 +790,11 @@
   .contact-capabilities article:first-child {
     border-left: 1px solid var(--muted-line);
   }
+  
   .contact-capabilities strong {
-  font-size: 12px;
-  white-space: nowrap;
-}
+    font-size: 12px;
+    white-space: nowrap;
+  }
 
   .contact-work-section > h2 {
     font-size: 26px;
@@ -695,14 +814,15 @@
     margin-right: 16px;
   }
 
-  .mission-intro,
-  .mission-form,
-  .global-copy,
-  .global-locations,
-  .career-copy,
-  .investor-band,
-  .future-band {
+  /* Fix: Reduce padding and gap in mission form for mobile */
+  .mission-intro {
     padding: 30px 22px;
+    min-height: auto; /* Remove fixed height on mobile */
+  }
+
+  .mission-form {
+    padding: 20px 16px; /* Reduced padding for mobile */
+    gap: 10px; /* Reduced gap between form fields */
   }
 
   .mission-intro h2,
@@ -713,9 +833,85 @@
     font-size: clamp(24px, 7vw, 34px);
   }
 
+  /* Fix: Reduce mission intro text spacing on mobile */
+  .mission-intro p:not(.contact-eyebrow) {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  /* Fix: Reduce margin between intro and form on mobile */
+  .mission-intro {
+    margin-bottom: 0;
+  }
+
+  .mission-form input,
+  .mission-form select,
+  .mission-form textarea {
+    font-size: 14px; /* Slightly smaller font on mobile */
+    min-height: 48px; /* Reduced height for mobile */
+    padding: 0 14px; /* Reduced padding for mobile */
+  }
+
+  /* ── Make placeholder text MUCH lighter on mobile too ── */
+  .mission-form input::placeholder,
+  .mission-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 300;
+  }
+
+  .mission-form textarea {
+    min-height: 80px;
+    padding-top: 14px;
+  }
+
+  /* Fix: Make file input more compact on mobile */
+  .file-input-wrap {
+    min-height: 48px;
+    padding: 6px 14px;
+  }
+
+  .file-input-wrap input[type="file"] {
+    font-size: 12px;
+    padding: 8px 8px;
+  }
+
+  .file-input-wrap input[type="file"]::file-selector-button {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-right: 10px;
+  }
+
   .mission-form button {
     min-width: 0;
     width: 100%;
+    font-size: 14px; /* Smaller button text on mobile */
+    padding: 12px 20px;
+  }
+
+  .form-action-row {
+    gap: 12px; /* Reduced gap on mobile */
+  }
+
+  .form-action-row p {
+    font-size: 13px;
+  }
+
+  /* Fix: Compact file upload field on mobile */
+  .file-upload-field {
+    gap: 4px;
+  }
+
+  .file-upload-label {
+    font-size: 13px;
+  }
+
+  .global-copy,
+  .global-locations,
+  .career-copy,
+  .investor-band,
+  .future-band {
+    padding: 30px 22px;
   }
 
   .global-map {
@@ -735,5 +931,69 @@
     height: 30px;
     width: 30px;
   }
+
+  /* ── Career email styles for mobile ── */
+  .career-email {
+    font-size: 14px;
+  }
+
+  /* Fix: Career actions on mobile */
+  .career-actions {
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .career-actions .solid-button,
+  .career-actions .outline-button {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
 }
 
+/* Extra small screens (below 400px) */
+@media (max-width: 400px) {
+  .mission-form {
+    padding: 16px 12px;
+    gap: 8px;
+  }
+
+  .mission-form input,
+  .mission-form select,
+  .mission-form textarea {
+    font-size: 13px;
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  /* ── Make placeholder text MUCH lighter on extra small screens ── */
+  .mission-form input::placeholder,
+  .mission-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 300;
+  }
+
+  .mission-form textarea {
+    min-height: 70px;
+    padding-top: 12px;
+  }
+
+  .mission-intro {
+    padding: 20px 16px;
+  }
+
+  .file-input-wrap {
+    min-height: 44px;
+    padding: 4px 12px;
+  }
+
+  .file-input-wrap input[type="file"] {
+    font-size: 11px;
+    padding: 6px 6px;
+  }
+
+  .file-input-wrap input[type="file"]::file-selector-button {
+    font-size: 11px;
+    padding: 5px 10px;
+    margin-right: 8px;
+  }
+}

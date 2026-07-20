@@ -207,7 +207,7 @@ export default function MediaPage() {
         </div>
       </section> */}
 
-      <section className="media-newsletter" style={{ backgroundImage: `url(${newsletterBg})` }}>
+      <section id="subscribe" className="media-newsletter" style={{ backgroundImage: `url(${newsletterBg})` }}>
         <div>
           <p className="media-eyebrow">Stay Connected</p>
           <h2>Get The Latest News And Insights</h2>

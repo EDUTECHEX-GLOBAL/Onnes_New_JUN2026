@@ -10,7 +10,7 @@
   gap: 40px;
   grid-template-columns: 1fr 330px;
   min-height: 360px;
-  padding: 58px 70px;
+  padding: 10px 70px 47px;
 }
 
 .final-cta h2 {
@@ -124,7 +124,7 @@
 @media (max-width: 1100px) {
   .final-cta {
     grid-template-columns: 1fr 280px;
-    padding: 52px 48px;
+    padding: 10px 48px 57px;
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.24) 48%, rgba(0, 0, 0, 0.08) 100%),
       url("../assets/journey-bg.webp") right center / 135% auto no-repeat;
@@ -149,7 +149,7 @@
   .final-cta {
     grid-template-columns: 1fr;
     min-height: auto;
-    padding: 48px 24px 52px;
+    padding: 48px 24px 56px;
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.46)),
       url("../assets/journey-bg.webp") 75% center / cover no-repeat;
@@ -221,7 +221,7 @@
    ============================================================ */
 @media (max-width: 480px) {
   .final-cta {
-    padding: 40px 18px 44px;
+    padding: 48px 18px 44px;
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.5)),
       url("../assets/journey-bg.webp") 72% center / cover no-repeat;
@@ -238,7 +238,7 @@
 
   .footer {
     grid-template-columns: 1fr 1fr;
-    padding: 36px 18px 28px;
+    padding: 56px 18px 28px;
     gap: 24px 16px;
   }
 

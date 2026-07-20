@@ -26,7 +26,7 @@ import systemsDashboard from "../assets/IntelligentSystems.webp";
 import engineeringOne from "../assets/AdvMaterials.webp";
 import engineeringTwo from "../assets/PrecisionEngineering.webp";
 import engineeringThree from "../assets/RigorousTesting.webp";
-import engineeringFour from "../assets/DigitalInnovationTech.webp";
+import engineeringFour from "../assets/DigitalInnovation2.png";
 import ctaBg from "../assets/journey-bg.webp";
 
 const advantages = [

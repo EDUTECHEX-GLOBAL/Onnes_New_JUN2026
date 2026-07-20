@@ -135,8 +135,8 @@ export default function ApplicationsPage() {
             Mission That Matters
           </h1>
           <p>
-            From commercial space to national security and space-enabled defense
-            systems, Onnes Aerospace provides the critical infrastructure that
+            From commercial space to national security and space-enabled dual usage systems
+            Onnes Aerospace provides the critical infrastructure that
             empowers the world&apos;s most ambitious missions.
           </p>
           <a className="outline-button" href="/contact#careers">
