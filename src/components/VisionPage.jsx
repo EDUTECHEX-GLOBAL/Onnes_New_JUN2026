@@ -21,7 +21,7 @@ import futureLunar from "../assets/LunarInfra2.webp";
 import futureDeep from "../assets/DeepSpace3.webp";
 import futureHumanity from "../assets/NationalSecuritySpace.webp";
 import ramImage from "../assets/founder-ram.png";
-import vikramImage from "../assets/founder-vikram.png";
+import vikramImage from "../assets/founder-vikram.jpeg";
 import rajeshImage from "../assets/founder-rajesh.jpeg";
 
 const heroPillars = [
