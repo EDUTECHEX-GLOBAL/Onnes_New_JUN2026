@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
 import { DatePicker, Select, Button, Tag, Modal, Drawer } from 'antd';
 import {
   DoubleLeftOutlined, LeftOutlined, RightOutlined, DoubleRightOutlined,
-  ExportOutlined, FilterOutlined, ReloadOutlined, EyeOutlined, PaperClipOutlined,
+  ExportOutlined, FilterOutlined, ReloadOutlined, EyeOutlined, DownloadOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/reset.css';
 import dayjs from 'dayjs';
@@ -106,6 +106,15 @@ if (!document.head.querySelector("#cl-styles")) {
   document.head.appendChild(styleTag);
 }
 
+// Helper function to get download URL from MongoDB
+function getDownloadUrl(c) {
+  if (!c || !c._id) return null;
+  if (c.fileData || c.fileName) {
+    return `${API}/api/admin-contact/file/${c._id}?download=true`;
+  }
+  return null;
+}
+
 // A submission's "Project Stage" tag — falls back to the legacy "interest" field
 // for records saved before this field existed.
 function getStageValue(c) {
@@ -114,11 +123,6 @@ function getStageValue(c) {
 
 function getStageColor(c) {
   return projectStageColors[c.projectStage] || interestColors[c.interest] || "#64748b";
-}
-
-function fileUrlFor(c) {
-  if (!c.fileUrl) return null;
-  return `${API}${c.fileUrl}`;
 }
 
 export default function ContactList() {
@@ -134,16 +138,28 @@ export default function ContactList() {
 
   useEffect(() => {
     axios.get(`${API}/api/admin-contact`)
-      .then(res => { setContacts(res.data); setFiltered(res.data); setLoading(false); })
-      .catch(err => { console.error("Contact API error:", err); setLoading(false); });
+      .then(res => { 
+        setContacts(res.data); 
+        setFiltered(res.data); 
+        setLoading(false); 
+      })
+      .catch(err => { 
+        console.error("Contact API error:", err); 
+        setLoading(false); 
+      });
   }, []);
 
   const exportData = () => {
     const rows = filtered.map((c, i) => ({
-      SNo: i + 1, Name: c.fullName, Email: c.email,
-      Organization: c.organization || '', Country: c.country || '',
-      AreaOfInterest: c.product || '', ProjectStage: getStageValue(c),
-      Phone: c.mobile || '', Message: c.message,
+      SNo: i + 1, 
+      Name: c.fullName, 
+      Email: c.email,
+      Organization: c.organization || '', 
+      Country: c.country || '',
+      AreaOfInterest: c.product || '', 
+      ProjectStage: getStageValue(c),
+      Phone: c.mobile || '', 
+      Message: c.message,
       Attachment: c.fileName || '',
       CreatedOn: new Date(c.createdAt).toLocaleString(),
     }));
@@ -164,12 +180,17 @@ export default function ContactList() {
     if (areaFilter !== 'All') tmp = tmp.filter(c =>
       c.product?.toLowerCase().trim() === areaFilter.toLowerCase().trim()
     );
-    setFiltered(tmp); setCurrentPage(1); setFilterOpen(false);
+    setFiltered(tmp); 
+    setCurrentPage(1); 
+    setFilterOpen(false);
   };
 
   const resetFilter = () => {
-    setDateRange([null, null]); setAreaFilter('All');
-    setFiltered(contacts); setCurrentPage(1); setFilterOpen(false);
+    setDateRange([null, null]); 
+    setAreaFilter('All');
+    setFiltered(contacts); 
+    setCurrentPage(1); 
+    setFilterOpen(false);
   };
 
   const total     = filtered.length;
@@ -295,9 +316,9 @@ export default function ContactList() {
                     <div style={{ overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", lineHeight: 1.5 }}>{c.message}</div>
                   </td>
                   <td style={tdStyle}>
-                    {fileUrlFor(c) ? (
-                      <a href={fileUrlFor(c)} target="_blank" rel="noreferrer" style={{ color: "#00B5F9", display: "inline-flex", alignItems: "center", gap: 4 }}>
-                        <PaperClipOutlined /> View
+                    {getDownloadUrl(c) ? (
+                      <a href={getDownloadUrl(c)} target="_blank" rel="noreferrer" style={{ color: "#00B5F9", display: "inline-flex", alignItems: "center", gap: 4 }}>
+                        <DownloadOutlined /> Download
                       </a>
                     ) : <span style={{ color: "#cbd5e1" }}>—</span>}
                   </td>
@@ -354,11 +375,11 @@ export default function ContactList() {
                 <span style={mobileLabel}>Submitted</span>
                 <span style={mobileVal}>{dayjs(c.createdAt).format("DD MMM YYYY")}</span>
               </div>
-              {fileUrlFor(c) && (
+              {getDownloadUrl(c) && (
                 <div>
                   <span style={mobileLabel}>Attachment</span>
-                  <a href={fileUrlFor(c)} target="_blank" rel="noreferrer" style={{ ...mobileVal, color: "#00B5F9" }}>
-                    <PaperClipOutlined /> View
+                  <a href={getDownloadUrl(c)} target="_blank" rel="noreferrer" style={{ ...mobileVal, color: "#00B5F9" }}>
+                    <DownloadOutlined /> Download
                   </a>
                 </div>
               )}
@@ -416,12 +437,17 @@ export default function ContactList() {
                 <span style={{ color: "#0f172a", flex: 1, wordBreak: "break-word" }}>{value}</span>
               </div>
             ))}
-            {fileUrlFor(modalData) && (
-              <div style={{ display: "flex", gap: 12, fontSize: 13, flexWrap: "wrap" }}>
+            {getDownloadUrl(modalData) && (
+              <div style={{ display: "flex", gap: 12, fontSize: 13, flexWrap: "wrap", alignItems: "center" }}>
                 <span style={{ minWidth: 130, fontWeight: 600, color: "#475569" }}>Attachment</span>
-                <a href={fileUrlFor(modalData)} target="_blank" rel="noreferrer" style={{ color: "#00B5F9", display: "inline-flex", alignItems: "center", gap: 4 }}>
-                  <PaperClipOutlined /> {modalData.fileName || "View file"}
-                </a>
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                  <a href={getDownloadUrl(modalData)} target="_blank" rel="noreferrer" style={{ color: "#00B5F9", display: "inline-flex", alignItems: "center", gap: 4 }}>
+                    <DownloadOutlined /> Download {modalData.fileName || 'File'}
+                  </a>
+                  <span style={{ fontSize: 12, color: "#94a3b8" }}>
+                    {modalData.fileName} ({(modalData.fileSize / 1024 / 1024).toFixed(2)} MB)
+                  </span>
+                </div>
               </div>
             )}
             <div style={{ borderTop: "1px solid #e2e8f0", paddingTop: 12 }}>

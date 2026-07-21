@@ -3,7 +3,7 @@ import {
   FaEnvelope, FaUserPlus, FaUsers,
   FaSignOutAlt, FaBars, FaBell, FaHome, FaTimes,
 } from "react-icons/fa";
-import assessalogo from "../../logos/onnes-adminlogo.jpg";
+import onnesWordmark from "../../assets/onnes-wordmark.png";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./AdminStyles.css";
@@ -60,7 +60,12 @@ export default function AdminDashboard() {
           alignItems: "center",
           justifyContent: "space-between",
         }}>
-          <img src={assessalogo} alt="Logo" style={{ width: 120, objectFit: "contain" }} />
+          <Link to="/admin-dashboard/admin-home" style={{ display: "inline-flex", flexDirection: "column", lineHeight: 1, textDecoration: "none" }}>
+            <img src={onnesWordmark} alt="Onnes" style={{ width: 108, height: "auto", display: "block" }} />
+            <span style={{ color: "#1a365d", fontSize: 11, letterSpacing: "8px", marginLeft: 4, marginTop: 5 }}>
+              AEROSPACE
+            </span>
+          </Link>
           {isMobile && (
             <button onClick={() => setSidebarOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#94a3b8", padding: 4 }}>
               <FaTimes size={16} />
