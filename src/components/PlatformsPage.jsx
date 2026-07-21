@@ -38,7 +38,7 @@ const platformSections = [
     imageSide: "left",
     cta: "Explore Our Platforms",
     features: [
-      ["Orbital Depots", "Modular depots for storage, staging, and distribution in orbit.", <Box />],
+      ["Orbital\nDepots", "Modular depots for storage, staging, and distribution in orbit.", <Box />],
       ["In-Space Logistics", "Autonomous transfer and servicing vehicles for seamless operations.", <Network />],
       ["Persistent Operations", "Built for long-duration missions with maximum reliability.", <Rocket />],
       ["Commercial Stations Support", "Infrastructure that powers the next generation of space stations.", <Users />],
@@ -55,7 +55,7 @@ const platformSections = [
       ["Lunar Logistics", "Reliable transport and delivery systems across the lunar surface.", <Truck />],
       ["Surface Operations", "Infrastructure for mobility, power, and mission support.", <Radar />],
       ["Resource Utilization", "Systems designed for in-situ resources and real-world applications.", <Cuboid />],
-      ["Habitats & Life Support Infrastructure", "Enabling safe, sustainable human presence on the Moon.", <Orbit />],
+      ["Habitats & Life\nSupport Infra", "Enabling safe, sustainable human presence on the Moon.", <Orbit />],
     ],
   },
   {
@@ -69,7 +69,7 @@ const platformSections = [
       ["Long-Duration Missions", "Systems built for extreme distance and extended mission timelines.", <Rocket />],
       ["Deep Space Logistics", "Autonomous transport and supply systems for deep space missions.", <Boxes />],
       ["Interplanetary Platforms", "Scalable platforms for lunar, Mars and planetary exploration.", <Satellite />],
-      ["Mission Enablement Systems", "Critical systems that ensure mission success in the harshest environments.", <Settings />],
+      ["Mission\nEnablement", "Critical systems that ensure mission success in the harshest environments.", <Settings />],
     ],
   },
   {
@@ -83,7 +83,7 @@ const platformSections = [
       ["Autonomous Platforms", "Self-operating systems that adapt and evolve in dynamic missions.", <Bot />],
       ["AI-Powered Operations", "Advanced AI for decision-making, optimization, and anomaly resolution.", <CircuitBoard />],
       ["Networked Systems", "Secure, resilient networks that connect and coordinate assets.", <ShieldCheck />],
-      ["Space Situational Awareness", "Real-time awareness and predictive response across the space domain.", <Globe2 />],
+      ["Space\nAwareness", "Real-time awareness and predictive response across the space domain.", <Globe2 />],
     ],
   },
 ];
@@ -92,7 +92,14 @@ function PlatformFeature({ title, body, icon }) {
   return (
     <article className="platform-page-feature">
       <span>{icon}</span>
-      <h4>{title}</h4>
+      <h4>
+        {title.split("\n").map((line, i, arr) => (
+          <span key={i}>
+            {line}
+            {i < arr.length - 1 && <br />}
+          </span>
+        ))}
+      </h4>
       <p>{body}</p>
     </article>
   );

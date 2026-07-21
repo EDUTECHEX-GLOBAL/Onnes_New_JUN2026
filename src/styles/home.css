@@ -85,7 +85,6 @@ h2 {
 .why-copy p,
 .reason p,
 .platform-card p,
-.final-cta p,
 .footer p {
   color: var(--muted);
   font-size: clamp(16px, 1.05vw, 21px);
@@ -230,11 +229,7 @@ h2 {
 
 .world-card {
   align-items: center;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%);
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: #05070a;              /* solid dark card background — border now always sits on this, never on the photo */
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 8px;
 
@@ -251,6 +246,49 @@ h2 {
 
   overflow: hidden;
 }
+
+/* ── INSET IMAGE LAYER ───────────────────────────────────────
+   Same technique as .platform-image: the photo lives on its own
+   layer set slightly inside the card (not touching the border),
+   so the border always has a clean dark edge to sit on, exactly
+   like the Platform cards below. This is what removes the
+   blending issue on Orbit/Moon permanently.
+   ──────────────────────────────────────────────────────────── */
+.world-image {
+  position: absolute;
+  inset: 0;              /* was: 3px — that gap is what created the visible strip */
+  border-radius: 6px;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
+}
+
+.world-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%);
+}
+
+.world-image-1 {
+  background-image: url("../assets/Visionearth.webp");
+}
+
+.world-image-2 {
+  background-image: url("../assets/Visionorbit1.webp");
+}
+
+.world-image-3 {
+  background-image: url("../assets/Visionmoon.webp");
+}
+
+.world-image-4 {
+  background-image: url("../assets/Visiondeepspace.webp");
+  background-size: 150% auto;
+  background-position: 100% center;
+}
+
 .world-content {
   margin-top: auto;
 
@@ -259,30 +297,8 @@ h2 {
   align-items: center;
 
   width: 100%;
-}
-
-.world-1 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionearth.webp");
-  background-size: cover;
-  background-position: center;
-}
-
-.world-2 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionorbit1.webp");
-  background-size: cover;
-  background-position: center;
-}
-
-.world-3 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visionmoon.webp");
-  background-size: cover;
-  background-position: center;
-}
-
-.world-4 {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0 48%, rgba(0, 0, 0, 0.9) 78%), url("../assets/Visiondeepspace.webp");
-  background-size: 150% auto;
-  background-position: 100% center;
+  position: relative;
+  z-index: 2;
 }
 
 /* ── PIN ──────────────────────────────────────────────────────
@@ -303,6 +319,7 @@ h2 {
   left: 50%;
   transform: translate(-50%, -50%);
   margin-bottom: 0;
+  z-index: 2;
 }
 
 .world-card h3,
@@ -617,7 +634,117 @@ h2 {
 }
 
 .reason p {
-  min-height: 6.2em;               /* NEW: reserves ~4 lines of space so all four cards bottom-align, at every breakpoint */
+  min-height: 6.2em;
+}
+
+/* ============================================================
+   PARTNERS — scrolling thanks-text + infinite logo strip
+   ============================================================ */
+.partners {
+  background: #000;
+  overflow: hidden;
+  padding-top: 15px;
+  padding-bottom: 100px;
+}
+
+/* Outlined scrolling text ("Onnes thanks its partners...")
+   font-family matches the old site's MovingText component
+   (helvetica), and case is left as-authored (no uppercase
+   transform) to match the old site's rendering exactly. */
+.partners-marquee {
+  overflow: hidden;
+  width: 100%;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--blue);
+  font-family: helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 1.2em;
+  margin-bottom: 56px;
+}
+
+.partners-marquee-track {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: max-content;
+  animation: partners-slide-left 34s linear infinite;
+}
+
+.partners-marquee-track span {
+  flex-shrink: 0;
+  padding: 0 30px;
+}
+
+.partners:hover .partners-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes partners-slide-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Infinite logo strip */
+.partners-logo-viewport {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.partners-logo-track {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 64px;
+  width: max-content;
+  padding: 8px 32px;
+  animation: partners-scroll-logos 28s linear infinite;
+}
+
+.partners:hover .partners-logo-track {
+  animation-play-state: paused;
+}
+
+@keyframes partners-scroll-logos {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.partner-logo {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  width: 160px;
+}
+
+.partner-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 /* ============================================================
@@ -683,6 +810,60 @@ h2 {
   /* Allow wrapping at 1100px since columns are narrower */
   .reason h3 {
     white-space: normal;
+  }
+
+  .partners {
+    padding-top: 13px;
+    padding-bottom: 72px;
+  }
+
+  .partners-marquee {
+    margin-bottom: 40px;
+  }
+
+  .partners-logo-track {
+    gap: 44px;
+  }
+
+  .partner-logo {
+    height: 70px;
+    width: 130px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — large desktop / ultra-wide screens (1600px+)
+   Prevents the marquee text and logos from feeling sparse or
+   over-stretched on very large monitors.
+   ============================================================ */
+@media (min-width: 1600px) {
+  .partners {
+    padding-top: 20px;
+    padding-bottom: 120px;
+  }
+
+  .partners-marquee {
+    font-size: clamp(72px, 5.2vw, 128px);
+    margin-bottom: 68px;
+  }
+
+  .partner-logo {
+    height: 104px;
+    width: 180px;
+  }
+
+  .partners-logo-track {
+    gap: 76px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 900px (tablet portrait) — Partners only
+   ============================================================ */
+@media (max-width: 900px) {
+  .partners-marquee {
+    font-size: clamp(32px, 7vw, 60px);
+    -webkit-text-stroke: 1.6px var(--blue);
   }
 }
 
@@ -1025,6 +1206,37 @@ h2 {
     width: 38px;
     height: 38px;
   }
+
+  /* Partners */
+  .partners {
+    padding-top: 10px;
+    padding-bottom: 56px;
+  }
+
+  .partners-marquee {
+    font-size: clamp(28px, 9vw, 44px);
+    -webkit-text-stroke: 1.4px var(--blue);
+    margin-bottom: 30px;
+  }
+
+  .partners-marquee-track {
+    animation-duration: 22s;
+  }
+
+  .partners-marquee-track span {
+    padding: 0 18px;
+  }
+
+  .partners-logo-track {
+    gap: 32px;
+    padding: 4px 20px;
+    animation-duration: 20s;
+  }
+
+  .partner-logo {
+    height: 54px;
+    width: 100px;
+  }
 }
 
 /* ============================================================
@@ -1073,5 +1285,51 @@ h2 {
 
   .reason {
     padding: 20px 0;
+  }
+
+  /* Partners */
+  .partners {
+    padding-top: 8px;
+    padding-bottom: 48px;
+  }
+
+  .partners-marquee {
+    font-size: clamp(22px, 9.5vw, 34px);
+    -webkit-text-stroke: 1.1px var(--blue);
+    margin-bottom: 24px;
+  }
+
+  .partners-marquee-track span {
+    padding: 0 12px;
+  }
+
+  .partners-logo-track {
+    gap: 22px;
+    padding: 4px 16px;
+  }
+
+  .partner-logo {
+    height: 44px;
+    width: 82px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 360px (very small phones, e.g. older/budget
+   devices, iPhone SE, small Android screens) — Partners only
+   ============================================================ */
+@media (max-width: 360px) {
+  .partners-marquee {
+    font-size: clamp(18px, 9vw, 26px);
+    -webkit-text-stroke: 1px var(--blue);
+  }
+
+  .partner-logo {
+    height: 38px;
+    width: 70px;
+  }
+
+  .partners-logo-track {
+    gap: 16px;
   }
 }

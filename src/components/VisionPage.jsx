@@ -21,8 +21,10 @@ import futureLunar from "../assets/LunarInfra2.webp";
 import futureDeep from "../assets/DeepSpace3.webp";
 import futureHumanity from "../assets/NationalSecuritySpace.webp";
 import ramImage from "../assets/founder-ram.png";
-import vikramImage from "../assets/founder-vikram.jpeg";
+import vikramImage from "../assets/founder-vikram3.png";
 import rajeshImage from "../assets/founder-rajesh.jpeg";
+import visionPanelImg from "../assets/Infrastructure_newspace.webp";
+import missionPanelImg from "../assets/LunarInfra3.webp";
 
 const heroPillars = [
   ["Persistent Operations", <Target />],
@@ -106,35 +108,41 @@ export default function VisionPage() {
       </section>
 
       <section className="vision-mission-split" id="mission">
-        <article className="vision-statement-panel">
-          <p className="eyebrow">Our Vision</p>
+        <p className="eyebrow vision-eyebrow">Our Vision</p>
+        <p className="eyebrow mission-eyebrow">Our Mission</p>
+        <div className="panel-copy vision-copy">
           <h2>Infrastructure For A New <span>Space Civilization</span></h2>
           <p>We are building the foundation for a future where humanity lives, works, and explores across the cosmos. A future that is sustainable, autonomous, and driven by innovation.</p>
-          <div className="vision-point-list">
-            {visionPoints.map(([text, icon]) => (
-              <div className="vision-point" key={text}>
-                <span>{icon}</span>
-                <p>{text}</p>
-              </div>
-            ))}
-          </div>
-        </article>
-        <article className="mission-panel">
-          <p className="eyebrow">Our Mission</p>
+        </div>
+        <div className="panel-copy mission-copy">
           <h2>To Engineer The Infrastructure That Enables Humanity's Expansion <span>Beyond Earth</span></h2>
           <p>Onnes Aerospace develops intelligent, resilient, and autonomous infrastructure systems that empower the world's most ambitious space and defense missions.</p>
-          <div className="mission-step-list">
-            {missionSteps.map(([title, text, icon]) => (
-              <div className="mission-step" key={title}>
-                <span>{icon}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
+        </div>
+        <div className="panel-image vision-image">
+          <img src={visionPanelImg} alt="Infrastructure for a new space civilization" />
+        </div>
+        <div className="panel-image mission-image">
+          <img src={missionPanelImg} alt="Engineering infrastructure beyond Earth" />
+        </div>
+        <div className="vision-point-list">
+          {visionPoints.map(([text, icon]) => (
+            <div className="vision-point" key={text}>
+              <span>{icon}</span>
+              <p>{text}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mission-step-list">
+          {missionSteps.map(([title, text, icon]) => (
+            <div className="mission-step" key={title}>
+              <span>{icon}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
               </div>
-            ))}
-          </div>
-        </article>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="future-section" id="future-beyond-earth">

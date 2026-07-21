@@ -219,7 +219,7 @@
   min-height: 0;
   min-width: 0;
   overflow: hidden;
-  padding: 22px 16px;
+  padding: 22px 12px;
 }
 
 .platform-page-feature > span {
@@ -241,10 +241,12 @@
 
 .platform-page-feature h4 {
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: -0.01em;
   line-height: 1.25;
   margin: 0 0 12px;
   max-width: 100%;
+  min-height: calc(1.25em * 2);
   overflow-wrap: break-word;
   text-transform: uppercase;
   word-break: break-word;
@@ -603,6 +605,7 @@
   .platform-page-feature h4 {
     font-size: 12px;
     margin-bottom: 8px;
+    min-height: calc(1.25em * 2);
     overflow-wrap: break-word;
     word-break: break-word;
   }

@@ -10,6 +10,7 @@ import Platforms from "./components/Platforms.jsx";
 import WhyOnnes from "./components/WhyOnnes.jsx";
 import FinalCta from "./components/FinalCta.jsx";
 import Footer from "./components/Footer.jsx";
+import Partners from "./components/Partners.jsx";
 
 // Lazy-load all page routes
 const VisionPage = lazy(() => import("./components/VisionPage.jsx"));
@@ -28,6 +29,7 @@ const ContactList = lazy(() => import("./AdminDashboard/components/ContactList")
 const SubscriptionList = lazy(() => import("./AdminDashboard/components/SubscriptionList"));
 const VisitorsList = lazy(() => import("./AdminDashboard/components/VisitorsList"));
 
+
 function HomePage() {
   return (
     <main className="site-shell">
@@ -37,6 +39,7 @@ function HomePage() {
       <Platforms />
       {/* <Journey /> */}
       <WhyOnnes />
+      <Partners />
       <FinalCta />
       <Footer />
     </main>

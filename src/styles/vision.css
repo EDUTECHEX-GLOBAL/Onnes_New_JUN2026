@@ -139,62 +139,112 @@
 
 /* ── VISION / MISSION SPLIT ───────────────────────────────── */
 .vision-mission-split {
+  background: #05070b;
+  column-gap: clamp(40px, 4.4vw, 76px);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: clamp(620px, 50vw, 900px);
+  padding: clamp(46px, 4.4vw, 70px) clamp(32px, 4.6vw, 66px);
+  row-gap: 18px;
 }
 
-.vision-statement-panel,
-.mission-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
-  padding: clamp(46px, 4.2vw, 70px);
-  position: relative;
+.vision-eyebrow {
+  grid-column: 1;
+  grid-row: 1;
 }
 
-.vision-statement-panel {
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0 24%, rgba(0, 0, 0, 0.34) 50%, rgba(0, 0, 0, 0.04) 100%),
-    url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-    #000;
+.mission-eyebrow {
+  grid-column: 2;
+  grid-row: 1;
 }
 
-.mission-panel {
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.84) 0 24%, rgba(0, 0, 0, 0.3) 52%, rgba(0, 0, 0, 0.04) 100%),
-    url("../assets/LunarInfra3.webp") right bottom / cover no-repeat,
-    #000;
+.vision-copy {
+  grid-column: 1;
+  grid-row: 2;
 }
 
-.vision-statement-panel h2,
-.mission-panel h2 {
+.mission-copy {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.vision-image {
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 22px;
+}
+
+.mission-image {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: 22px;
+}
+
+.vision-point-list {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.mission-step-list {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+.panel-copy {
+  align-self: start;
+}
+
+.panel-copy h2 {
   font-size: clamp(34px, 3vw, 58px);
   line-height: 1.06;
   max-width: 720px;
 }
 
-.vision-statement-panel h2 span,
-.mission-panel h2 span {
+.panel-copy h2 span {
   color: #1c83ff;
 }
 
-.vision-statement-panel > p:not(.eyebrow),
-.mission-panel > p:not(.eyebrow) {
+.panel-copy p {
   color: #d6d9e2;
   font-size: clamp(15px, 1vw, 16px);
   line-height: 1.55;
+  margin-top: 14px;
   max-width: 520px;
+}
+
+.panel-image {
+  align-self: start;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.panel-image img {
+  aspect-ratio: 16 / 9;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.panel-image::after {
+  background:
+    linear-gradient(to right, #05070b 0%, transparent 14%, transparent 86%, #05070b 100%),
+    linear-gradient(to bottom, #05070b 0%, transparent 18%, transparent 82%, #05070b 100%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
 }
 
 .vision-point-list,
 .mission-step-list {
+  align-self: start;
   display: grid;
   gap: 18px;
-  margin-top: 32px;
   max-width: 590px;
 }
+
 
 .mission-step-list {
   max-width: 520px;
@@ -574,21 +624,51 @@
     min-height: 76px;
   }
 
-  .mission-panel {
-    border-left: 0;
-    border-top: 0;
+  .vision-mission-split {
+    row-gap: 14px;
   }
 
-  .vision-statement-panel,
-  .mission-panel {
-    min-height: 620px;
+  .vision-eyebrow {
+    grid-column: 1;
+    grid-row: 1;
   }
 
-  .vision-statement-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-      #000;
+  .vision-copy {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .vision-image {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .vision-point-list {
+    grid-column: 1;
+    grid-row: 4;
+    margin-top: 8px;
+  }
+
+  .mission-eyebrow {
+    grid-column: 1;
+    grid-row: 5;
+    margin-top: 20px;
+  }
+
+  .mission-copy {
+    grid-column: 1;
+    grid-row: 6;
+  }
+
+  .mission-image {
+    grid-column: 1;
+    grid-row: 7;
+  }
+
+  .mission-step-list {
+    grid-column: 1;
+    grid-row: 8;
+    margin-top: 8px;
   }
 
   .future-head,
@@ -617,26 +697,6 @@
       linear-gradient(180deg, rgba(0, 0, 0, 0.46) 0 10%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.95) 86%, #000 100%),
       url("../assets/CommercialSpace2.webp") 58% center / cover no-repeat;
     padding: 130px 28px 46px;
-  }
-
-  .vision-statement-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-      #000;
-  }
-
-  .mission-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0 26%, rgba(0, 0, 0, 0.04) 55%, rgba(0, 0, 0, 0.52) 100%),
-      url("../assets/LunarInfra3.webp") center bottom / cover no-repeat,
-      #000;
-  }
-
-  .vision-statement-panel,
-  .mission-panel {
-    min-height: 700px;
-    padding-bottom: 60px;
   }
 
   .founder-grid {
@@ -702,8 +762,7 @@
     grid-template-columns: 1fr;
   }
 
-  .vision-statement-panel,
-  .mission-panel,
+  .vision-mission-split,
   .future-section,
   .leadership-section,
   .values-section {
@@ -711,22 +770,7 @@
     padding-right: 22px;
   }
 
-  .vision-statement-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-      #000;
-    min-height: 600px;
-    padding-bottom: 60px;
-  }
-
-  .mission-panel {
-    min-height: 600px;
-    padding-bottom: 60px;
-  }
-
-  .vision-statement-panel h2,
-  .mission-panel h2,
+  .panel-copy h2,
   .future-head h2,
   .leadership-intro h2 {
     font-size: clamp(30px, 9vw, 42px);
@@ -734,8 +778,7 @@
     overflow-wrap: anywhere;
   }
 
-  .vision-statement-panel > p:not(.eyebrow),
-  .mission-panel > p:not(.eyebrow),
+  .panel-copy p,
   .future-head p:not(.eyebrow),
   .leadership-intro p:not(.eyebrow) {
     max-width: 100%;
@@ -765,8 +808,7 @@
 
 @media (max-width: 640px) {
   .vision-hero,
-  .vision-statement-panel,
-  .mission-panel,
+  .vision-mission-split,
   .future-section,
   .leadership-section,
   .values-section {
@@ -784,8 +826,7 @@
 
   .vision-hero-copy,
   .vision-hero-copy p:not(.eyebrow),
-  .vision-statement-panel > p:not(.eyebrow),
-  .mission-panel > p:not(.eyebrow),
+  .panel-copy p,
   .future-head p:not(.eyebrow),
   .leadership-intro p:not(.eyebrow) {
     max-width: 100%;
@@ -797,8 +838,7 @@
     max-width: 100%;
   }
 
-  .vision-statement-panel h2,
-  .mission-panel h2,
+  .panel-copy h2,
   .future-head h2,
   .leadership-intro h2 {
     font-size: clamp(24px, 7vw, 32px);
@@ -811,8 +851,7 @@
     word-break: break-word;
   }
 
-  .vision-statement-panel h2 span,
-  .mission-panel h2 span,
+  .panel-copy h2 span,
   .future-head h2 span,
   .leadership-intro h2 span {
     display: inline;
@@ -822,8 +861,7 @@
   }
 
   .vision-hero-copy p:not(.eyebrow),
-  .vision-statement-panel > p:not(.eyebrow),
-  .mission-panel > p:not(.eyebrow),
+  .panel-copy p,
   .future-head p:not(.eyebrow),
   .leadership-intro p:not(.eyebrow) {
     font-size: 14px;
@@ -868,24 +906,6 @@
   .value-item h3 {
     font-size: 16px;
     line-height: 1.15;
-  }
-
-  .vision-statement-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-      #000;
-    min-height: 580px;
-    padding-bottom: 60px;
-  }
-
-  .mission-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0 28%, rgba(0, 0, 0, 0.04) 55%, rgba(0, 0, 0, 0.52) 100%),
-      url("../assets/LunarInfra3.webp") center bottom / cover no-repeat,
-      #000;
-    min-height: 580px;
-    padding-bottom: 60px;
   }
 
   .future-card,
@@ -935,20 +955,6 @@
     padding-left: 18px;
   }
 
-  .vision-statement-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-      #000;
-    min-height: 560px;
-    padding-bottom: 60px;
-  }
-
-  .mission-panel {
-    min-height: 560px;
-    padding-bottom: 60px;
-  }
-
   .future-card-image {
     aspect-ratio: 4 / 3;
   }
@@ -967,25 +973,10 @@
     font-size: clamp(27px, 8.2vw, 34px);
   }
 
-  .vision-statement-panel h2,
-  .mission-panel h2,
+  .panel-copy h2,
   .future-head h2,
   .leadership-intro h2 {
     font-size: clamp(22px, 6.6vw, 28px);
-  }
-
-  .vision-statement-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-      #000;
-    min-height: 540px;
-    padding-bottom: 60px;
-  }
-
-  .mission-panel {
-    min-height: 540px;
-    padding-bottom: 60px;
   }
 
   .future-card-body {
@@ -999,8 +990,7 @@
 
 @media (max-width: 360px) {
   .vision-hero,
-  .vision-statement-panel,
-  .mission-panel,
+  .vision-mission-split,
   .future-section,
   .leadership-section,
   .values-section {
@@ -1012,25 +1002,10 @@
     font-size: clamp(25px, 8vw, 30px);
   }
 
-  .vision-statement-panel h2,
-  .mission-panel h2,
+  .panel-copy h2,
   .future-head h2,
   .leadership-intro h2 {
     max-width: calc(100vw - 32px);
-  }
-
-  .vision-statement-panel {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0 18%, rgba(0, 0, 0, 0.18) 52%, rgba(0, 0, 0, 0.62) 100%),
-      url("../assets/Infrastructure_newspace.webp") left 60% / cover no-repeat,
-      #000;
-    min-height: 520px;
-    padding-bottom: 60px;
-  }
-
-  .mission-panel {
-    min-height: 520px;
-    padding-bottom: 60px;
   }
 
   .hero-pillar,

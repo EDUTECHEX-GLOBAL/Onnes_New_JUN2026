@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import onnesWordmark from "../assets/onnes-wordmark.png";
 import "../styles/header.css";
 
-const navItems = [["Contact", "/contact"]];
+const navItems = [["Contact", "/contact#mission-brief"]];
 
 const visionItems = [
   ["Mission", "/vision#mission"],

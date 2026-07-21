@@ -71,6 +71,37 @@ const mediaItems = [
 ];
 
 // ── Mission brief form config ────────────────────────────────────────────
+const countryOptions = [
+  "India",
+  "United States",
+  "United Kingdom",
+  "France",
+  "Germany",
+  "Israel",
+  "Japan",
+  "Singapore",
+  "United Arab Emirates",
+  "Canada",
+  "Australia",
+  "Netherlands",
+  "Italy",
+  "Spain",
+  "Sweden",
+  "Norway",
+  "South Korea",
+  "Finland",
+  "Belgium",
+  "Switzerland",
+  "Poland",
+  "Denmark",
+  "Brazil",
+  "Malaysia",
+  "New Zealand",
+  "Czech Republic",
+  "Austria",
+  "Other Countries",
+];
+
 const areaOfInterestOptions = [
   "Space Infrastructure",
   "National Security & Defence",
@@ -99,13 +130,7 @@ const projectStageOptions = [
 
 const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25 MB
 
-const ACCEPTED_FILE_TYPES = [
-  "application/pdf",
-  "application/msword",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
-  "application/vnd.ms-powerpoint",
-  "application/vnd.openxmlformats-officedocument.presentationml.presentation", // .pptx
-];
+const ACCEPTED_FILE_TYPES = ["application/pdf"];
 
 const defaultForm = {
   fullName: "",
@@ -150,7 +175,7 @@ export default function ContactPage() {
     }
 
     if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
-      setFileError("Only PDF, DOCX, and PPTX files are accepted.");
+      setFileError("Only PDF files are accepted.");
       setSelectedFile(null);
       event.target.value = "";
       return;
@@ -291,11 +316,9 @@ export default function ContactPage() {
           <div className="field-row">
             <select name="country" value={form.country} onChange={updateField} aria-label="Country" required>
               <option value="">Country *</option>
-              <option>United States</option>
-              <option>India</option>
-              <option>Japan</option>
-              <option>Luxembourg</option>
-              <option>United Arab Emirates</option>
+              {countryOptions.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
             </select>
             <select
               name="areaOfInterest"
@@ -334,11 +357,11 @@ export default function ContactPage() {
             <label className="file-input-wrap">
               <input
                 type="file"
-                accept=".pdf,.doc,.docx,.ppt,.pptx"
+                accept=".pdf"
                 onChange={handleFileChange}
               />
             </label>
-            <span className="file-hint">Accepted: PDF, DOCX, PPTX (Max 25 MB)</span>
+            <span className="file-hint">Accepted: PDF only</span>
             {fileError && <span className="file-error">{fileError}</span>}
             {selectedFile && !fileError && (
               <span className="file-hint">Selected: {selectedFile.name}</span>
