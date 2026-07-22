@@ -48,8 +48,8 @@
   display: flex;
   gap: clamp(20px, 2vw, 42px);
   justify-content: center;
-  position: relative; /* FIX: ensure nav creates its own stacking context */
-  z-index: 500;       /* FIX: sit above hero content on all pages */
+  position: relative;
+  z-index: 500;
 }
 
 .nav a {
@@ -108,7 +108,7 @@
   top: 34px;
   transform: translateY(8px);
   transition: opacity 160ms ease, transform 160ms ease;
-  z-index: 500; /* FIX: raised from 50 to 500 to clear hero z-index layers */
+  z-index: 500;
 }
 
 .nav-dropdown:hover .nav-menu,
@@ -403,5 +403,18 @@
 
   .mobile-menu {
     display: block;
+  }
+
+  /* FIX: arrow (↗) inside solid/outline buttons renders too small
+     and optically off-center on Android — bump its size and force
+     proper vertical centering, without touching desktop button
+     styles above. Targets the aria-hidden arrow span specifically. */
+  .solid-button span[aria-hidden="true"],
+  .outline-button span[aria-hidden="true"] {
+    font-size: 20px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    transform: translateY(-1px);
   }
 }
