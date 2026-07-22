@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import { FaLinkedinIn } from "react-icons/fa";
 import {
   Boxes,
@@ -83,9 +84,32 @@ const values = [
 ];
 
 export default function VisionPage() {
+  const visionCopyRef = useRef(null);
+  const missionCopyRef = useRef(null);
+  const [copyHeight, setCopyHeight] = useState(null);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (window.innerWidth <= 1024) {
+        setCopyHeight(null);
+        return;
+      }
+      const visionH = visionCopyRef.current ? visionCopyRef.current.offsetHeight : 0;
+      const missionH = missionCopyRef.current ? missionCopyRef.current.offsetHeight : 0;
+      setCopyHeight(Math.max(visionH, missionH));
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
+    return function cleanup() {
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
   return (
     <main className="site-shell vision-page">
       <Header />
+
       <section className="vision-hero" id="vision">
         <div className="vision-hero-copy">
           <p className="eyebrow">Our Vision</p>
@@ -93,56 +117,94 @@ export default function VisionPage() {
           <p>We envision a humanity that is multi-planetary, sustained by intelligent infrastructure spanning orbit, the Moon, and deep space.</p>
           <p>Onnes Aerospace is building the operational backbone that makes this future possible.</p>
           <div className="actions">
-            {/* <a className="solid-button" href="#film"><span className="play-dot" aria-hidden="true">▶</span> Watch Our Vision Film</a> */}
-            <a className="outline-button" href="#mission">Explore Our Vision <span aria-hidden="true">↗</span></a>
+            <a className="outline-button" href="#mission">
+              Explore Our Vision <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
+
         <div className="hero-pillar-list">
-          {heroPillars.map(([label, icon]) => (
-            <div className="hero-pillar" key={label}>
-              <span>{icon}</span>
-              <strong>{label}</strong>
-            </div>
-          ))}
+          {heroPillars.map(function (pillar) {
+            var label = pillar[0];
+            var icon = pillar[1];
+            return (
+              <div className="hero-pillar" key={label}>
+                <span>{icon}</span>
+                <strong>{label}</strong>
+              </div>
+            );
+          })}
         </div>
       </section>
 
       <section className="vision-mission-split" id="mission">
-        <p className="eyebrow vision-eyebrow">Our Vision</p>
-        <p className="eyebrow mission-eyebrow">Our Mission</p>
-        <div className="panel-copy vision-copy">
-          <h2>Infrastructure For A New <span>Space Civilization</span></h2>
-          <p>We are building the foundation for a future where humanity lives, works, and explores across the cosmos. A future that is sustainable, autonomous, and driven by innovation.</p>
-        </div>
-        <div className="panel-copy mission-copy">
-          <h2>To Engineer The Infrastructure That Enables Humanity's Expansion <span>Beyond Earth</span></h2>
-          <p>Onnes Aerospace develops intelligent, resilient, and autonomous infrastructure systems that empower the world's most ambitious space and defense missions.</p>
-        </div>
-        <div className="panel-image vision-image">
-          <img src={visionPanelImg} alt="Infrastructure for a new space civilization" />
-        </div>
-        <div className="panel-image mission-image">
-          <img src={missionPanelImg} alt="Engineering infrastructure beyond Earth" />
-        </div>
-        <div className="vision-point-list">
-          {visionPoints.map(([text, icon]) => (
-            <div className="vision-point" key={text}>
-              <span>{icon}</span>
-              <p>{text}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mission-step-list">
-          {missionSteps.map(([title, text, icon]) => (
-            <div className="mission-step" key={title}>
-              <span>{icon}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <article className="panel vision-panel">
+          <p className="eyebrow">Our Vision</p>
+
+          <div
+            className="panel-copy"
+            ref={visionCopyRef}
+            style={copyHeight ? { minHeight: copyHeight } : undefined}
+          >
+            <h2>
+              Infrastructure For A New <span>Space Civilization</span>
+            </h2>
+            <p>We are building the foundation for a future where humanity lives, works, and explores across the cosmos. A future that is sustainable, autonomous, and driven by innovation.</p>
+          </div>
+
+          <div className="panel-image">
+            <img src={visionPanelImg} alt="Infrastructure for a new space civilization" />
+          </div>
+
+          <div className="vision-point-list">
+            {visionPoints.map(function (point) {
+              var text = point[0];
+              var icon = point[1];
+              return (
+                <div className="vision-point" key={text}>
+                  <span>{icon}</span>
+                  <p>{text}</p>
+                </div>
+              );
+            })}
+          </div>
+        </article>
+
+        <article className="panel mission-panel">
+          <p className="eyebrow">Our Mission</p>
+
+          <div
+            className="panel-copy"
+            ref={missionCopyRef}
+            style={copyHeight ? { minHeight: copyHeight } : undefined}
+          >
+            <h2>
+              To Engineer The Infrastructure That Enables Humanity's Expansion <span>Beyond Earth</span>
+            </h2>
+            <p>Onnes Aerospace develops intelligent, resilient, and autonomous infrastructure systems that empower the world's most ambitious space and defense missions.</p>
+          </div>
+
+          <div className="panel-image">
+            <img src={missionPanelImg} alt="Engineering infrastructure beyond Earth" />
+          </div>
+
+          <div className="mission-step-list">
+            {missionSteps.map(function (step) {
+              var title = step[0];
+              var text = step[1];
+              var icon = step[2];
+              return (
+                <div className="mission-step" key={title}>
+                  <span>{icon}</span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </article>
       </section>
 
       <section className="future-section" id="future-beyond-earth">
@@ -151,21 +213,28 @@ export default function VisionPage() {
           <h2>Building The Next Era Of Humanity</h2>
           <p>Earth orbit, lunar frontier, deep space, humanity's future.</p>
         </div>
+
         <div className="future-card-grid">
-          {futureCards.map(([title, text, image, icon]) => (
-            <article className="future-card" key={title}>
-              <div className="future-card-image">
-                <img src={image} alt={title} />
-              </div>
-              <div className="future-card-body">
-                <span>{icon}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
+          {futureCards.map(function (card) {
+            var title = card[0];
+            var text = card[1];
+            var image = card[2];
+            var icon = card[3];
+            return (
+              <article className="future-card" key={title}>
+                <div className="future-card-image">
+                  <img src={image} alt={title} />
                 </div>
-              </div>
-            </article>
-          ))}
+                <div className="future-card-body">
+                  <span>{icon}</span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
@@ -173,47 +242,61 @@ export default function VisionPage() {
         <div className="leadership-intro">
           <h2>Leadership</h2>
         </div>
+
         <div className="founder-grid">
-          {founders.map(([name, role, image, linkedin]) => (
-            <article className="founder-card" key={name}>
-              <div
-                className="founder-image"
-                style={{ backgroundImage: `url(${image})` }}
-              />
-              <div className="founder-overlay">
-                <div className="founder-overlay-info">
-                  <h3>{name}</h3>
-                  <strong>{role}</strong>
+          {founders.map(function (founder) {
+            var name = founder[0];
+            var role = founder[1];
+            var image = founder[2];
+            var linkedin = founder[3];
+            return (
+              <article className="founder-card" key={name}>
+                <div
+                  className="founder-image"
+                  style={{ backgroundImage: "url(" + image + ")" }}
+                />
+                <div className="founder-overlay">
+                  <div className="founder-overlay-info">
+                    <h3>{name}</h3>
+                    <strong>{role}</strong>
+                  </div>
+
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={name + " LinkedIn"}
+                    className="founder-linkedin"
+                  >
+                    <FaLinkedinIn />
+                  </a>
                 </div>
-                <a
-                  href={linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${name} LinkedIn`}
-                  className="founder-linkedin"
-                >
-                  <FaLinkedinIn />
-                </a>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </section>
 
       <section className="values-section">
         <p className="eyebrow">Our Values</p>
         <div className="values-grid">
-          {values.map(([title, text, icon]) => (
-            <article className="value-item" key={title}>
-              <span>{icon}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-            </article>
-          ))}
+          {values.map(function (value) {
+            var title = value[0];
+            var text = value[1];
+            var icon = value[2];
+            return (
+              <article className="value-item" key={title}>
+                <span>{icon}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
+
       <FinalCta />
       <Footer />
     </main>

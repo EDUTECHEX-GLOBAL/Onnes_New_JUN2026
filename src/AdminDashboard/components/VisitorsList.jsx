@@ -56,7 +56,7 @@ export default function VisitorsList() {
   const [filterOpen, setFilterOpen]   = useState(false);
 
   useEffect(() => {
-    api.get('/api/admin-visitors')
+    api.get('/api/admin-visitors?limit=500')
       .then(res => { setVisitors(res.data); setFiltered(res.data); setLoading(false); })
       .catch(err => { console.error("Visitors API error:", err); setLoading(false); });
   }, []);

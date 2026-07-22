@@ -302,10 +302,11 @@ h2 {
 }
 
 /* ── PIN ──────────────────────────────────────────────────────
-   Absolutely positioned so it always sits at the same vertical
-   point (42% from top) regardless of card width or text wrapping.
-   margin-bottom was the root cause of misalignment on wider screens
-   because it spaced the pin relative to the text below it.
+   Anchored from the BOTTOM of the card (not the top) so it sits
+   just above the title regardless of card height. This keeps it
+   correctly positioned across every breakpoint (large desktop,
+   1100px tablet, and the flow-based mobile layout below) without
+   needing a separate override per breakpoint.
    ──────────────────────────────────────────────────────────── */
 .pin {
   background: var(--blue);
@@ -315,9 +316,9 @@ h2 {
   height: 26px;
   width: 26px;
   position: absolute;
-  top:230px;
+  bottom: 165px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   margin-bottom: 0;
   z-index: 2;
 }
@@ -874,7 +875,7 @@ h2 {
   /* Hero */
   .hero {
     min-height: auto;
-    padding: 100px 24px 48px;
+    padding: 0 24px 48px;   /* top padding removed — offset now handled entirely by .hero-copy margin-top below */
   }
 
   .hero::after {
@@ -883,6 +884,7 @@ h2 {
   }
 
   .hero-video {
+    top: 88px;                  /* pushes video below the fixed mobile header so the logo no longer overlaps it */
     height: clamp(200px, 56.25vw, 400px);
     object-fit: cover;
     object-position: center top;
@@ -890,13 +892,16 @@ h2 {
   }
 
   .hero-video-mask {
+    top: 88px;                              /* bounds the mask to the video's own box instead of the whole section */
+    height: clamp(200px, 56.25vw, 400px);   /* matches video height so the fade completes exactly at the video's real bottom edge */
+    bottom: auto;
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 48%, rgba(0, 0, 0, 0.42) 72%, #000 100%),
       linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 35%, transparent 65%, rgba(0, 0, 0, 0.12));
   }
 
   .hero-copy {
-    margin-top: clamp(160px, 44vw, 320px);
+    margin-top: calc(88px + clamp(200px, 56.25vw, 400px) + 20px);  /* header height + actual video height + 20px breathing room, so text always starts right after the video ends — no gap, no overlap */
     max-width: 100%;
   }
 
@@ -963,6 +968,7 @@ h2 {
   min-height: 210px;
   height: auto;
   padding: 16px 14px 20px;
+  justify-content: flex-end;   /* pushes the pin + text block together to the bottom of the card, instead of the pin floating to the top as the first flow child */
 }
 
 .world-content {
@@ -971,15 +977,17 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
 
-  flex: 1;
   width: 100%;
 }
-  /* Pin override for mobile — revert to flow so it sits above text */
+  /* Pin override for mobile — revert to flow so it sits above text.
+     bottom: auto clears the inherited "bottom: 165px" from the base
+     .pin rule — without this, the pin gets pushed out of the card
+     (clipped by overflow: hidden) instead of sitting in normal flow. */
   .pin {
   position: relative;
   top: auto;
+  bottom: auto;
   left: auto;
   transform: none;
 
@@ -1244,7 +1252,7 @@ h2 {
    ============================================================ */
 @media (max-width: 480px) {
   .hero {
-    padding: 90px 18px 48px;
+    padding: 0 18px 48px;   /* was 90px — same fix as the 760px block: offset now handled by .hero-copy margin-top */
   }
 
   .eyebrow {

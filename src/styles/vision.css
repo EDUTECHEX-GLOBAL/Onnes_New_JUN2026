@@ -140,57 +140,22 @@
 /* ── VISION / MISSION SPLIT ───────────────────────────────── */
 .vision-mission-split {
   background: #05070b;
-  column-gap: clamp(40px, 4.4vw, 76px);
+  column-gap: clamp(24px, 3vw, 48px); /* was: clamp(40px, 4.4vw, 76px) — reduced for a tighter gap on all screens */
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: clamp(46px, 4.4vw, 70px) clamp(32px, 4.6vw, 66px);
-  row-gap: 18px;
 }
 
-.vision-eyebrow {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.mission-eyebrow {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.vision-copy {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.mission-copy {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.vision-image {
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 22px;
-}
-
-.mission-image {
-  grid-column: 2;
-  grid-row: 3;
-  margin-top: 22px;
-}
-
-.vision-point-list {
-  grid-column: 1;
-  grid-row: 4;
-}
-
-.mission-step-list {
-  grid-column: 2;
-  grid-row: 4;
+.panel {
+  display: flex;
+  flex-direction: column;
 }
 
 .panel-copy {
   align-self: start;
+  /* Height is now set inline via JS (measured from the actual
+     rendered content of both panels), so no fixed/guessed value
+     is needed here. See VisionPage.jsx. */
 }
 
 .panel-copy h2 {
@@ -211,26 +176,28 @@
   max-width: 520px;
 }
 
+/* ── PANEL IMAGE ── */
 .panel-image {
   align-self: start;
-  border-radius: 6px;
+  background: #05070b;
+  border-radius: 4px;
+  margin-top: 22px;
   overflow: hidden;
   position: relative;
   width: 100%;
 }
 
 .panel-image img {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   display: block;
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
 
+/* Subtle bottom fade only — blends into the point-list below. */
 .panel-image::after {
-  background:
-    linear-gradient(to right, #05070b 0%, transparent 14%, transparent 86%, #05070b 100%),
-    linear-gradient(to bottom, #05070b 0%, transparent 18%, transparent 82%, #05070b 100%);
+  background: linear-gradient(to bottom, transparent 97%, rgba(5, 7, 11, 0.85) 100%);
   content: "";
   inset: 0;
   pointer-events: none;
@@ -242,9 +209,9 @@
   align-self: start;
   display: grid;
   gap: 18px;
+  margin-top: 22px;
   max-width: 590px;
 }
-
 
 .mission-step-list {
   max-width: 520px;
@@ -568,10 +535,6 @@
     min-height: 78px;
   }
 
-  .vision-mission-split {
-    min-height: 560px;
-  }
-
   .future-card-grid {
     gap: 16px;
   }
@@ -625,50 +588,7 @@
   }
 
   .vision-mission-split {
-    row-gap: 14px;
-  }
-
-  .vision-eyebrow {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .vision-copy {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .vision-image {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .vision-point-list {
-    grid-column: 1;
-    grid-row: 4;
-    margin-top: 8px;
-  }
-
-  .mission-eyebrow {
-    grid-column: 1;
-    grid-row: 5;
-    margin-top: 20px;
-  }
-
-  .mission-copy {
-    grid-column: 1;
-    grid-row: 6;
-  }
-
-  .mission-image {
-    grid-column: 1;
-    grid-row: 7;
-  }
-
-  .mission-step-list {
-    grid-column: 1;
-    grid-row: 8;
-    margin-top: 8px;
+    row-gap: 48px;
   }
 
   .future-head,

@@ -507,7 +507,7 @@
 }
 
 .form-action-row p {
-  color: #dce5f1;
+  color: var(--blue); /* was #dce5f1 — confirmation/status message now shown in the site's blue accent color */
   font-size: 14px;
   margin: 0;
 }
