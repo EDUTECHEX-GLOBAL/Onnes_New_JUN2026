@@ -39,7 +39,7 @@ function HomePage() {
       <Platforms />
       {/* <Journey /> */}
       <WhyOnnes />
-      <Partners />
+      {/* <Partners /> */}
       <FinalCta />
       <Footer />
     </main>

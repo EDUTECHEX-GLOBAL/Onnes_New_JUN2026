@@ -57,19 +57,16 @@ const futureCards = [
 const founders = [
   [
     "Ram K Aluru",
-    "CEO & Co-Founder",
     ramImage,
     "https://www.linkedin.com/in/ram-k-aluru-ph-d-77608a3b",
   ],
   [
     "Vikram S Raghavan",
-    "CTO & Co-Founder",
     vikramImage,
     "https://www.linkedin.com/in/vikram-s-raghavan-ph-d-5293481a3",
   ],
   [
     "Rajesh Adla",
-    "CSO & Co-Founder",
     rajeshImage,
     "https://www.linkedin.com/in/rajeshkumaradla",
   ],
@@ -240,15 +237,14 @@ export default function VisionPage() {
 
       <section className="leadership-section" id="leadership">
         <div className="leadership-intro">
-          <h2>Leadership</h2>
+          <h2>Founders</h2>
         </div>
 
         <div className="founder-grid">
           {founders.map(function (founder) {
             var name = founder[0];
-            var role = founder[1];
-            var image = founder[2];
-            var linkedin = founder[3];
+            var image = founder[1];
+            var linkedin = founder[2];
             return (
               <article className="founder-card" key={name}>
                 <div
@@ -258,7 +254,6 @@ export default function VisionPage() {
                 <div className="founder-overlay">
                   <div className="founder-overlay-info">
                     <h3>{name}</h3>
-                    <strong>{role}</strong>
                   </div>
 
                   <a

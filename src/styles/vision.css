@@ -348,7 +348,7 @@
   line-height: 1.48;
 }
 
-/* ── LEADERSHIP ───────────────────────────────────────────── */
+/* ── LEADERSHIP / FOUNDERS ───────────────────────────────── */
 .leadership-section {
   background:
     linear-gradient(180deg, rgba(0, 10, 18, 0.82), rgba(0, 0, 0, 0.9)),
@@ -418,24 +418,18 @@
   top: 0;
 }
 
+/* No designation line anymore — single name, sitting on the
+   bottom edge of the scrim (not centered across the whole card). */
 .founder-overlay-info {
   align-self: flex-end;
 }
 
 .founder-overlay-info h3 {
   color: #fff;
-  font-size: 17px;
+  font-size: 21px;
   font-weight: 600;
-  line-height: 1.2;
-  margin: 0 0 4px;
-  text-transform: none;
-}
-
-.founder-overlay-info strong {
-  color: rgba(255, 255, 255, 0.7);
-  display: block;
-  font-size: 13px;
-  font-weight: 400;
+  line-height: 1.25;
+  margin: 0;
   text-transform: none;
 }
 
@@ -724,6 +718,10 @@
     grid-template-columns: 1fr;
   }
 
+  .founder-overlay-info h3 {
+    font-size: 20px;
+  }
+
 }
 
 @media (max-width: 640px) {
@@ -856,6 +854,10 @@
     width: 100%;
   }
 
+  .founder-overlay-info h3 {
+    font-size: 18px;
+  }
+
 }
 
 @media (max-width: 520px) {
@@ -905,6 +907,10 @@
 
   .values-grid {
     gap: 20px;
+  }
+
+  .founder-overlay-info h3 {
+    font-size: 17px;
   }
 }
 
