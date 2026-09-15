@@ -33,7 +33,8 @@ const technologyItems = [
 
 const mediaItems = [
   ["News", "/media#news"],
-  ["Insights", "/media#subscribe"],
+  ["Blogs", "/blogs"],
+  // ["Insights", "/media#subscribe"],
 ];
 
 const dropdownNavs = [
@@ -58,7 +59,9 @@ export default function Header() {
     platforms: location.pathname === "/platforms",
     applications: location.pathname === "/applications",
     technology: location.pathname === "/technology",
-    media: location.pathname === "/media",
+    // Also highlight "Media" when on the Blogs page, since Blogs lives
+    // under the Media dropdown even though it's its own route.
+    media: location.pathname === "/media" || location.pathname === "/blogs",
   };
 
   const closeDropdown = (name) => {
