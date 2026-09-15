@@ -1013,8 +1013,22 @@ h2 {
   white-space: normal;
 }
 
+  /* ── OUR VISION LINK (mobile-only arrow fix) ──────────────────
+     Desktop .text-link is untouched. Here we only override the
+     arrow span: bump its size relative to the text and pull it
+     closer using a negative margin (cheaper than touching the
+     JSX space), plus vertical-align to fix the baseline offset
+     seen in DevTools on mobile widths.
+     ─────────────────────────────────────────────────────────── */
   .text-link {
     font-size: 16px;
+  }
+
+  .text-link span[aria-hidden="true"] {
+    display: inline-block;
+    font-size: 1.35em;
+    vertical-align: middle;
+    margin-left: -4px;
   }
 
   /* Platforms */
