@@ -27,6 +27,8 @@ const MediaPage = lazy(() => import("./components/MediaPage.jsx"));
 // works exactly as before — that's what the emailed links actually use.
 const BlogPostPage = lazy(() => import("./components/BlogPostPage.jsx"));
 const ContactPage = lazy(() => import("./components/ContactPage.jsx"));
+const PrivacyPolicyPage = lazy(() => import("./components/PrivacyPolicyPage.jsx"));
+const TermsOfUsePage = lazy(() => import("./components/TermsOfUsePage.jsx"));
 
 // Lazy admin imports
 const AdminLogin = lazy(() => import("./AdminDashboard/pages/AdminLogin"));
@@ -84,6 +86,26 @@ function ScrollToHash() {
   return null;
 }
 
+// Canonical host for the site. Every public page declares itself under this
+// single host so Google consolidates www / non-www / old-domain signals here.
+const SITE_URL = "https://onnesaerospace.com";
+
+// Adds <link rel="canonical"> for every public route (skips /admin routes).
+// A page can still override this by setting its own canonical in its Helmet.
+function CanonicalLink() {
+  const { pathname } = useLocation();
+
+  if (pathname.startsWith("/admin")) return null;
+
+  const cleanPath = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+
+  return (
+    <Helmet>
+      <link rel="canonical" href={`${SITE_URL}${cleanPath}`} />
+    </Helmet>
+  );
+}
+
 const VISIT_TRACK_KEY = "onnes_visit_logged";
 
 export default function App() {
@@ -104,6 +126,7 @@ export default function App() {
   return (
     <Suspense fallback={null}>
       <ScrollToHash />
+      <CanonicalLink />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/vision" element={<VisionPage />} />
@@ -113,6 +136,8 @@ export default function App() {
         <Route path="/media" element={<MediaPage />} />
         <Route path="/blogs/:slug" element={<BlogPostPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-of-use" element={<TermsOfUsePage />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
 
